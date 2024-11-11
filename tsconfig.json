@@ -3,8 +3,15 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
+      "@assets/*": ["assets/*"],
       "@components/*": ["components/*"],
-      "@screens/*": ["screens/*"]
+      "@hooks/*": ["hooks/*"],
+      "@navigation/*": ["navigation/*"],
+      "@redux/*": ["redux/*"],
+      "@screens/*": ["screens/*"],
+      "@services/*": ["services/*"],
+      "@types/*": ["types/*"],
+      "@utils/*": ["utils/*"]
     }
   }
 }
