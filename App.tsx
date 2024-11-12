@@ -1,13 +1,14 @@
-import {StyleSheet} from 'react-native';
+import MainNavigator from '@navigation/MainNavigator';
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import BottomNavigator from '@navigation/BottomNavigator';
+
+import {StyleSheet} from 'react-native';
+import {ThemeProviderContext} from '@context/ThemeProviderContext';
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <BottomNavigator />
-    </NavigationContainer>
+    <ThemeProviderContext>
+      <MainNavigator />
+    </ThemeProviderContext>
   );
 }
 

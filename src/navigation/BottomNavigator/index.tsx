@@ -3,7 +3,8 @@ import {LinearGradient} from 'react-native-linear-gradient';
 import {TabParamList} from './types';
 import {Text, Image} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {styles} from './styles';
+import {createStyles} from './styles';
+import {useAppTheme} from '@hooks/useAppTheme';
 
 /**
  * @type {Screens}
@@ -42,6 +43,9 @@ const ICONS: Record<string, any> = {
  * @type {Component} Define the BottomNavigator component
  */
 const BottomNavigator: React.FC = React.memo(() => {
+  const {theme} = useAppTheme();
+  const styles = createStyles(theme);
+
   // Use useMemo to memoize the tab bar background for performance optimization
   const tabBarBackground = useMemo(
     () => (
@@ -83,6 +87,9 @@ const BottomNavigator: React.FC = React.memo(() => {
  * @returns JSX
  */
 const renderTabBarIcon = (focused: boolean, routeName: keyof TabParamList) => {
+  const {theme} = useAppTheme();
+  const styles = createStyles(theme);
+
   const iconColor = focused ? '#ffffff' : '#808080';
   const IconSource = ICONS[routeName];
 
@@ -105,14 +112,19 @@ const renderTabBarIcon = (focused: boolean, routeName: keyof TabParamList) => {
  * @param routeName
  * @returns JSX
  */
-const renderTabBarLabel = (focused: boolean, routeName: keyof TabParamList) => (
-  <Text
-    style={{
-      ...styles?.tabBarLabelStyle, // Base style for the label
-      color: focused ? '#ffffff' : '#808080', // Determine label color based on focus state
-    }}>
-    {routeName?.toUpperCase()}
-  </Text>
-);
+const renderTabBarLabel = (focused: boolean, routeName: keyof TabParamList) => {
+  const {theme} = useAppTheme();
+  const styles = createStyles(theme);
+
+  return (
+    <Text
+      style={{
+        ...styles?.tabBarLabelStyle, // Base style for the label
+        color: focused ? '#ffffff' : '#808080', // Determine label color based on focus state
+      }}>
+      {routeName?.toUpperCase()}
+    </Text>
+  );
+};
 
 export default BottomNavigator;

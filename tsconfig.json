@@ -5,11 +5,13 @@
     "paths": {
       "@assets/*": ["assets/*"],
       "@components/*": ["components/*"],
+      "@context/*": ["context/*"],
       "@hooks/*": ["hooks/*"],
       "@navigation/*": ["navigation/*"],
       "@redux/*": ["redux/*"],
       "@screens/*": ["screens/*"],
       "@services/*": ["services/*"],
+      "@styles/*": ["styles/*"],
       "@types/*": ["types/*"],
       "@utils/*": ["utils/*"]
     }
