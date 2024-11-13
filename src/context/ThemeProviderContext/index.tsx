@@ -31,12 +31,14 @@ export const ThemeProviderContext: React.FC<ThemeProviderProps> = ({
 
   // Effect to update the theme based on the current state
   useEffect(() => {
-    setTheme(colorScheme === 'dark' ? darkTheme : lightTheme);
+    // setTheme(colorScheme === 'dark' ? darkTheme : lightTheme); // Un-comment this code later
+    setTheme(darkTheme);
   }, [colorScheme]);
 
   // Function to toggle between light and dark themes
   const toggleTheme = () => {
-    setTheme(prevTheme => (prevTheme === lightTheme ? darkTheme : lightTheme));
+    // setTheme(prevTheme => (prevTheme === lightTheme ? darkTheme : lightTheme)); // Un-comment this code later
+    setTheme(darkTheme);
   };
 
   // Returning the ThemeContext provider with the current theme and toggle function

@@ -8,6 +8,7 @@ module.exports = {
           '@assets': './src/assets',
           '@components': './src/components',
           '@context': './src/context',
+          '@dummyDataPreProd': './src/dummyDataPreProd',
           '@hooks': './src/hooks',
           '@navigation': './src/navigation',
           '@redux': './src/redux',
@@ -19,5 +20,6 @@ module.exports = {
         },
       },
     ],
+    ['react-native-reanimated/plugin'],
   ],
 };

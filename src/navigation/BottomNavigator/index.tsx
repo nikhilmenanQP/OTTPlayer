@@ -60,6 +60,7 @@ const BottomNavigator: React.FC = React.memo(() => {
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
+        headerShown: false,
         // Set the tab bar background
         tabBarBackground: () => tabBarBackground,
         // Render the icon for the tab based on the focused state

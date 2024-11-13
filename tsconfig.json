@@ -6,6 +6,7 @@
       "@assets/*": ["assets/*"],
       "@components/*": ["components/*"],
       "@context/*": ["context/*"],
+      "@dummyDataPreProd/*": ["dummyDataPreProd/*"],
       "@hooks/*": ["hooks/*"],
       "@navigation/*": ["navigation/*"],
       "@redux/*": ["redux/*"],
