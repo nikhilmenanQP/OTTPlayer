@@ -10,16 +10,24 @@ import {useAppTheme} from '@hooks/useAppTheme';
 
 interface HomeScreenProps {}
 
-const HomeScreen: React.FC<HomeScreenProps> = () => {
+const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   const {theme} = useAppTheme();
   const styles = createStyle(theme);
+
+  const onMovieClickHandler = (movie: any) => {
+    console.log('Hello', movie);
+    navigation.navigate('DetailScreen');
+  };
 
   return (
     <ScrollView
       style={styles.container}
       contentContainerStyle={styles.contentContainerStyle}>
       {/* AppHeader with extracted style */}
-      <AppHeader appHeaderContainerStyle={styles.headerContainerStyle} />
+      <AppHeader
+        appHeaderContainerStyle={styles.headerContainerStyle}
+        showBackButton={false}
+      />
 
       {/* AppCarousel for banners */}
       <AppCarousel banners={banners} />
@@ -43,6 +51,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
             isWatchList={isWatchList}
             key={title}
             title={title}
+            onPressHandler={onMovieClickHandler}
           />
         ),
       )}

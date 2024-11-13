@@ -36,6 +36,7 @@ type ThemeColors = {
   standardGray: string;
   textPrimary: string;
   white: string;
+  bootstrapBlue: string;
 };
 
 // Extend the base theme with colors for light and dark themes
@@ -104,15 +105,15 @@ const baseTheme: BaseTheme = {
     md_xxxx: 28,
     md_xxx: 32,
     md_xx: 36,
-    md: 30,
-    md_ll: 32,
-    md_lll: 36,
-    md_llll: 42,
+    md: 40,
+    md_ll: 42,
+    md_lll: 46,
+    md_llll: 50,
     // large
-    lg_xxxx: 44,
-    lg_xxx: 46,
-    lg_xx: 48,
-    lg: 50,
+    lg_xxxx: 52,
+    lg_xxx: 56,
+    lg_xx: 60,
+    lg: 64,
     lg_ll: 70,
     lg_lll: 80,
     lg_llll: 100,
@@ -134,14 +135,14 @@ const baseTheme: BaseTheme = {
     md_xx: 36,
     md: 40,
     md_ll: 42,
-    md_lll: 48,
-    md_llll: 52,
+    md_lll: 46,
+    md_llll: 50,
     // large
-    lg_xxxx: 54,
+    lg_xxxx: 52,
     lg_xxx: 56,
-    lg_xx: 62,
-    lg: 68,
-    lg_ll: 72,
+    lg_xx: 60,
+    lg: 64,
+    lg_ll: 70,
     lg_lll: 80,
     lg_llll: 100,
   },
@@ -166,6 +167,7 @@ export const darkTheme: Theme = {
     standardGray: '#808080',
     textPrimary: '#FFFFFF',
     white: '#ffffff',
+    bootstrapBlue: '#007bff',
   },
 };
 
@@ -188,5 +190,6 @@ export const lightTheme: Theme = {
     standardGray: '#808080',
     textPrimary: '#000000',
     white: '#ffffff',
+    bootstrapBlue: '#007bff',
   },
 };

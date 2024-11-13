@@ -1,11 +1,17 @@
 import React, {useCallback, useMemo} from 'react';
-import {FlatList, Image, Text, View} from 'react-native';
+import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
 import {MovieCardProps} from './types';
 import {createStyles} from './styles';
 import {useAppTheme} from '@hooks/useAppTheme';
 
 const MovieCard: React.FC<MovieCardProps> = React.memo(
-  ({title, data, isContinueWatching, isWatchList}) => {
+  ({
+    title = '',
+    data = [],
+    isContinueWatching = false,
+    isWatchList = false,
+    onPressHandler = () => {},
+  }) => {
     const {theme} = useAppTheme();
     const styles = createStyles(theme);
 
@@ -17,7 +23,9 @@ const MovieCard: React.FC<MovieCardProps> = React.memo(
 
     const renderItem = useCallback(
       ({item}: {item: {id: string; title: string; image: string}}) => (
-        <View style={[styles.card]}>
+        <TouchableOpacity
+          style={[styles.card]}
+          onPress={() => onPressHandler(item)}>
           <Image source={{uri: item.image}} style={[cardStyle]} />
           {title === 'Continue Watching' && (
             <>
@@ -25,7 +33,7 @@ const MovieCard: React.FC<MovieCardProps> = React.memo(
               <Text style={styles.cardSubTitle}>Adventure · Drama</Text>
             </>
           )}
-        </View>
+        </TouchableOpacity>
       ),
       [cardStyle, title],
     );

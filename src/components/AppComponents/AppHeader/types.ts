@@ -3,6 +3,7 @@ import {Theme} from '@styles/theme';
 
 export interface AppHeaderProps {
   appHeaderContainerStyle?: ViewStyle;
+  onBackButtonHandler?: () => void;
   profileImage?: string;
   showBackButton?: boolean;
   showLogo?: boolean;
@@ -10,6 +11,7 @@ export interface AppHeaderProps {
 }
 
 export interface BackButtonProps {
+  handleBackButton: () => void;
   styles: BackButtonStyles;
   theme: Theme;
 }

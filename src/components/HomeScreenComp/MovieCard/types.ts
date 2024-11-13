@@ -3,4 +3,5 @@ export interface MovieCardProps {
   isContinueWatching: boolean;
   isWatchList: boolean;
   title: string;
+  onPressHandler: (item: any) => any;
 }

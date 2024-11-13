@@ -10,6 +10,10 @@ export const createStyles = (theme: Theme, insets: any) => {
       justifyContent: 'center',
       marginHorizontal: theme.spacing.sm_lll,
       marginTop: insets.top,
+      ///////////////////////
+      position: 'absolute',
+      width: '90%',
+      zIndex: 1,
     } as ViewStyle,
 
     backButtonContainer: {
