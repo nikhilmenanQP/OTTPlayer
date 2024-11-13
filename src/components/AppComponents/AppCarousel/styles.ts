@@ -17,7 +17,7 @@ export const createStyles = (theme: Theme) => {
       alignSelf: 'center',
       borderRadius: theme.spacing.sm_x,
       margin: theme.spacing.sm_xxx,
-      transition: 'width 0.3s ease',
+      // transition: 'width 0.3s ease',
     },
     header: {
       height: theme.spacing.lg_llll * 5,
@@ -31,7 +31,7 @@ export const createStyles = (theme: Theme) => {
     bottomGradient: {
       position: 'absolute',
       width: '100%',
-      height: '15%',
+      height: '30%',
       bottom: theme.spacing.null,
       justifyContent: 'flex-end',
     },

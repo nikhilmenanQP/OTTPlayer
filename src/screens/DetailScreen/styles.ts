@@ -10,6 +10,13 @@ export const createStyle = (theme: Theme) =>
       bottom: theme.spacing.null,
       justifyContent: 'flex-end',
     },
+    topGradient: {
+      position: 'absolute',
+      width: '100%',
+      height: '30%',
+      top: theme.spacing.null,
+      justifyContent: 'flex-start',
+    },
     actionBtnContainer: {
       flexDirection: 'row',
       justifyContent: 'space-between',
@@ -113,5 +120,12 @@ export const createStyle = (theme: Theme) =>
       backgroundColor: theme.colors.standardGray,
       alignSelf: 'center',
       marginBottom: theme.spacing.sm_lll,
+    },
+    scrollView: {
+      flex: 1,
+      backgroundColor: theme.colors.background,
+    },
+    contentContainer: {
+      paddingBottom: theme.spacing.lg_llll + theme.spacing.sm,
     },
   });

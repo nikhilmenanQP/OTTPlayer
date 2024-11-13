@@ -10,7 +10,7 @@ export const MoviesStack = () => {
       screenOptions={{
         headerShown: false,
       }}>
-      <Stack.Screen name="Movies" component={MoviesScreen} />
+      <Stack.Screen name="MoviesScreen" component={MoviesScreen} />
       <Stack.Screen name="DetailScreen" component={DetailScreen} />
     </Stack.Navigator>
   );

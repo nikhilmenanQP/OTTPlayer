@@ -31,11 +31,17 @@ const DetailScreen = ({}) => {
 
   return (
     <>
-      <AppHeader />
-      <ScrollView style={{flex: 1, backgroundColor: theme.colors.background}}>
+      <AppHeader showBackButton={true} />
+      <ScrollView
+        contentContainerStyle={styles.contentContainer}
+        style={styles.scrollView}>
         <ImageBackground
           source={{uri: 'https://picsum.photos/200/300'}}
           style={styles.movieBanner}>
+          <LinearGradient
+            colors={[theme.colors.background, 'transparent']}
+            style={styles.topGradient}
+          />
           <Text style={styles.movieInfoText}>
             PG | 4seasons | 2005-2008 | drama
           </Text>
@@ -96,7 +102,6 @@ const DetailScreen = ({}) => {
             data={extraData}
             contentContainerStyle={{
               paddingLeft: theme.spacing.sm_lll,
-              paddingBottom: theme.spacing.lg_llll,
             }}
             renderItem={({item}) => (
               <View style={styles.cardContainer}>

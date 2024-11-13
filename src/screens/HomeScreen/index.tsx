@@ -7,8 +7,11 @@ import {ScrollView} from 'react-native';
 import {createStyle} from './styles';
 import {homeScreenData, banners} from '@dummyDataPreProd/HomeScreenMovie';
 import {useAppTheme} from '@hooks/useAppTheme';
+import {NavigationProp} from '@react-navigation/native';
 
-interface HomeScreenProps {}
+interface HomeScreenProps {
+  navigation: NavigationProp<any>;
+}
 
 const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   const {theme} = useAppTheme();
@@ -26,7 +29,8 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
       {/* AppHeader with extracted style */}
       <AppHeader
         appHeaderContainerStyle={styles.headerContainerStyle}
-        showBackButton={false}
+        showLogo={true}
+        showMenuButton={true}
       />
 
       {/* AppCarousel for banners */}

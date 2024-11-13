@@ -12,9 +12,9 @@ import {useNavigation} from '@react-navigation/native';
 const AppHeader: React.FC<AppHeaderProps> = ({
   appHeaderContainerStyle = {},
   profileImage = 'https://picsum.photos/200/300',
-  showBackButton = true,
-  showLogo = true,
-  showMenuButton = true,
+  showBackButton = false,
+  showLogo = false,
+  showMenuButton = false,
   onBackButtonHandler,
 }) => {
   const {theme} = useAppTheme();
