@@ -11,7 +11,6 @@ import {useAppTheme} from '@hooks/useAppTheme';
  * Import screen components for each tab
  */
 import HomeScreen from '@screens/HomeScreen';
-import MoviesScreen from '@screens/MoviesScreen';
 import SearchScreen from '@screens/SearchScreen';
 import SeriesScreen from '@screens/SeriesScreen';
 
@@ -23,6 +22,8 @@ import HomeIcon from '@assets/images/appIcons/HomeIcon.png';
 import MovieIcon from '@assets/images/appIcons/MovieIcon.png';
 import SearchIcon from '@assets/images/appIcons/SearchIcon.png';
 import SeriesIcon from '@assets/images/appIcons/SeriesIcon.png';
+import {MoviesStack} from '@navigation/MoviesStack';
+import {HomeStack} from '@navigation/HomeStack';
 
 /**
  * Create a bottom tab navigator with specified screen parameters
@@ -73,8 +74,8 @@ const BottomNavigator: React.FC = React.memo(() => {
         tabBarStyle: styles.tabBarStyle,
       })}>
       {/* Define the screens for each tab in the navigator */}
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Movies" component={MoviesScreen} />
+      <Tab.Screen name="Home" component={HomeStack} />
+      <Tab.Screen name="Movies" component={MoviesStack} />
       <Tab.Screen name="Series" component={SeriesScreen} />
       <Tab.Screen name="Search" component={SearchScreen} />
     </Tab.Navigator>
