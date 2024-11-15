@@ -3,11 +3,11 @@ import AppHeader from '@components/AppComponents/AppHeader';
 import MovieCard from '@components/HomeScreenComp/MovieCard';
 import React from 'react';
 
+import {NavigationProp} from '@react-navigation/native';
 import {ScrollView} from 'react-native';
 import {createStyle} from './styles';
 import {homeScreenData, banners} from '@dummyDataPreProd/HomeScreenMovie';
 import {useAppTheme} from '@hooks/useAppTheme';
-import {NavigationProp} from '@react-navigation/native';
 
 interface HomeScreenProps {
   navigation: NavigationProp<any>;
@@ -18,14 +18,15 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   const styles = createStyle(theme);
 
   const onMovieClickHandler = (movie: any) => {
-    console.log('Hello', movie);
-    navigation.navigate('DetailScreen');
+    navigation.navigate('DetailScreen', {
+      data: movie,
+    });
   };
 
   return (
     <ScrollView
-      style={styles.container}
-      contentContainerStyle={styles.contentContainerStyle}>
+      contentContainerStyle={styles.contentContainerStyle}
+      style={styles.container}>
       {/* AppHeader with extracted style */}
       <AppHeader
         appHeaderContainerStyle={styles.headerContainerStyle}
@@ -44,18 +45,22 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
           isWatchList,
           title,
         }: {
-          data: {id: string; title: string; image: string}[];
+          data: any;
           isContinueWatching: boolean;
           isWatchList: boolean;
           title: string;
         }) => (
           <MovieCard
             data={data}
-            isContinueWatching={isContinueWatching}
-            isWatchList={isWatchList}
+            horizontalCard={(isContinueWatching || isWatchList) && true}
             key={title}
-            title={title}
+            marginLeft={false}
+            marginTop={false}
             onPressHandler={onMovieClickHandler}
+            sectionContainerStyle={styles.sectionContainer}
+            showMovieDetails={isContinueWatching && true}
+            showTitle={true}
+            title={title}
           />
         ),
       )}

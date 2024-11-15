@@ -1,5 +1,8 @@
 import React, {useMemo} from 'react';
+
+import {HomeStack} from '@navigation/HomeStack';
 import {LinearGradient} from 'react-native-linear-gradient';
+import {MoviesStack} from '@navigation/MoviesStack';
 import {TabParamList} from './types';
 import {Text, Image} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -10,7 +13,6 @@ import {useAppTheme} from '@hooks/useAppTheme';
  * @type {Screens}
  * Import screen components for each tab
  */
-import HomeScreen from '@screens/HomeScreen';
 import SearchScreen from '@screens/SearchScreen';
 import SeriesScreen from '@screens/SeriesScreen';
 
@@ -18,12 +20,10 @@ import SeriesScreen from '@screens/SeriesScreen';
  * @type {Icons}
  * Import icons for each tab
  */
-import HomeIcon from '@assets/images/appIcons/HomeIcon.png';
-import MovieIcon from '@assets/images/appIcons/MovieIcon.png';
+import HomeIcon from '@assets/images/appIcons/homeIcon.png';
+import MovieIcon from '@assets/images/appIcons/movieIcon.svg';
 import SearchIcon from '@assets/images/appIcons/SearchIcon.png';
 import SeriesIcon from '@assets/images/appIcons/SeriesIcon.png';
-import {MoviesStack} from '@navigation/MoviesStack';
-import {HomeStack} from '@navigation/HomeStack';
 
 /**
  * Create a bottom tab navigator with specified screen parameters

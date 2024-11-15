@@ -17,5 +17,9 @@ export const createStyle = (theme: Theme) => {
       width: '90%',
       zIndex: 1,
     } as ViewStyle,
+    sectionContainer: {
+      marginTop: theme.spacing.sm_lll + 2,
+      paddingLeft: theme.spacing.sm_ll + 2,
+    } as ViewStyle,
   });
 };

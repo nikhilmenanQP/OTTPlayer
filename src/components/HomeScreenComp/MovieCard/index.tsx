@@ -1,4 +1,5 @@
 import React, {useCallback, useMemo} from 'react';
+
 import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
 import {MovieCardProps} from './types';
 import {createStyles} from './styles';
@@ -6,42 +7,83 @@ import {useAppTheme} from '@hooks/useAppTheme';
 
 const MovieCard: React.FC<MovieCardProps> = React.memo(
   ({
-    title = '',
+    cardHeight,
+    cardSubTitleStyle,
+    cardTitleStyle,
+    cardWidth,
     data = [],
-    isContinueWatching = false,
-    isWatchList = false,
+    horizontalCard,
+    listContentContainerStyle,
+    marginBottom = true,
+    marginLeft = true,
+    marginRight = true,
+    marginTop = true,
     onPressHandler = () => {},
+    sectionContainerStyle = {},
+    sectionTitleStyle = {},
+    showMovieDetails = false,
+    showTitle = false,
+    title = '',
   }) => {
     const {theme} = useAppTheme();
-    const styles = createStyles(theme);
+    const styles = createStyles({
+      cardHeight,
+      cardWidth,
+      marginBottom,
+      marginLeft,
+      marginRight,
+      marginTop,
+      theme,
+    });
 
-    const cardStyle = useMemo(
-      () =>
-        isContinueWatching || isWatchList ? styles.cardWide : styles.cardNarrow,
-      [isContinueWatching, isWatchList],
+    const cardImageStyle = useMemo(
+      () => (horizontalCard ? styles.cardImageWide : styles.cardImageNarrow),
+      [horizontalCard],
     );
 
     const renderItem = useCallback(
-      ({item}: {item: {id: string; title: string; image: string}}) => (
-        <TouchableOpacity
-          style={[styles.card]}
-          onPress={() => onPressHandler(item)}>
-          <Image source={{uri: item.image}} style={[cardStyle]} />
-          {title === 'Continue Watching' && (
-            <>
-              <Text style={styles.cardTitle}>{item.title}</Text>
-              <Text style={styles.cardSubTitle}>Adventure · Drama</Text>
-            </>
-          )}
-        </TouchableOpacity>
-      ),
-      [cardStyle, title],
+      ({item}: {item: {id: string; title: string; image: string}}) => {
+        return (
+          <TouchableOpacity
+            style={[styles.card]}
+            onPress={() => onPressHandler(item)}>
+            <Image source={{uri: item.image}} style={[cardImageStyle]} />
+            {(showMovieDetails || title === 'Continue Watching') && (
+              <>
+                <Text
+                  key={`${item.id}-title`}
+                  style={[styles.cardTitle, cardTitleStyle]}>
+                  {item.title}
+                </Text>
+                <Text
+                  key={`${item.id}-subtitle`}
+                  style={[styles.cardSubTitle, cardSubTitleStyle]}>
+                  Adventure · Drama
+                </Text>
+              </>
+            )}
+          </TouchableOpacity>
+        );
+      },
+      [
+        cardImageStyle,
+        marginBottom,
+        marginLeft,
+        marginRight,
+        marginTop,
+        showMovieDetails,
+        title,
+      ],
     );
 
     return (
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>{title}</Text>
+      <View style={[styles.section, sectionContainerStyle]}>
+        {showTitle && (
+          <Text style={[styles.sectionTitle, sectionTitleStyle]}>{title}</Text>
+        )}
+
         <FlatList
+          contentContainerStyle={[listContentContainerStyle]}
           data={data}
           horizontal
           initialNumToRender={5}
