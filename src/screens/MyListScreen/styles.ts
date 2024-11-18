@@ -13,7 +13,7 @@ export const createStyle = (theme: Theme) =>
   StyleSheet.create({
     container: {
       margin: theme.spacing.sm_lll - theme.spacing.sm_xxxx,
-      flex: 1,
+      paddingBottom: width * 0.3,
     } as ViewStyle,
 
     deleteButton: {
