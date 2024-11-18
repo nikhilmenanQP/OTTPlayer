@@ -11,18 +11,18 @@ export const createStyle = (theme: Theme) =>
     tabContainer: {
       flexDirection: 'row',
       justifyContent: 'space-around',
-      marginTop: 150,
+      marginTop: theme.spacing.lg_llll + theme.spacing.md_llll,
     },
     tabIndicator: {
       alignSelf: 'center',
-      height: 2,
+      height: theme.spacing.sm_xxxx,
       width: '100%',
     },
     tabText: {
       fontFamily: 'inter_semiBold',
-      fontSize: 15,
+      fontSize: theme.spacing.sm_ll + 3,
       letterSpacing: 1,
-      paddingVertical: 12,
+      paddingVertical: theme.spacing.sm_ll,
       textTransform: 'uppercase',
     },
   });

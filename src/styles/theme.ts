@@ -40,6 +40,9 @@ type ThemeColors = {
   mediumGray: string;
   firebrickRed: string;
   blueGray: string;
+  appleGreen: string;
+  appleRed: string;
+  charcoalGray: string;
 };
 
 // Extend the base theme with colors for light and dark themes
@@ -174,6 +177,9 @@ export const darkTheme: Theme = {
     mediumGray: '#aaa',
     firebrickRed: '#B72B31',
     blueGray: '#262c34',
+    appleGreen: '#34C759',
+    appleRed: '#FF3B30',
+    charcoalGray: '#383e44',
   },
 };
 
@@ -200,5 +206,8 @@ export const lightTheme: Theme = {
     mediumGray: '#aaa',
     firebrickRed: '#B72B31',
     blueGray: '#262c34',
+    appleGreen: '#34C759',
+    appleRed: '#FF3B30',
+    charcoalGray: '#383e44',
   },
 };

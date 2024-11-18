@@ -5,28 +5,28 @@ export const createStyle = (theme: Theme) =>
   StyleSheet.create({
     // Button Section
     arrowRightIcon: {
-      marginRight: 8,
+      marginRight: theme.spacing.sm_x,
     },
     buttonContainer: {
       alignItems: 'center',
       flexDirection: 'row',
       justifyContent: 'space-between',
-      marginTop: 24,
+      marginTop: theme.spacing.sm_llll,
     },
     buttonText: {
-      backgroundColor: '#383e44',
-      borderRadius: 5,
-      color: 'white',
-      paddingHorizontal: 46,
-      paddingVertical: 10,
+      backgroundColor: theme.colors.charcoalGray,
+      borderRadius: theme.spacing.sm_xxx + 1,
+      color: theme.colors.white,
+      paddingHorizontal: theme.spacing.md_lll,
+      paddingVertical: theme.spacing.sm,
     },
 
     // Account Section
     accountSection: {
-      backgroundColor: '#262c34',
-      borderRadius: 6,
-      marginVertical: 12,
-      padding: 15,
+      backgroundColor: theme.colors.blueGray,
+      borderRadius: theme.spacing.sm_xx,
+      marginVertical: theme.spacing.sm_ll,
+      padding: theme.spacing.sm_ll + 3,
     },
 
     // Info Section
@@ -36,42 +36,45 @@ export const createStyle = (theme: Theme) =>
       justifyContent: 'space-between',
     },
     infoText: {
-      color: '#fff',
-      marginBottom: 2,
+      color: theme.colors.white,
+      marginBottom: theme.spacing.sm_xxxx,
     },
 
     // Text styles
     changePasswordText: {
-      color: '#fff',
+      color: theme.colors.white,
+      fontSize: theme.spacing.sm_ll + theme.spacing.sm_xxxx,
+      fontFamily: theme.fontFamily.inter_medium,
     },
     editButton: {
-      color: '#fff',
-      textDecorationLine: 'underline',
+      color: theme.colors.white,
+      fontSize: theme.fontSize.sm_ll + theme.fontSize.sm_xxxx,
+      fontFamily: theme.fontFamily.inter_medium,
     },
     planText: {
-      fontSize: 12,
+      fontSize: theme.fontSize.sm_ll,
       letterSpacing: 0.5,
     },
     activePlan: {
-      color: '#34C759',
-      fontSize: 16,
+      color: theme.colors.appleGreen,
+      fontSize: theme.spacing.sm_lll - theme.spacing.sm_xxxx,
       fontWeight: 'bold',
-      marginTop: 8,
+      marginTop: theme.spacing.sm_x,
     },
     noActivePlan: {
-      color: '#FF3B30',
-      fontSize: 16,
+      color: theme.colors.appleRed,
+      fontSize: theme.spacing.sm_lll - theme.spacing.sm_xxxx,
       fontWeight: 'bold',
-      marginTop: 8,
+      marginTop: theme.spacing.sm_x,
     },
 
     // Miscellaneous
     container: {
       flex: 1,
-      padding: 14,
+      padding: theme.spacing.sm_ll + theme.spacing.sm_xxxx,
     },
     horizontalRule: {
       height: 0.2,
-      marginVertical: 10,
+      marginVertical: theme.spacing.sm,
     },
   });
