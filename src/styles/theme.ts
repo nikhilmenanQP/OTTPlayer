@@ -38,6 +38,8 @@ type ThemeColors = {
   white: string;
   bootstrapBlue: string;
   mediumGray: string;
+  firebrickRed: string;
+  blueGray: string;
 };
 
 // Extend the base theme with colors for light and dark themes
@@ -170,6 +172,8 @@ export const darkTheme: Theme = {
     white: '#ffffff',
     bootstrapBlue: '#007bff',
     mediumGray: '#aaa',
+    firebrickRed: '#B72B31',
+    blueGray: '#262c34',
   },
 };
 
@@ -194,5 +198,7 @@ export const lightTheme: Theme = {
     white: '#ffffff',
     bootstrapBlue: '#007bff',
     mediumGray: '#aaa',
+    firebrickRed: '#B72B31',
+    blueGray: '#262c34',
   },
 };

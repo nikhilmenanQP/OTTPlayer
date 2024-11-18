@@ -4,7 +4,9 @@ import {Theme} from '@styles/theme';
 export interface AppHeaderProps {
   appHeaderContainerStyle?: ViewStyle;
   onBackButtonHandler?: () => void;
+  onProfileIconHandler?: () => void;
   profileImage?: string;
+  profileName?: string;
   showBackButton?: boolean;
   showLogo?: boolean;
   showMenuButton?: boolean;
@@ -21,6 +23,7 @@ interface BackButtonStyles {
 }
 
 export interface ProfileIconProps {
+  onProfileIconHandler: () => void;
   profileImage: string;
   styles: ProfileIconStyles;
   theme: Theme;

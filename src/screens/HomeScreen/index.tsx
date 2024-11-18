@@ -23,6 +23,10 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
     });
   };
 
+  const onProfileClickHandler = () => {
+    navigation.navigate('ProfileScreen');
+  };
+
   return (
     <ScrollView
       contentContainerStyle={styles.contentContainerStyle}
@@ -32,6 +36,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
         appHeaderContainerStyle={styles.headerContainerStyle}
         showLogo={true}
         showMenuButton={true}
+        onProfileIconHandler={onProfileClickHandler}
       />
 
       {/* AppCarousel for banners */}
