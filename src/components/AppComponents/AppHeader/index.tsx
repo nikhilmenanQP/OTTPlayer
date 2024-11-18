@@ -22,7 +22,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
  */
 const AppHeader: React.FC<AppHeaderProps> = ({
   appHeaderContainerStyle = {},
-  onBackButtonHandler = () => {},
+  onBackButtonHandler,
   onProfileIconHandler = () => {},
   profileImage = 'https://picsum.photos/200/300',
   profileName,

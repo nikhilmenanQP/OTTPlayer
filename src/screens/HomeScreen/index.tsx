@@ -7,6 +7,7 @@ import {NavigationProp} from '@react-navigation/native';
 import {ScrollView} from 'react-native';
 import {createStyle} from './styles';
 import {homeScreenData, banners} from '@dummyDataPreProd/HomeScreenMovie';
+import {mapDataProps} from './types';
 import {useAppTheme} from '@hooks/useAppTheme';
 
 interface HomeScreenProps {
@@ -44,17 +45,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
 
       {/* Map through homeScreenData to render MovieCards */}
       {homeScreenData.map(
-        ({
-          data,
-          isContinueWatching,
-          isWatchList,
-          title,
-        }: {
-          data: any;
-          isContinueWatching: boolean;
-          isWatchList: boolean;
-          title: string;
-        }) => (
+        ({data, isContinueWatching, isWatchList, title}: mapDataProps) => (
           <MovieCard
             data={data}
             horizontalCard={(isContinueWatching || isWatchList) && true}
