@@ -8,6 +8,7 @@ import {useAppTheme} from '@hooks/useAppTheme';
 const MovieCard: React.FC<MovieCardProps> = React.memo(
   ({
     cardHeight,
+    cardStyle,
     cardSubTitleStyle,
     cardTitleStyle,
     cardWidth,
@@ -19,11 +20,14 @@ const MovieCard: React.FC<MovieCardProps> = React.memo(
     marginRight = true,
     marginTop = true,
     onPressHandler = () => {},
+    scrollEnabled = true,
     sectionContainerStyle = {},
     sectionTitleStyle = {},
     showMovieDetails = false,
     showTitle = false,
     title = '',
+    horizontal = true,
+    numberOfColumns,
   }) => {
     const {theme} = useAppTheme();
     const styles = createStyles({
@@ -45,10 +49,10 @@ const MovieCard: React.FC<MovieCardProps> = React.memo(
       ({item}: {item: {id: string; title: string; image: string}}) => {
         return (
           <TouchableOpacity
-            style={[styles.card]}
+            style={[styles.card, cardStyle]}
             onPress={() => onPressHandler(item)}>
             <Image source={{uri: item.image}} style={[cardImageStyle]} />
-            {(showMovieDetails || title === 'Continue Watching') && (
+            {showMovieDetails && title === 'Continue Watching' && (
               <>
                 <Text
                   key={`${item.id}-title`}
@@ -81,16 +85,17 @@ const MovieCard: React.FC<MovieCardProps> = React.memo(
         {showTitle && (
           <Text style={[styles.sectionTitle, sectionTitleStyle]}>{title}</Text>
         )}
-
         <FlatList
           contentContainerStyle={[listContentContainerStyle]}
           data={data}
-          horizontal
+          horizontal={horizontal}
           initialNumToRender={5}
           keyExtractor={item => item.id}
           maxToRenderPerBatch={10}
           renderItem={renderItem}
+          scrollEnabled={scrollEnabled}
           windowSize={5}
+          numColumns={numberOfColumns}
         />
       </View>
     );

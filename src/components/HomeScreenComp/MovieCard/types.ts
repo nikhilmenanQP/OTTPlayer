@@ -29,6 +29,7 @@ export interface createStyleReturnProps {
  */
 export interface MovieCardProps {
   cardHeight?: number;
+  cardStyle?: ViewStyle;
   cardSubTitleStyle?: TextStyle;
   cardTitleStyle?: TextStyle;
   cardWidth?: number;
@@ -40,9 +41,12 @@ export interface MovieCardProps {
   marginRight?: boolean;
   marginTop?: boolean;
   onPressHandler: (item: any) => any;
+  scrollEnabled?: boolean;
   sectionContainerStyle?: ViewStyle;
   sectionTitleStyle?: TextStyle;
   showMovieDetails?: boolean;
   showTitle?: boolean;
   title?: string;
+  horizontal?: boolean;
+  numberOfColumns?: number;
 }
