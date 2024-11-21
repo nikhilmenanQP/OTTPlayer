@@ -14,7 +14,7 @@ import {View, Text, ScrollView, TouchableOpacity} from 'react-native';
 import {createStyle} from './styles';
 import {useAppTheme} from '@hooks/useAppTheme';
 
-const DetailScreen = ({route}: {route: any}) => {
+const DetailScreen = ({navigation, route}: {route: any}) => {
   const {theme} = useAppTheme();
   const styles = useMemo(() => createStyle(theme), [theme]);
 
@@ -48,6 +48,11 @@ const DetailScreen = ({route}: {route: any}) => {
     },
   ];
 
+  const onWatchNowHandler = () => {
+    console.log('Watch now handler...');
+    navigation.navigate('PlayerScreen');
+  };
+
   return (
     <>
       <AppHeader showBackButton={true} />
@@ -59,7 +64,9 @@ const DetailScreen = ({route}: {route: any}) => {
           movieInfo="PG | 4seasons | 2005-2008 | drama"
         />
 
-        <TouchableOpacity style={styles.watchNowBtn}>
+        <TouchableOpacity
+          style={styles.watchNowBtn}
+          onPress={onWatchNowHandler}>
           <PlayIcon />
           <Text style={styles.watchNowBtnText}>Watch Now</Text>
         </TouchableOpacity>

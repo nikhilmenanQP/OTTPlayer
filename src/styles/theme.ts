@@ -45,6 +45,8 @@ type ThemeColors = {
   charcoalGray: string;
   davisGrey: string;
   gunMetal: string;
+  black_92: string;
+  black_32: string;
 };
 
 // Extend the base theme with colors for light and dark themes
@@ -184,6 +186,8 @@ export const darkTheme: Theme = {
     charcoalGray: '#383e44',
     davisGrey: '#555555',
     gunMetal: '#161c24',
+    black_92: '#00000092',
+    black_32: '#00000032',
   },
 };
 
@@ -215,5 +219,7 @@ export const lightTheme: Theme = {
     charcoalGray: '#383e44',
     davisGrey: '#555555',
     gunMetal: '#161c24',
+    black_92: '#00000092',
+    black_32: '#00000032',
   },
 };
