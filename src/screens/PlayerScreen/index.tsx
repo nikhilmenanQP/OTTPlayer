@@ -11,8 +11,12 @@ import {PlayerState} from './types';
 import {View, StyleProp, ViewStyle} from 'react-native';
 import {createStyle} from './styles';
 import {useAppTheme} from '@hooks/useAppTheme';
+import PlayerSettingsModal from '@components/PlayerScreen/SettingsModal';
+import AudioSubtitleModal from '@components/PlayerScreen/AudioSubtitleModal';
 
 const PlayerScreen: React.FC = () => {
+  const [isAudioSubtitleModal, setIsAudioSubtitleModal] = useState<boolean>(false);
+  const [isSettingsModal, setIsSettingsModal] = useState<boolean>(false);
   const videoRef = useRef<VideoRef | null>(null); // Reference to the video player
 
   // State to manage video controls, playback time, and fullscreen mode
@@ -44,10 +48,7 @@ const PlayerScreen: React.FC = () => {
    */
   const onProgress = useCallback(
     (data: OnProgressData) => {
-      if (
-        !playerState.isSliding &&
-        playerState.currentTime !== data.currentTime
-      ) {
+      if (!playerState.isSliding && playerState.currentTime !== data.currentTime) {
         setPlayerState(prevState => ({
           ...prevState,
           currentTime: data.currentTime,
@@ -91,6 +92,22 @@ const PlayerScreen: React.FC = () => {
     videoRef.current?.seek(value); // Seek to the selected time in the video
   }, []);
 
+  const handleAudioSubtitle = () => {
+    setIsAudioSubtitleModal(!isAudioSubtitleModal);
+  };
+
+  const onAudioSubTitleClose = () => {
+    setIsAudioSubtitleModal(!isAudioSubtitleModal);
+  };
+
+  const handleSettingsClick = () => {
+    setIsSettingsModal(!isSettingsModal);
+  };
+
+  const onSettingModalClose = () => {
+    setIsSettingsModal(!isSettingsModal);
+  };
+
   /**
    * Format time (seconds) into mm:ss format
    * @param seconds - Time in seconds
@@ -108,10 +125,7 @@ const PlayerScreen: React.FC = () => {
    * Fast forward the video by 10 seconds
    */
   const handleFastForward = useCallback(() => {
-    const newTime = Math.min(
-      playerState.currentTime + 10,
-      playerState.duration,
-    );
+    const newTime = Math.min(playerState.currentTime + 10, playerState.duration);
     videoRef.current?.seek(newTime); // Seek forward by 10 seconds
     setPlayerState(prevState => ({
       ...prevState,
@@ -170,6 +184,7 @@ const PlayerScreen: React.FC = () => {
           uri: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4', // Video source
         }}
         style={styles.video}
+        // rate={selectedSpeed}
       />
 
       <View style={styles.controlsContainer as StyleProp<ViewStyle>}>
@@ -190,9 +205,23 @@ const PlayerScreen: React.FC = () => {
           formatTime={formatTime} // Time formatting function
           handleSlidingComplete={handleSlidingComplete} // Handle seek completion
           handleSlidingStart={handleSlidingStart} // Handle seek start
+          handleAudioSubtitle={handleAudioSubtitle}
+          handleSettingsClick={handleSettingsClick}
         />
         <GradientSeparator position="bottom" /> {/* Gradient effect */}
       </View>
+
+      <AudioSubtitleModal
+        isFullscreen={playerState.isFullscreen}
+        onClose={onAudioSubTitleClose}
+        visible={isAudioSubtitleModal}
+      />
+
+      <PlayerSettingsModal
+        isFullscreen={playerState.isFullscreen}
+        onClose={onSettingModalClose}
+        visible={isSettingsModal}
+      />
     </View>
   );
 };

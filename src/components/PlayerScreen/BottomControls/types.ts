@@ -5,4 +5,6 @@ export interface BottomControlsProps {
   formatTime: (time: number) => string; // Function to format time (e.g., from seconds to MM:SS)
   handleSlidingComplete: (value: number) => void; // Function to handle the completion of the slider interaction
   handleSlidingStart: () => void; // Function to handle the start of the slider interaction
+  handleAudioSubtitle: () => void; // Function to handle the AudioSubtitle Click
+  handleSettingsClick: () => void;
 }

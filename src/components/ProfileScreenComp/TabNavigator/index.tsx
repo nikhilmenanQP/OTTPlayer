@@ -32,18 +32,12 @@ const TabNavigator: React.FC<TabNavigatorProps> = ({tab, setTab}) => {
   return (
     <View style={styles.tabContainer}>
       {tabNames.map(tabName => (
-        <TouchableOpacity
-          key={tabName}
-          onPress={() => setTab(tabName)}
-          style={styles.tab}>
+        <TouchableOpacity key={tabName} onPress={() => setTab(tabName)} style={styles.tab}>
           <Text
             style={[
               styles.tabText,
               {
-                color:
-                  tab === tabName
-                    ? theme.colors.white
-                    : theme.colors.standardGray,
+                color: tab === tabName ? theme.colors.white : theme.colors.standardGray,
               },
             ]}>
             {tabName.charAt(0).toUpperCase() + tabName.slice(1)}
@@ -52,10 +46,7 @@ const TabNavigator: React.FC<TabNavigatorProps> = ({tab, setTab}) => {
             style={[
               styles.tabIndicator,
               {
-                backgroundColor:
-                  tab === tabName
-                    ? theme.colors.white
-                    : theme.colors.standardGray,
+                backgroundColor: tab === tabName ? theme.colors.white : theme.colors.standardGray,
                 transform: [
                   {
                     translateX: tabIndicatorPosition.interpolate({

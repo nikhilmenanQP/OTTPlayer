@@ -3,7 +3,7 @@ import Slider from '@react-native-community/slider';
 
 import {BottomControlsProps} from './types';
 import {Setting, SubTitle} from '@assets/images/appIcons';
-import {Text, View} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 import {createStyle} from './styles';
 import {useAppTheme} from '@hooks/useAppTheme';
 
@@ -18,6 +18,8 @@ const BottomControls: React.FC<BottomControlsProps> = ({
   formatTime,
   handleSlidingComplete,
   handleSlidingStart,
+  handleAudioSubtitle,
+  handleSettingsClick,
 }) => {
   // Get the current theme and memoize styles to prevent unnecessary recalculations on each render
   const {theme} = useAppTheme();
@@ -51,15 +53,15 @@ const BottomControls: React.FC<BottomControlsProps> = ({
       {/* Options container for additional actions (like subtitles or settings) */}
       <View style={styles.optionsContainer}>
         {/* Audio subtitles option */}
-        <View style={styles.options}>
+        <TouchableOpacity style={styles.options} onPress={handleAudioSubtitle}>
           <SubTitle />
           <Text style={styles.optionsText}>Audio Subtitles</Text>
-        </View>
+        </TouchableOpacity>
         {/* Settings option */}
-        <View style={styles.options}>
+        <TouchableOpacity style={styles.options} onPress={handleSettingsClick}>
           <Setting />
           <Text style={styles.optionsText}>Settings</Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );

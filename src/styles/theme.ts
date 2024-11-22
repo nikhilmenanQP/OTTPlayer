@@ -34,6 +34,8 @@ type ThemeColors = {
   musselBlue: string;
   sectionTitle: string;
   standardGray: string;
+  standardGray_50: string;
+  standardGray_32: string;
   textPrimary: string;
   white: string;
   bootstrapBlue: string;
@@ -47,6 +49,7 @@ type ThemeColors = {
   gunMetal: string;
   black_92: string;
   black_32: string;
+  black_50: string;
 };
 
 // Extend the base theme with colors for light and dark themes
@@ -175,6 +178,8 @@ export const darkTheme: Theme = {
     musselBlue: '#5450FF',
     sectionTitle: '#FFFFFF',
     standardGray: '#808080',
+    standardGray_50: '#80808050',
+    standardGray_32: '#80808032',
     textPrimary: '#FFFFFF',
     white: '#ffffff',
     bootstrapBlue: '#007bff',
@@ -188,6 +193,7 @@ export const darkTheme: Theme = {
     gunMetal: '#161c24',
     black_92: '#00000092',
     black_32: '#00000032',
+    black_50: '#00000050',
   },
 };
 
@@ -208,6 +214,8 @@ export const lightTheme: Theme = {
     musselBlue: '#5450FF',
     sectionTitle: '#000000',
     standardGray: '#808080',
+    standardGray_50: '#80808050',
+    standardGray_32: '#80808032',
     textPrimary: '#000000',
     white: '#ffffff',
     bootstrapBlue: '#007bff',
@@ -221,5 +229,6 @@ export const lightTheme: Theme = {
     gunMetal: '#161c24',
     black_92: '#00000092',
     black_32: '#00000032',
+    black_50: '#00000050',
   },
 };

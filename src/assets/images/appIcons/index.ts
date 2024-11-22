@@ -9,6 +9,7 @@ import Setting from '@assets/images/appIcons/Settings.svg';
 import ArrowTailLeft from '@assets/images/appIcons/arrowTail-left.svg';
 import Cast from '@assets/images/appIcons/cast.svg';
 import Expand from '@assets/images/appIcons/expand.svg';
+import Check from '@assets/images/appIcons/check.svg';
 
 export {
   CloseIcon,
@@ -22,4 +23,5 @@ export {
   ArrowTailLeft,
   Cast,
   Expand,
+  Check,
 };
