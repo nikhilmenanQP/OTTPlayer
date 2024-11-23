@@ -1,10 +1,10 @@
 import BlurBackground from '@components/AppComponents/BlurBackGround'; // Custom background blur component
-import React, {useState, useEffect, useRef, Component, ComponentElement} from 'react';
+import React, {useState, useEffect, useRef, Component, ComponentElement, useCallback} from 'react';
 
 import {Check, CloseIcon} from '@assets/images/appIcons'; // Icons for selection and closing modal
-import {Modal, View, Text, TouchableOpacity, FlatList, Animated, ViewStyle, Easing} from 'react-native';
+import {Modal, View, Text, TouchableOpacity, FlatList, Animated, ViewStyle, Easing, StyleProp} from 'react-native';
 import {Option, PlayerSettingsModalProps, SpeedOption, TabProps} from './types'; // Type definitions
-import {createStyle} from './styles'; // Function to create styles based on the current theme
+import {alignSelf, createStyle} from './styles'; // Function to create styles based on the current theme
 import {useAppTheme} from '@hooks/useAppTheme'; // Custom hook for theme management
 import {useSafeAreaInsets} from 'react-native-safe-area-context'; // For handling safe area insets
 
@@ -116,7 +116,9 @@ const Tab: React.FC<TabProps> = React.memo(({selectedTab, setSelectedTab, onClos
             onPress={() => setSelectedTab(tab)} // Change selected tab on press
             style={[styles.tabButton, {width: initialTabWidth !== 0 ? initialTabWidth : undefined}]}
             onLayout={event => handleTabLayout(event, index)}>
-            <Text style={styles.tabText}>{tab.charAt(0).toUpperCase() + tab.slice(1)}</Text>{' '}
+            <Text style={[selectedTab === tab ? styles.tabSelectedText : styles.tabText]}>
+              {tab.charAt(0).toUpperCase() + tab.slice(1)}
+            </Text>{' '}
             {/* Capitalize the tab text */}
           </TouchableOpacity>
         ))}
@@ -186,26 +188,58 @@ const PlaybackSpeedOptions: React.FC = React.memo(() => {
   const {theme} = useAppTheme(); // Fetch the theme
   const styles = createStyle(theme); // Apply styles
 
-  const handlePress = (item: SpeedOption) => setSelectedSpeed(item); // Handle speed option selection
+  // Optimized handlePress with useCallback to avoid unnecessary re-renders
+  const handlePress = useCallback((item: SpeedOption) => {
+    setSelectedSpeed(item); // Handle speed option selection
+  }, []);
+
+  // Function to render the ListHeaderComponent, now moved outside of JSX
+  const renderListHeader = () => <View />;
+
+  // Memoized renderItem function moved outside JSX, avoiding inline function
+  const renderItem = useCallback(
+    ({item, index}: {item: SpeedOption; index: number}) => {
+      const isSelected = selectedSpeed === item;
+      const isFirst = index === 0;
+      const isLast = index === SPEED_OPTIONS.length - 1;
+
+      // Pre-calculate the alignment style for optimization
+      const alignSelfStyle = isSelected ? 'center' : alignSelf(isFirst, isLast);
+
+      // Pre-calculate the selected styles to avoid ternary in JSX
+      const outerCircleStyle = isSelected ? styles.outerCheckCircle : styles.outerUncheckCircle;
+      const innerCircleStyle: StyleProp<ViewStyle> = isSelected
+        ? [styles.innerCheckCircle, {alignSelf: alignSelfStyle}]
+        : [styles.innerUncheckCircle, {alignSelf: alignSelfStyle}];
+
+      return (
+        <TouchableOpacity
+          onPress={() => handlePress(item)} // Update selected speed on press
+          style={{justifyContent: 'center', alignItems: 'center'}}>
+          <View style={outerCircleStyle}>
+            {isSelected && <BlurBackground />}
+            <View style={innerCircleStyle} />
+          </View>
+          <Text style={[isSelected ? styles.selectedText : styles.optionText, {marginLeft: 0}]}>{item}</Text>
+          {/* Highlight selected option */}
+        </TouchableOpacity>
+      );
+    },
+    [selectedSpeed, handlePress, styles], // Only re-render when selectedSpeed or styles change
+  );
 
   return (
     <FlatList
       data={SPEED_OPTIONS} // Playback speed options data
       horizontal
       keyExtractor={item => item}
-      contentContainerStyle={styles.flatListContainer}
+      contentContainerStyle={styles.playbackContentContainer}
       initialNumToRender={3}
       windowSize={2}
       removeClippedSubviews
-      renderItem={({item}) => (
-        <TouchableOpacity
-          onPress={() => handlePress(item)} // Update selected speed on press
-          style={selectedSpeed === item ? styles.selectedOption : styles.option}>
-          {selectedSpeed === item && <Check />} {/* Show check icon for selected option */}
-          <Text style={[styles.optionText, selectedSpeed === item && styles.selectedText]}>{item}</Text>{' '}
-          {/* Highlight selected option */}
-        </TouchableOpacity>
-      )}
+      ListHeaderComponent={renderListHeader} // Use the extracted function here
+      ListHeaderComponentStyle={styles.playbackListHeader}
+      renderItem={renderItem} // Use the extracted memoized renderItem
     />
   );
 });

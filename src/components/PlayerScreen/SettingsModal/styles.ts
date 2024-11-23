@@ -1,13 +1,32 @@
 import {Theme} from '@styles/theme';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, ViewStyle} from 'react-native';
 
 /**
  * @type {CSS}
  * @param theme
  * @returns
  */
-export const createStyle = (theme: Theme) =>
-  StyleSheet.create({
+export const alignSelf = (isFirst: boolean, isLast: boolean) => {
+  if (isFirst) {
+    return 'flex-start';
+  } else if (isLast) {
+    return 'flex-end';
+  } else {
+    return 'center';
+  }
+};
+
+export const createStyle = (theme: Theme) => {
+  const outerCircleStyle = {
+    borderRadius: theme.spacing.lg_llll,
+    height: theme.spacing.md_xx,
+    justifyContent: 'center',
+    marginBottom: theme.spacing.sm_llll,
+    overflow: 'hidden',
+    width: theme.spacing.md_xx,
+  };
+
+  return StyleSheet.create({
     /**
      * Modal container style: Sets the background color and ensures the modal takes up the full screen.
      */
@@ -37,6 +56,18 @@ export const createStyle = (theme: Theme) =>
       width: '100%', // Full width of the container
     },
 
+    innerCheckCircle: {
+      backgroundColor: theme.colors.white, // White background color when the circle is checked
+      borderRadius: theme.spacing.lg_llll, // Large border radius to make the circle fully rounded
+      padding: theme.spacing.sm, // Small padding for inner content when selected
+    },
+
+    innerUncheckCircle: {
+      backgroundColor: theme.colors.white, // White background color for the unchecked circle (same as the checked state for consistency)
+      borderRadius: theme.spacing.lg_llll, // Large border radius to maintain the circular shape
+      padding: theme.spacing.sm_x, // Slightly smaller padding when the circle is not selected
+    },
+
     /**
      * Style for each option item in the list (both quality and speed options).
      */
@@ -51,11 +82,47 @@ export const createStyle = (theme: Theme) =>
     },
 
     /**
+     * Style for the text inside the option button
+     */
+    optionText: {
+      color: 'white', // White text color for better contrast
+      fontSize: theme.spacing.sm_lll - theme.spacing.sm_xxxx, // Font size for option text
+      fontFamily: theme.fontFamily.inter_semiBold,
+    },
+
+    outerCheckCircle: {
+      ...outerCircleStyle, // Inherits common circle styles (e.g., size, shape)
+      borderColor: theme.colors.bootstrapBlue, // White border to indicate the circle is selected
+      borderWidth: theme.spacing.sm_xxxx, // Thin border to enhance the visual distinction of the selected state
+    } as ViewStyle, // Explicitly asserting this object as ViewStyle for TypeScript compatibility
+
+    outerUncheckCircle: {
+      ...outerCircleStyle, // Inherits common circle styles for consistency
+      borderColor: 'transparent', // No visible border when the circle is unselected
+      borderWidth: theme.spacing.null, // No border width for unselected state
+    } as ViewStyle, // Explicitly asserting this object as ViewStyle for TypeScript compatibility
+
+    playbackContentContainer: {
+      alignItems: 'flex-start', // Align items to the start of the cross-axis (top for a row layout)
+      flex: 1, // Take up full available space
+      flexDirection: 'row', // Arrange child elements horizontally
+      justifyContent: 'space-between', // Distribute space evenly between elements
+    },
+
+    playbackListHeader: {
+      backgroundColor: 'white', // White background for the header section
+      height: theme.spacing.sm_xxxx, // Define the height of the header for spacing purposes
+      marginTop: theme.spacing.sm_lll, // Add margin to space the header from the top
+      position: 'absolute', // Make the header positioned absolutely within its container
+      width: '100%', // Ensure the header spans the full width of the container
+    },
+
+    /**
      * Style for selected options: Highlighted with blue background and rounded corners.
      */
     selectedOption: {
       alignItems: 'center', // Center content horizontally
-      backgroundColor: '#007AFF', // Highlighted background color (blue)
+      backgroundColor: theme.colors.bootstrapBlue, // Highlighted background color (blue)
       borderRadius: theme.spacing.sm_xxx + 1, // Rounded corners for selected option
       flexDirection: 'row', // Align text and icon horizontally
       justifyContent: 'center', // Center the option horizontally
@@ -65,18 +132,13 @@ export const createStyle = (theme: Theme) =>
     },
 
     /**
-     * Style for the text inside the option button
-     */
-    optionText: {
-      color: 'white', // White text color for better contrast
-      fontSize: theme.spacing.sm_lll - theme.spacing.sm_xxxx, // Font size for option text
-    },
-
-    /**
      * Style for the selected text in the option button
      */
     selectedText: {
       marginLeft: theme.spacing.sm, // Add space between the icon and the text for selected options
+      color: 'white', // White text color for better contrast
+      fontSize: theme.spacing.sm_lll - theme.spacing.sm_xxxx, // Font size for option text
+      fontFamily: theme.fontFamily.inter_extraBold,
     },
 
     /**
@@ -85,6 +147,8 @@ export const createStyle = (theme: Theme) =>
     tabButton: {
       // marginRight: theme.spacing.sm, // Space between the tab buttons
       padding: theme.spacing.sm_lll - theme.spacing.sm_xxxx, // Add padding inside each tab button
+      alignItems: 'center',
+      justifyContent: 'center',
     },
 
     /**
@@ -98,8 +162,17 @@ export const createStyle = (theme: Theme) =>
      * Text style for tab buttons (quality/speed tabs).
      */
     tabText: {
-      color: '#fff', // White text for tabs
-      fontSize: theme.spacing.sm_lll - theme.spacing.sm_xxxx, // Font size for tab text
+      color: theme.colors.standardGray, // White text for tabs
+      fontSize: theme.spacing.sm_llll - theme.spacing.sm_xxx, // Font size for tab text
+      fontFamily: theme.fontFamily.inter_medium,
+      textAlign: 'center',
+    },
+
+    tabSelectedText: {
+      color: theme.colors.white, // White text for tabs
+      fontSize: theme.spacing.sm_llll + theme.spacing.sm_xxxx, // Font size for tab text
+      fontFamily: theme.fontFamily.inter_medium,
+      textAlign: 'center',
     },
 
     /**
@@ -125,3 +198,4 @@ export const createStyle = (theme: Theme) =>
       bottom: theme.spacing.null, // Align at the bottom of the tab
     },
   });
+};
