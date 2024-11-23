@@ -10,6 +10,8 @@ import ArrowTailLeft from '@assets/images/appIcons/arrowTail-left.svg';
 import Cast from '@assets/images/appIcons/cast.svg';
 import Expand from '@assets/images/appIcons/expand.svg';
 import Check from '@assets/images/appIcons/check.svg';
+import Refresh from '@assets/images/appIcons/refresh.svg';
+import Danger from '@assets/images/appIcons/danger.svg';
 
 export {
   CloseIcon,
@@ -24,4 +26,6 @@ export {
   Cast,
   Expand,
   Check,
+  Refresh,
+  Danger,
 };

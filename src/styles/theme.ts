@@ -48,6 +48,7 @@ type ThemeColors = {
   davisGrey: string;
   gunMetal: string;
   black_92: string;
+  black_95: string;
   black_32: string;
   black_50: string;
 };
@@ -192,6 +193,7 @@ export const darkTheme: Theme = {
     davisGrey: '#555555',
     gunMetal: '#161c24',
     black_92: '#00000092',
+    black_95: '#00000095',
     black_32: '#00000032',
     black_50: '#00000050',
   },
@@ -228,6 +230,7 @@ export const lightTheme: Theme = {
     davisGrey: '#555555',
     gunMetal: '#161c24',
     black_92: '#00000092',
+    black_95: '#00000095',
     black_32: '#00000032',
     black_50: '#00000050',
   },
