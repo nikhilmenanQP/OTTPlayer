@@ -6,6 +6,7 @@ import {Setting, SubTitle} from '@assets/images/appIcons';
 import {Text, TouchableOpacity, View} from 'react-native';
 import {createStyle} from './styles';
 import {useAppTheme} from '@hooks/useAppTheme';
+import SubtitleOverlay from '@components/AppComponents/SubtitleOverlay';
 
 /**
  * @type {Component} The BottomControls component
@@ -16,10 +17,11 @@ const BottomControls: React.FC<BottomControlsProps> = ({
   currentTime,
   duration,
   formatTime,
-  handleSlidingComplete,
-  handleSlidingStart,
   handleAudioSubtitle,
   handleSettingsClick,
+  handleSlidingComplete,
+  handleSlidingStart,
+  isFullscreen,
 }) => {
   // Get the current theme and memoize styles to prevent unnecessary recalculations on each render
   const {theme} = useAppTheme();
@@ -27,6 +29,12 @@ const BottomControls: React.FC<BottomControlsProps> = ({
 
   return (
     <View style={styles.container}>
+      {/* Video Subtitle */}
+      <SubtitleOverlay
+        currentTime={currentTime}
+        isFullScreen={isFullscreen}
+        subtitleUri="https://bitdash-a.akamaihd.net/content/sintel/subtitles/subtitles_en.vtt"
+      />
       {/* Slider container */}
       <View style={styles.sliderContainer}>
         <Slider

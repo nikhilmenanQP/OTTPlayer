@@ -283,6 +283,7 @@ const PlayerScreen: React.FC = () => {
           handleSlidingStart={handleSlidingStart} // Seek bar start handler
           handleAudioSubtitle={handleAudioSubtitle} // Audio/subtitle settings handler
           handleSettingsClick={handleSettingsClick} // Settings modal toggle
+          isFullscreen={playerState.isFullscreen} // Fullscreen state
         />
         <GradientSeparator position="bottom" /> {/* Gradient separator on bottom */}
       </View>
