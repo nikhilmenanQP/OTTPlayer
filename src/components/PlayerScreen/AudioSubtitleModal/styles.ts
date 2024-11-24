@@ -72,6 +72,8 @@ export const createStyle = (theme: Theme): Styles =>
      */
     tabButton: {
       padding: theme.spacing.sm_lll - theme.spacing.sm_xxxx, // Padding around the tab button to increase touch area
+      alignItems: 'center',
+      justifyContent: 'center',
     },
 
     /**
@@ -87,10 +89,17 @@ export const createStyle = (theme: Theme): Styles =>
      * Styled with theme color, medium font size, and centered
      */
     tabText: {
-      color: theme.colors.white, // White text color from theme
-      fontSize: theme.spacing.sm_lll - theme.spacing.sm_xxxx, // Medium-sized font for tab labels
-      textAlign: 'center', // Center-align text within the tab
-      width: theme.spacing.lg_lll, // Fixed width to ensure consistent size across tabs
+      color: theme.colors.standardGray, // White text for tabs
+      fontSize: theme.spacing.sm_llll - theme.spacing.sm_xxx, // Font size for tab text
+      fontFamily: theme.fontFamily.inter_medium,
+      textAlign: 'center',
+    },
+
+    tabSelectedText: {
+      color: theme.colors.white, // White text for tabs
+      fontSize: theme.spacing.sm_llll + theme.spacing.sm_xxxx, // Font size for tab text
+      fontFamily: theme.fontFamily.inter_medium,
+      textAlign: 'center',
     },
 
     /**

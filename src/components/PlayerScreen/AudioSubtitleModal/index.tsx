@@ -132,8 +132,11 @@ const Tab: React.FC<TabProps> = React.memo(({selectedTab, setSelectedTab, onClos
             key={tab}
             onLayout={event => handleTabLayout(event, index)} // Capture layout information for the tab
             onPress={() => setSelectedTab(tab)} // Switch to selected tab
-            style={[styles.tabButton, {width: initialTabWidth || undefined}]}>
-            <Text style={styles.tabText}>{tab.charAt(0).toUpperCase() + tab.slice(1)}</Text> {/* Display tab name */}
+            style={[styles.tabButton, {width: initialTabWidth !== 0 ? initialTabWidth + 50 : undefined}]}>
+            <Text style={selectedTab === tab ? styles.tabSelectedText : styles.tabText}>
+              {tab.charAt(0).toUpperCase() + tab.slice(1)}
+            </Text>{' '}
+            {/* Display tab name */}
           </TouchableOpacity>
         ))}
         {/* Animated underline */}

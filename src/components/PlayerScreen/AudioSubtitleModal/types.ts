@@ -99,6 +99,8 @@ export interface Styles {
    */
   tabText: TextStyle;
 
+  tabSelectedText: TextStyle;
+
   /**
    * Tab container with underline for active tab.
    */
