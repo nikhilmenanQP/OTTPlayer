@@ -12,6 +12,7 @@ import Expand from '@assets/images/appIcons/expand.svg';
 import Check from '@assets/images/appIcons/check.svg';
 import Refresh from '@assets/images/appIcons/refresh.svg';
 import Danger from '@assets/images/appIcons/danger.svg';
+import Loader from '@assets/images/appIcons/loader.svg';
 
 export {
   CloseIcon,
@@ -28,4 +29,5 @@ export {
   Check,
   Refresh,
   Danger,
+  Loader,
 };

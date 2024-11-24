@@ -7,7 +7,7 @@ import React, {useState, useRef, useEffect, useMemo, useCallback} from 'react'; 
 import TopControls from '@components/PlayerScreen/TopControls'; // Top controls for fullscreen toggle
 import Video, {OnProgressData, OnLoadData, VideoRef, OnBufferData} from 'react-native-video'; // Video component
 
-import {AppHeader, PlayerLoader} from '@components/AppComponents'; // Custom app header
+import {AppHeader} from '@components/AppComponents'; // Custom app header
 import {PlayerState} from './types'; // Player state types for managing video playback
 import {View, StyleProp, ViewStyle} from 'react-native'; // View and style components for layout
 import {createStyle} from './styles'; // Styling function for the player screen
@@ -15,6 +15,7 @@ import {useAppTheme} from '@hooks/useAppTheme'; // Custom hook to fetch the curr
 import PlayerSettingsModal from '@components/PlayerScreen/SettingsModal'; // Modal for player settings
 import AudioSubtitleModal from '@components/PlayerScreen/AudioSubtitleModal'; // Modal for audio and subtitle settings
 import ErrorScreen from '@components/AppComponents/ErrorScreen'; // Error screen component
+import LottieLoader from '@components/AppComponents/LottieLoader';
 
 /**
  * PlayerScreen Component
@@ -27,7 +28,6 @@ const PlayerScreen: React.FC = () => {
   const [isAudioSubtitleModal, setIsAudioSubtitleModal] = useState<boolean>(false); // Toggle for Audio/Subtitles modal
   const [isSettingsModal, setIsSettingsModal] = useState<boolean>(false); // Toggle for settings modal
   const [isErrorVisible, setIsErrorVisible] = useState<boolean>(false); // Toggle for error modal visibility
-  const [isLoading, setIsLoading] = useState<boolean>(true); // Flag for showing/hiding the loading state
 
   const videoRef = useRef<VideoRef | null>(null); // Reference to the video player instance for controlling playback
 
@@ -266,7 +266,7 @@ const PlayerScreen: React.FC = () => {
           toggleFullscreen={toggleFullscreen} // Toggle fullscreen function
         />
         {playerState.isLoading ? (
-          <PlayerLoader size="large" />
+          <LottieLoader />
         ) : (
           <MiddleControls
             handleFastForward={handleFastForward} // Fast-forward control
