@@ -7,7 +7,7 @@ import React, {useState, useRef, useEffect, useMemo, useCallback} from 'react'; 
 import TopControls from '@components/PlayerScreen/TopControls'; // Top controls for fullscreen toggle
 import Video, {OnProgressData, OnLoadData, VideoRef} from 'react-native-video'; // Video component
 
-import {AppHeader} from '@components/AppComponents'; // Custom app header
+import {AppHeader, PlayerLoader} from '@components/AppComponents'; // Custom app header
 import {PlayerState} from './types'; // Player state types for managing video playback
 import {View, StyleProp, ViewStyle} from 'react-native'; // View and style components for layout
 import {createStyle} from './styles'; // Styling function for the player screen
@@ -26,6 +26,7 @@ const PlayerScreen: React.FC = () => {
   const [isSettingsModal, setIsSettingsModal] = useState<boolean>(false); // Settings modal visibility
   const videoRef = useRef<VideoRef | null>(null); // Reference to the video player for controlling playback
   const [isErrorVisible, setIsErrorVisible] = useState<boolean>(false); // Error modal visibility
+  const [isLoading, setIsLoading] = useState<boolean>(); // State to track loading
 
   // Player state management (playback, fullscreen, and progress)
   const [playerState, setPlayerState] = useState<PlayerState>({
@@ -34,6 +35,7 @@ const PlayerScreen: React.FC = () => {
     isFullscreen: false, // Fullscreen mode state
     isSliding: false, // Whether the user is interacting with the seek bar
     paused: true, // Play/pause state
+    isLoading: true,
   });
 
   // Get the current app theme and use memoization to optimize style recalculation
@@ -72,8 +74,17 @@ const PlayerScreen: React.FC = () => {
     setPlayerState(prevState => ({
       ...prevState,
       duration: data.duration,
+      isLoading: false,
     }));
   }, []);
+
+  // Video event handlers
+  const onLoadStart = () => {
+    setPlayerState(prevState => ({
+      ...prevState,
+      isLoading: true,
+    }));
+  };
 
   /**
    * @type {Function} Mark that the user started interacting with the seek bar
@@ -93,8 +104,18 @@ const PlayerScreen: React.FC = () => {
       ...prevState,
       isSliding: false,
       currentTime: value,
+      isLoading: true, // Hide loader when video starts playing
     }));
     videoRef.current?.seek(value); // Seek to the selected time
+
+    // Wait for the video to resume playing before hiding the loader
+    setTimeout(() => {
+      setPlayerState(prevState => ({
+        ...prevState,
+        isLoading: false, // Hide loader when video starts playing
+        paused: false, // Resume playing the video after seeking
+      }));
+    }, 500); // Adjust the timeout as needed for smooth transition
   }, []);
 
   /**
@@ -206,6 +227,7 @@ const PlayerScreen: React.FC = () => {
           uri: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4', // Sample video URI
         }}
         style={styles.video} // Styling for the video element
+        onLoadStart={onLoadStart} // Show loader when video starts loading
       />
       {/* Controls section */}
       <View style={styles.controlsContainer as StyleProp<ViewStyle>}>
@@ -214,12 +236,16 @@ const PlayerScreen: React.FC = () => {
           isFullscreen={playerState.isFullscreen} // Fullscreen state
           toggleFullscreen={toggleFullscreen} // Toggle fullscreen function
         />
-        <MiddleControls
-          handleFastForward={handleFastForward} // Fast-forward control
-          handlePlayPause={handlePlayPause} // Play/pause control
-          handleRewind={handleRewind} // Rewind control
-          paused={playerState.paused} // Play/pause icon state
-        />
+        {playerState.isLoading ? (
+          <PlayerLoader size="large" />
+        ) : (
+          <MiddleControls
+            handleFastForward={handleFastForward} // Fast-forward control
+            handlePlayPause={handlePlayPause} // Play/pause control
+            handleRewind={handleRewind} // Rewind control
+            paused={playerState.paused} // Play/pause icon state
+          />
+        )}
         <BottomControls
           currentTime={playerState.currentTime} // Current time of playback
           duration={playerState.duration} // Total video duration
