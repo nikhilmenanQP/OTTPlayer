@@ -27,7 +27,7 @@ const PlayerScreen: React.FC = () => {
   // State hooks for managing modals and error visibility
   const [isAudioSubtitleModal, setIsAudioSubtitleModal] = useState<boolean>(false); // Toggle for Audio/Subtitles modal
   const [isSettingsModal, setIsSettingsModal] = useState<boolean>(false); // Toggle for settings modal
-  const [isErrorVisible, setIsErrorVisible] = useState<boolean>(false); // Toggle for error modal visibility
+  // const [isErrorVisible, setIsErrorVisible] = useState<boolean>(false); // Toggle for error modal visibility
 
   const videoRef = useRef<VideoRef | null>(null); // Reference to the video player instance for controlling playback
 
@@ -35,10 +35,11 @@ const PlayerScreen: React.FC = () => {
   const [playerState, setPlayerState] = useState<PlayerState>({
     currentTime: 0, // Current playback time in seconds
     duration: 0, // Total duration of the video
+    isErrorVisible: false,
     isFullscreen: false, // Fullscreen state (true/false)
+    isLoading: true, // Flag for loading state (true when the video is buffering or loading)
     isSliding: false, // Flag indicating if the seek bar is being dragged
     paused: true, // Play/Pause state (true for paused)
-    isLoading: true, // Flag for loading state (true when the video is buffering or loading)
   });
 
   // Fetch the current theme using the custom hook and apply memoization to optimize styling updates
@@ -150,7 +151,10 @@ const PlayerScreen: React.FC = () => {
    * Closes the error modal
    */
   const onErrorModalClose = () => {
-    setIsErrorVisible(!isErrorVisible); // Toggle error modal visibility
+    setPlayerState(prevState => ({
+      ...prevState,
+      isErrorVisible: true, // Update current time in state
+    })); // Toggle error modal visibility
   };
 
   /**
@@ -300,8 +304,8 @@ const PlayerScreen: React.FC = () => {
       />
       <ErrorScreen
         isFullscreen={playerState.isFullscreen} // Fullscreen state
-        visible={isErrorVisible}
         onErrorModalClose={onErrorModalClose}
+        visible={playerState.isErrorVisible}
       />
     </View>
   );

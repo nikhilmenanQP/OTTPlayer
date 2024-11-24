@@ -6,5 +6,16 @@ import HorizontalRule from './HorizontalRule';
 import LottieLoader from './LottieLoader';
 import PlayerLoader from './PlayerLoader';
 import SearchBar from './SearchBar';
+import SubtitleOverlay from './SubtitleOverlay';
 
-export {AppCarousel, AppHeader, HorizontalRule, SearchBar, BlurBackground, ErrorScreen, PlayerLoader, LottieLoader};
+export {
+  AppCarousel,
+  AppHeader,
+  BlurBackground,
+  ErrorScreen,
+  HorizontalRule,
+  LottieLoader,
+  PlayerLoader,
+  SearchBar,
+  SubtitleOverlay,
+};

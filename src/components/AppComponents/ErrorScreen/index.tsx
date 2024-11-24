@@ -41,7 +41,7 @@ const ErrorScreen: React.FC<ErrorScreenProps> = ({visible = true, isFullscreen =
   return (
     <Modal
       // Modal configuration to animate from the bottom with slide animation
-      animationType="slide"
+      animationType="fade"
       // Ensure the modal supports both portrait and landscape orientations
       supportedOrientations={['landscape', 'landscape-left', 'portrait']}
       // Make the modal transparent and control its visibility
