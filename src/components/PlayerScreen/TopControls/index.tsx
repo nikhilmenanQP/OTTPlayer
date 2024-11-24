@@ -1,7 +1,7 @@
 import Orientation from 'react-native-orientation-locker';
 import React, {useCallback} from 'react';
 
-import {ArrowTailLeft, Cast, Expand} from '@assets/images/appIcons';
+import {ArrowTailLeft, Cast, Expand, MusicPlaylist, Next} from '@assets/images/appIcons';
 import {createStyle} from './styles';
 import {Styles, TopControlsProps} from './types';
 import {Text, View, TouchableOpacity, ViewStyle} from 'react-native';
@@ -11,8 +11,11 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 // Functional component for the top controls UI, including back button, movie info, and fullscreen toggle
 const TopControls: React.FC<TopControlsProps> = ({
-  toggleFullscreen,
+  castButtonHandler = () => {},
   isFullscreen,
+  musicPlaylistHandler = () => {},
+  nextButtonHandler = () => {},
+  toggleFullscreen,
 }) => {
   // Get insets for safe area (to prevent UI elements from overlapping with system UI like the notch)
   const insets = useSafeAreaInsets();
@@ -45,9 +48,7 @@ const TopControls: React.FC<TopControlsProps> = ({
     <View style={containerStyle}>
       {/* Left section containing back button and movie information */}
       <View style={styles.leftControl}>
-        <TouchableOpacity
-          style={styles.iconStyle}
-          onPress={onBackButtonHandler}>
+        <TouchableOpacity style={styles.iconStyle} onPress={onBackButtonHandler}>
           {/* Arrow icon for navigating back */}
           <ArrowTailLeft width={18} height={18} />
         </TouchableOpacity>
@@ -60,12 +61,23 @@ const TopControls: React.FC<TopControlsProps> = ({
 
       {/* Right section with cast icon and fullscreen toggle */}
       <View style={styles.rightControl}>
-        <View style={styles.iconStyle}>
-          {/* Cast icon */}
+        {/* Music Playlist Icon */}
+        {/* <TouchableOpacity onPress={musicPlaylistHandler} style={styles.iconStyle}>
+          <MusicPlaylist />
+        </TouchableOpacity> */}
+
+        {/* Next Icon */}
+        {/* <TouchableOpacity onPress={nextButtonHandler} style={styles.iconStyle}>
+          <Next />
+        </TouchableOpacity> */}
+
+        {/* Cast icon */}
+        <TouchableOpacity onPress={castButtonHandler} style={styles.iconStyle}>
           <Cast width={18} height={18} />
-        </View>
+        </TouchableOpacity>
+
+        {/* Expand icon for toggling fullscreen */}
         <TouchableOpacity onPress={toggleFullscreen} style={styles.iconStyle}>
-          {/* Expand icon for toggling fullscreen */}
           <Expand />
         </TouchableOpacity>
       </View>

@@ -2,7 +2,10 @@ import {TextStyle, ViewStyle} from 'react-native';
 
 // Define types for props and styles
 export interface TopControlsProps {
+  castButtonHandler?: () => void;
   isFullscreen: boolean;
+  musicPlaylistHandler?: () => void;
+  nextButtonHandler?: () => void;
   toggleFullscreen: () => void;
 }
 
