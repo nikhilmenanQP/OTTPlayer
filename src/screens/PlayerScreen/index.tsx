@@ -266,7 +266,7 @@ const PlayerScreen: React.FC = () => {
           toggleFullscreen={toggleFullscreen} // Toggle fullscreen function
         />
         {playerState.isLoading ? (
-          <LottieLoader />
+          <LottieLoader isFullScreen={playerState.isFullscreen} />
         ) : (
           <MiddleControls
             handleFastForward={handleFastForward} // Fast-forward control
