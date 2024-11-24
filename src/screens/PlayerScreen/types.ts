@@ -1,4 +1,7 @@
+import {ViewStyle} from 'react-native';
+
 export interface PlayerState {
+  controlsVisible: boolean;
   currentTime: number; // Current playback time in seconds
   duration: number; // Total duration of the video
   isErrorVisible: boolean;

@@ -9,7 +9,7 @@ import Video, {OnProgressData, OnLoadData, VideoRef, OnBufferData} from 'react-n
 
 import {AppHeader} from '@components/AppComponents'; // Custom app header
 import {PlayerState} from './types'; // Player state types for managing video playback
-import {View, StyleProp, ViewStyle} from 'react-native'; // View and style components for layout
+import {View, StyleProp, ViewStyle, TouchableWithoutFeedback, Animated} from 'react-native'; // View and style components for layout
 import {createStyle} from './styles'; // Styling function for the player screen
 import {useAppTheme} from '@hooks/useAppTheme'; // Custom hook to fetch the current app theme
 import PlayerSettingsModal from '@components/PlayerScreen/SettingsModal'; // Modal for player settings
@@ -28,10 +28,12 @@ const PlayerScreen: React.FC = () => {
   const [isAudioSubtitleModal, setIsAudioSubtitleModal] = useState<boolean>(false); // Toggle for Audio/Subtitles modal
   const [isSettingsModal, setIsSettingsModal] = useState<boolean>(false); // Toggle for settings modal
 
+  const controlsOpacity = useRef(new Animated.Value(1)).current; // 1 means fully visible
   const videoRef = useRef<VideoRef | null>(null); // Reference to the video player instance for controlling playback
 
   // Initial state of the player (current time, duration, fullscreen, play/pause state)
   const [playerState, setPlayerState] = useState<PlayerState>({
+    controlsVisible: true,
     currentTime: 0, // Current playback time in seconds
     duration: 0, // Total duration of the video
     isErrorVisible: false,
@@ -62,6 +64,16 @@ const PlayerScreen: React.FC = () => {
       paused: !prevState.paused, // Invert the paused state
     }));
   }, []);
+
+  /**
+   * Toggle controls visibility on screen tap
+   */
+  const handleScreenTap = () => {
+    setPlayerState(prevState => ({
+      ...prevState,
+      controlsVisible: !playerState.controlsVisible, // Invert the paused state
+    }));
+  };
 
   /**
    * Toggle the visibility of the settings modal
@@ -250,71 +262,126 @@ const PlayerScreen: React.FC = () => {
     };
   }, []);
 
+  /**
+   * Effect to fade out player controls after change video start to play
+   */
+  useEffect(() => {
+    if (!playerState.paused) {
+      const fadeOutControls = Animated.timing(controlsOpacity, {
+        toValue: 0, // Fade out to transparent
+        duration: 500, // 0.5 second duration for fade-out
+        useNativeDriver: true, // Optimize performance by using native driver
+      });
+
+      const hideControlsTimeout = setTimeout(() => {
+        fadeOutControls.start(); // Start fade-out animation
+      }, 4000); // 4 seconds delay before starting fade-out
+
+      return () => {
+        clearTimeout(hideControlsTimeout); // Cleanup timeout on unmount
+      };
+    } else {
+      // Fade in controls if the video is paused
+      Animated.timing(controlsOpacity, {
+        toValue: 1, // Fade in to fully visible
+        duration: 500, // 0.5 second duration for fade-in
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [playerState.paused, playerState.controlsVisible]);
+
+  /**
+   * Toggle Player Controls on screen tap
+   */
+  useEffect(() => {
+    if (!playerState.controlsVisible) {
+      // Fade out controls if they are not visible
+      Animated.timing(controlsOpacity, {
+        toValue: 0, // Fade out to transparent
+        duration: 500, // 0.5 second duration
+        useNativeDriver: true,
+      }).start();
+    } else {
+      // Fade in controls if they are visible
+      Animated.timing(controlsOpacity, {
+        toValue: 1, // Fade in to fully visible
+        duration: 500, // 0.5 second duration
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [playerState.controlsVisible, controlsOpacity]);
+
   return (
-    <View style={styles.container as StyleProp<ViewStyle>}>
-      <AppHeader /> {/* Header component */}
-      <Video
-        // rate={selectedSpeed}
-        onBuffer={onVideoBuffer}
-        onError={onVideoError}
-        onLoad={onLoad} // Event handler for video load
-        onLoadStart={onLoadStart} // Show loader when video starts loading
-        onProgress={onProgress} // Event handler for video progress
-        onReadyForDisplay={onReadyForDisplay}
-        paused={playerState.paused} // Control the play/pause state
-        ref={videoRef}
-        resizeMode="contain" // Resize video to maintain aspect ratio
-        source={{
-          uri: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4', // Sample video URI
-        }}
-        style={styles.video} // Styling for the video element
-      />
-      {/* Controls section */}
-      <View style={styles.controlsContainer as StyleProp<ViewStyle>}>
-        <GradientSeparator position="top" /> {/* Gradient separator on top */}
-        <TopControls
-          isFullscreen={playerState.isFullscreen} // Fullscreen state
-          toggleFullscreen={toggleFullscreen} // Toggle fullscreen function
+    <TouchableWithoutFeedback onPress={handleScreenTap}>
+      <View style={styles.container as StyleProp<ViewStyle>}>
+        <AppHeader /> {/* Header component */}
+        <Video
+          // rate={selectedSpeed}
+          onBuffer={onVideoBuffer}
+          onError={onVideoError}
+          onLoad={onLoad} // Event handler for video load
+          onLoadStart={onLoadStart} // Show loader when video starts loading
+          onProgress={onProgress} // Event handler for video progress
+          onReadyForDisplay={onReadyForDisplay}
+          paused={playerState.paused} // Control the play/pause state
+          ref={videoRef}
+          resizeMode="contain" // Resize video to maintain aspect ratio
+          source={{
+            uri: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4', // Sample video URI
+          }}
+          style={styles.video} // Styling for the video element
         />
-        {playerState.isLoading ? (
-          <LottieLoader isFullScreen={playerState.isFullscreen} />
-        ) : (
-          <MiddleControls
-            handleFastForward={handleFastForward} // Fast-forward control
-            handlePlayPause={handlePlayPause} // Play/pause control
-            handleRewind={handleRewind} // Rewind control
-            paused={playerState.paused} // Play/pause icon state
+        {/* Controls section */}
+        <Animated.View
+          style={[
+            styles.controlsContainer,
+            {opacity: controlsOpacity, zIndex: 1}, // Bind the animated opacity value
+          ]}>
+          <GradientSeparator position="top" /> {/* Gradient separator on top */}
+          <TopControls
+            isFullscreen={playerState.isFullscreen} // Fullscreen state
+            toggleFullscreen={toggleFullscreen} // Toggle fullscreen function
           />
-        )}
-        <BottomControls
-          currentTime={playerState.currentTime} // Current time of playback
-          duration={playerState.duration} // Total video duration
-          formatTime={formatTime} // Time formatting function
-          handleSlidingComplete={handleSlidingComplete} // Seek bar completion handler
-          handleSlidingStart={handleSlidingStart} // Seek bar start handler
-          handleAudioSubtitle={handleAudioSubtitle} // Audio/subtitle settings handler
-          handleSettingsClick={handleSettingsClick} // Settings modal toggle
+          {playerState.isLoading ? (
+            <LottieLoader isFullScreen={playerState.isFullscreen} />
+          ) : (
+            <MiddleControls
+              handleFastForward={handleFastForward} // Fast-forward control
+              handlePlayPause={handlePlayPause} // Play/pause control
+              handleRewind={handleRewind} // Rewind control
+              paused={playerState.paused} // Play/pause icon state
+            />
+          )}
+          <BottomControls
+            currentTime={playerState.currentTime} // Current time of playback
+            duration={playerState.duration} // Total video duration
+            formatTime={formatTime} // Time formatting function
+            handleSlidingComplete={handleSlidingComplete} // Seek bar completion handler
+            handleSlidingStart={handleSlidingStart} // Seek bar start handler
+            handleAudioSubtitle={handleAudioSubtitle} // Audio/subtitle settings handler
+            handleSettingsClick={handleSettingsClick} // Settings modal toggle
+            isFullscreen={playerState.isFullscreen} // Fullscreen state
+          />
+          <GradientSeparator position="bottom" /> {/* Gradient separator on bottom */}
+        </Animated.View>
+        {/* Modals for settings, audio/subtitle, and errors */}
+        <AudioSubtitleModal
           isFullscreen={playerState.isFullscreen} // Fullscreen state
+          onClose={onAudioSubTitleClose}
+          visible={isAudioSubtitleModal}
         />
-        <GradientSeparator position="bottom" /> {/* Gradient separator on bottom */}
+        <PlayerSettingsModal
+          isFullscreen={playerState.isFullscreen} // Fullscreen state
+          onClose={onSettingModalClose}
+          visible={isSettingsModal}
+        />
+        <ErrorScreen
+          isFullscreen={playerState.isFullscreen} // Fullscreen state
+          onErrorModalClose={onErrorModalClose}
+          visible={playerState.isErrorVisible}
+        />
       </View>
-      {/* Modals for settings, audio/subtitle, and errors */}
-      <AudioSubtitleModal
-        isFullscreen={playerState.isFullscreen} // Fullscreen state
-        onClose={onAudioSubTitleClose}
-        visible={isAudioSubtitleModal}
-      />
-      <PlayerSettingsModal
-        isFullscreen={playerState.isFullscreen} // Fullscreen state
-        onClose={onSettingModalClose}
-        visible={isSettingsModal}
-      />
-      <ErrorScreen
-        isFullscreen={playerState.isFullscreen} // Fullscreen state
-        onErrorModalClose={onErrorModalClose}
-        visible={playerState.isErrorVisible}
-      />
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 
