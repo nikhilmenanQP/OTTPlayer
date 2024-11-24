@@ -27,7 +27,6 @@ const PlayerScreen: React.FC = () => {
   // State hooks for managing modals and error visibility
   const [isAudioSubtitleModal, setIsAudioSubtitleModal] = useState<boolean>(false); // Toggle for Audio/Subtitles modal
   const [isSettingsModal, setIsSettingsModal] = useState<boolean>(false); // Toggle for settings modal
-  // const [isErrorVisible, setIsErrorVisible] = useState<boolean>(false); // Toggle for error modal visibility
 
   const videoRef = useRef<VideoRef | null>(null); // Reference to the video player instance for controlling playback
 
@@ -153,7 +152,7 @@ const PlayerScreen: React.FC = () => {
   const onErrorModalClose = () => {
     setPlayerState(prevState => ({
       ...prevState,
-      isErrorVisible: true, // Update current time in state
+      isErrorVisible: false, // Update current time in state
     })); // Toggle error modal visibility
   };
 
@@ -217,6 +216,13 @@ const PlayerScreen: React.FC = () => {
     }));
   };
 
+  const onVideoError = () => {
+    setPlayerState(prevState => ({
+      ...prevState,
+      isErrorVisible: true, // Show or hide loader based on buffering state
+    }));
+  };
+
   /**
    * Toggles fullscreen mode
    * Locks orientation based on fullscreen state
@@ -248,19 +254,20 @@ const PlayerScreen: React.FC = () => {
     <View style={styles.container as StyleProp<ViewStyle>}>
       <AppHeader /> {/* Header component */}
       <Video
+        // rate={selectedSpeed}
+        onBuffer={onVideoBuffer}
+        onError={onVideoError}
         onLoad={onLoad} // Event handler for video load
+        onLoadStart={onLoadStart} // Show loader when video starts loading
         onProgress={onProgress} // Event handler for video progress
+        onReadyForDisplay={onReadyForDisplay}
         paused={playerState.paused} // Control the play/pause state
         ref={videoRef}
         resizeMode="contain" // Resize video to maintain aspect ratio
-        // rate={selectedSpeed}
         source={{
           uri: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4', // Sample video URI
         }}
         style={styles.video} // Styling for the video element
-        onLoadStart={onLoadStart} // Show loader when video starts loading
-        onBuffer={onVideoBuffer}
-        onReadyForDisplay={onReadyForDisplay}
       />
       {/* Controls section */}
       <View style={styles.controlsContainer as StyleProp<ViewStyle>}>
