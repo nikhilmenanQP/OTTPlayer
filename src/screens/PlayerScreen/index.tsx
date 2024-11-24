@@ -7,7 +7,7 @@ import React, {useState, useRef, useEffect, useMemo, useCallback} from 'react'; 
 import TopControls from '@components/PlayerScreen/TopControls'; // Top controls for fullscreen toggle
 import Video, {OnProgressData, OnLoadData, VideoRef, OnBufferData} from 'react-native-video'; // Video component
 
-import {AppHeader} from '@components/AppComponents'; // Custom app header
+import {AppHeader, SubtitleOverlay} from '@components/AppComponents'; // Custom app header
 import {PlayerState} from './types'; // Player state types for managing video playback
 import {View, StyleProp, ViewStyle, TouchableWithoutFeedback, Animated} from 'react-native'; // View and style components for layout
 import {createStyle} from './styles'; // Styling function for the player screen
@@ -29,6 +29,7 @@ const PlayerScreen: React.FC = () => {
   const [isSettingsModal, setIsSettingsModal] = useState<boolean>(false); // Toggle for settings modal
 
   const controlsOpacity = useRef(new Animated.Value(1)).current; // 1 means fully visible
+  const subTitleBottomValue = useRef(new Animated.Value(0)).current;
   const videoRef = useRef<VideoRef | null>(null); // Reference to the video player instance for controlling playback
 
   // Initial state of the player (current time, duration, fullscreen, play/pause state)
@@ -45,7 +46,7 @@ const PlayerScreen: React.FC = () => {
 
   // Fetch the current theme using the custom hook and apply memoization to optimize styling updates
   const {theme} = useAppTheme();
-  const styles = useMemo(() => createStyle(theme), [theme]); // Memoized styles for performance
+  const styles = useMemo(() => createStyle(theme, subTitleBottomValue), [theme]); // Memoized styles for performance
 
   /**
    * Toggle the visibility of the Audio/Subtitles modal
@@ -311,6 +312,25 @@ const PlayerScreen: React.FC = () => {
     }
   }, [playerState.controlsVisible, controlsOpacity]);
 
+  /**
+   * Smooth transition when controlsVisible changes
+   */
+  useEffect(() => {
+    if (playerState.controlsVisible) {
+      Animated.timing(subTitleBottomValue, {
+        toValue: theme.spacing.lg_llll + theme.spacing.sm_lll, // target value based on controlVisible state
+        duration: 300, // 0.5 second duration
+        useNativeDriver: false, // We are animating the 'bottom' value, which requires 'useNativeDriver: false'
+      }).start();
+    } else {
+      Animated.timing(subTitleBottomValue, {
+        toValue: theme.spacing.md, // target value based on controlVisible state
+        duration: 1000, // 1 second duration
+        useNativeDriver: false, // We are animating the 'bottom' value, which requires 'useNativeDriver: false'
+      }).start();
+    }
+  }, [playerState.controlsVisible]); // Triggered whenever controlsVisible changes
+
   return (
     <TouchableWithoutFeedback onPress={handleScreenTap}>
       <View style={styles.container as StyleProp<ViewStyle>}>
@@ -331,6 +351,14 @@ const PlayerScreen: React.FC = () => {
           }}
           style={styles.video} // Styling for the video element
         />
+        {/* Video Subtitle */}
+        <Animated.View style={styles.subTitle}>
+          <SubtitleOverlay
+            currentTime={playerState.currentTime}
+            isFullScreen={playerState.isFullscreen}
+            subtitleUri="https://bitdash-a.akamaihd.net/content/sintel/subtitles/subtitles_en.vtt"
+          />
+        </Animated.View>
         {/* Controls section */}
         <Animated.View
           style={[
@@ -360,7 +388,6 @@ const PlayerScreen: React.FC = () => {
             handleSlidingStart={handleSlidingStart} // Seek bar start handler
             handleAudioSubtitle={handleAudioSubtitle} // Audio/subtitle settings handler
             handleSettingsClick={handleSettingsClick} // Settings modal toggle
-            isFullscreen={playerState.isFullscreen} // Fullscreen state
           />
           <GradientSeparator position="bottom" /> {/* Gradient separator on bottom */}
         </Animated.View>

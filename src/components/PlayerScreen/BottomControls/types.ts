@@ -7,5 +7,4 @@ export interface BottomControlsProps {
   handleSettingsClick: () => void;
   handleSlidingComplete: (value: number) => void; // Function to handle the completion of the slider interaction
   handleSlidingStart: () => void; // Function to handle the start of the slider interaction
-  isFullscreen: boolean;
 }

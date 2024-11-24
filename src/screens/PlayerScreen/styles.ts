@@ -1,7 +1,7 @@
-import {StyleSheet, ViewStyle} from 'react-native';
+import {Animated, StyleSheet, ViewStyle} from 'react-native';
 import {Theme} from '@styles/theme';
 
-export const createStyle = (theme: Theme) =>
+export const createStyle = (theme: Theme, subTitleBottomValue: Animated.Value) =>
   StyleSheet.create({
     container: {
       alignSelf: 'center',
@@ -30,6 +30,15 @@ export const createStyle = (theme: Theme) =>
       top: theme.spacing.null,
       width: '100%',
     } as ViewStyle,
+
+    subTitle: {
+      position: 'absolute',
+      bottom: subTitleBottomValue,
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: '100%',
+      zIndex: 2,
+    },
 
     video: {
       flex: 1,

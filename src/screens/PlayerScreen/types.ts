@@ -1,5 +1,3 @@
-import {ViewStyle} from 'react-native';
-
 export interface PlayerState {
   controlsVisible: boolean;
   currentTime: number; // Current playback time in seconds
