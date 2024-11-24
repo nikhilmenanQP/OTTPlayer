@@ -5,7 +5,7 @@ import MiddleControls from '@components/PlayerScreen/MiddleControls'; // Middle 
 import Orientation from 'react-native-orientation-locker'; // To lock/unlock screen orientation
 import React, {useState, useRef, useEffect, useMemo, useCallback} from 'react'; // React hooks
 import TopControls from '@components/PlayerScreen/TopControls'; // Top controls for fullscreen toggle
-import Video, {OnProgressData, OnLoadData, VideoRef} from 'react-native-video'; // Video component
+import Video, {OnProgressData, OnLoadData, VideoRef, OnBufferData} from 'react-native-video'; // Video component
 
 import {AppHeader, PlayerLoader} from '@components/AppComponents'; // Custom app header
 import {PlayerState} from './types'; // Player state types for managing video playback
@@ -17,144 +17,95 @@ import AudioSubtitleModal from '@components/PlayerScreen/AudioSubtitleModal'; //
 import ErrorScreen from '@components/AppComponents/ErrorScreen'; // Error screen component
 
 /**
- * @type {Component} PlayerScreen Component
- * @returns JSX
+ * PlayerScreen Component
+ * This component renders the video player, including video controls (play, pause, fullscreen, etc.)
+ * It also manages various modals like settings, audio/subtitle selection, and error handling.
+ * @returns JSX Element representing the PlayerScreen UI.
  */
 const PlayerScreen: React.FC = () => {
-  // State hooks to manage modal visibility and player state
-  const [isAudioSubtitleModal, setIsAudioSubtitleModal] = useState<boolean>(false); // Audio/subtitle modal visibility
-  const [isSettingsModal, setIsSettingsModal] = useState<boolean>(false); // Settings modal visibility
-  const videoRef = useRef<VideoRef | null>(null); // Reference to the video player for controlling playback
-  const [isErrorVisible, setIsErrorVisible] = useState<boolean>(false); // Error modal visibility
-  const [isLoading, setIsLoading] = useState<boolean>(); // State to track loading
+  // State hooks for managing modals and error visibility
+  const [isAudioSubtitleModal, setIsAudioSubtitleModal] = useState<boolean>(false); // Toggle for Audio/Subtitles modal
+  const [isSettingsModal, setIsSettingsModal] = useState<boolean>(false); // Toggle for settings modal
+  const [isErrorVisible, setIsErrorVisible] = useState<boolean>(false); // Toggle for error modal visibility
+  const [isLoading, setIsLoading] = useState<boolean>(true); // Flag for showing/hiding the loading state
 
-  // Player state management (playback, fullscreen, and progress)
+  const videoRef = useRef<VideoRef | null>(null); // Reference to the video player instance for controlling playback
+
+  // Initial state of the player (current time, duration, fullscreen, play/pause state)
   const [playerState, setPlayerState] = useState<PlayerState>({
-    currentTime: 0, // Current playback time
+    currentTime: 0, // Current playback time in seconds
     duration: 0, // Total duration of the video
-    isFullscreen: false, // Fullscreen mode state
-    isSliding: false, // Whether the user is interacting with the seek bar
-    paused: true, // Play/pause state
-    isLoading: true,
+    isFullscreen: false, // Fullscreen state (true/false)
+    isSliding: false, // Flag indicating if the seek bar is being dragged
+    paused: true, // Play/Pause state (true for paused)
+    isLoading: true, // Flag for loading state (true when the video is buffering or loading)
   });
 
-  // Get the current app theme and use memoization to optimize style recalculation
+  // Fetch the current theme using the custom hook and apply memoization to optimize styling updates
   const {theme} = useAppTheme();
-  const styles = useMemo(() => createStyle(theme), [theme]);
+  const styles = useMemo(() => createStyle(theme), [theme]); // Memoized styles for performance
 
   /**
-   * @type {Function} Handle play/pause toggle
-   */
-  const handlePlayPause = useCallback(() => {
-    setPlayerState(prevState => ({
-      ...prevState,
-      paused: !prevState.paused,
-    }));
-  }, []);
-
-  /**
-   * @type {Function} Handle video progress update, tracking current playback time
-   */
-  const onProgress = useCallback(
-    (data: OnProgressData) => {
-      if (!playerState.isSliding && playerState.currentTime !== data.currentTime) {
-        setPlayerState(prevState => ({
-          ...prevState,
-          currentTime: data.currentTime,
-        }));
-      }
-    },
-    [playerState.isSliding, playerState.currentTime],
-  );
-
-  /**
-   * @type {Function} Update the duration of the video once loaded
-   */
-  const onLoad = useCallback((data: OnLoadData) => {
-    setPlayerState(prevState => ({
-      ...prevState,
-      duration: data.duration,
-      isLoading: false,
-    }));
-  }, []);
-
-  // Video event handlers
-  const onLoadStart = () => {
-    setPlayerState(prevState => ({
-      ...prevState,
-      isLoading: true,
-    }));
-  };
-
-  /**
-   * @type {Function} Mark that the user started interacting with the seek bar
-   */
-  const handleSlidingStart = useCallback(() => {
-    setPlayerState(prevState => ({
-      ...prevState,
-      isSliding: true,
-    }));
-  }, []);
-
-  /**
-   * @type {Function} Handle the completion of seek bar interaction and update the playback time
-   */
-  const handleSlidingComplete = useCallback((value: number) => {
-    setPlayerState(prevState => ({
-      ...prevState,
-      isSliding: false,
-      currentTime: value,
-      isLoading: true, // Hide loader when video starts playing
-    }));
-    videoRef.current?.seek(value); // Seek to the selected time
-
-    // Wait for the video to resume playing before hiding the loader
-    setTimeout(() => {
-      setPlayerState(prevState => ({
-        ...prevState,
-        isLoading: false, // Hide loader when video starts playing
-        paused: false, // Resume playing the video after seeking
-      }));
-    }, 500); // Adjust the timeout as needed for smooth transition
-  }, []);
-
-  /**
-   * @type {Function} Toggle visibility of the audio/subtitle modal
+   * Toggle the visibility of the Audio/Subtitles modal
    */
   const handleAudioSubtitle = () => {
     setIsAudioSubtitleModal(!isAudioSubtitleModal);
   };
 
   /**
-   * @type {Function} Close the audio/subtitle modal
+   * Handle play/pause functionality
+   * Toggles between playing and pausing the video
    */
-  const onAudioSubTitleClose = () => {
-    setIsAudioSubtitleModal(!isAudioSubtitleModal);
-  };
+  const handlePlayPause = useCallback(() => {
+    setPlayerState(prevState => ({
+      ...prevState,
+      paused: !prevState.paused, // Invert the paused state
+    }));
+  }, []);
 
   /**
-   * @type {Function} Toggle visibility of the settings modal
+   * Toggle the visibility of the settings modal
    */
   const handleSettingsClick = () => {
     setIsSettingsModal(!isSettingsModal);
   };
 
   /**
-   * @type {Function} Close the settings modal
+   * Handle the seek bar interaction completion
+   * Updates the playback time and resumes video playback after seeking
    */
-  const onSettingModalClose = () => {
-    setIsSettingsModal(!isSettingsModal);
-  };
+  const handleSlidingComplete = useCallback((value: number) => {
+    setPlayerState(prevState => ({
+      ...prevState,
+      isSliding: false, // Stop sliding
+      currentTime: value, // Update the current playback time
+      isLoading: true, // Show loader while seeking
+    }));
+    videoRef.current?.seek(value); // Seek to the specified time in the video
+
+    // Resume playing the video and hide loader after a short delay
+    setTimeout(() => {
+      setPlayerState(prevState => ({
+        ...prevState,
+        isLoading: false, // Hide loader after seeking
+        paused: false, // Resume playback
+      }));
+    }, 500); // Adjust timeout for smooth transition
+  }, []);
 
   /**
-   * @type {Function} Close the error modal
+   * Triggered when the user starts interacting with the seek bar
+   * Marks the player state as 'sliding'
    */
-  const onErrorModalClose = () => {
-    setIsErrorVisible(!isErrorVisible);
-  };
+  const handleSlidingStart = useCallback(() => {
+    setPlayerState(prevState => ({
+      ...prevState,
+      isSliding: true, // Indicate that the seek bar is being dragged
+    }));
+  }, []);
 
   /**
-   * @type {Function} Format time from seconds to mm:ss format
+   * Formats the playback time (in seconds) to a 'mm:ss' format for display
    */
   const formatTime = useCallback((seconds: number): string => {
     const mins = Math.floor(seconds / 60).toString();
@@ -165,45 +116,122 @@ const PlayerScreen: React.FC = () => {
   }, []);
 
   /**
-   * @type {Function} Fast forward the video by 10 seconds
+   * Fast forward the video by 10 seconds
    */
   const handleFastForward = useCallback(() => {
-    const newTime = Math.min(playerState.currentTime + 10, playerState.duration);
-    videoRef.current?.seek(newTime);
+    const newTime = Math.min(playerState.currentTime + 10, playerState.duration); // Calculate new time
+    videoRef.current?.seek(newTime); // Seek the video
     setPlayerState(prevState => ({
       ...prevState,
-      currentTime: newTime,
+      currentTime: newTime, // Update current time in state
     }));
   }, [playerState.currentTime, playerState.duration]);
 
   /**
-   * @type {Function} Rewind the video by 10 seconds
+   * Rewind the video by 10 seconds
    */
   const handleRewind = useCallback(() => {
-    const newTime = Math.max(playerState.currentTime - 10, 0);
-    videoRef.current?.seek(newTime);
+    const newTime = Math.max(playerState.currentTime - 10, 0); // Calculate new time
+    videoRef.current?.seek(newTime); // Seek the video
     setPlayerState(prevState => ({
       ...prevState,
-      currentTime: newTime,
+      currentTime: newTime, // Update current time in state
     }));
   }, [playerState.currentTime]);
 
   /**
-   * @type {Function} Toggle fullscreen mode and lock the orientation accordingly
+   * Closes the Audio/Subtitles modal
+   */
+  const onAudioSubTitleClose = () => {
+    setIsAudioSubtitleModal(!isAudioSubtitleModal); // Toggle modal visibility
+  };
+
+  /**
+   * Closes the error modal
+   */
+  const onErrorModalClose = () => {
+    setIsErrorVisible(!isErrorVisible); // Toggle error modal visibility
+  };
+
+  /**
+   * Handles video load event
+   * Updates the video duration and stops the loading spinner
+   */
+  const onLoad = useCallback((data: OnLoadData) => {
+    setPlayerState(prevState => ({
+      ...prevState,
+      duration: data.duration, // Set video duration
+      isLoading: false, // Stop loading spinner
+    }));
+  }, []);
+
+  // Starts loading the video and shows a loading spinner
+  const onLoadStart = () => {
+    setPlayerState(prevState => ({
+      ...prevState,
+      isLoading: true, // Show loader during video load
+    }));
+  };
+
+  /**
+   * Updates the current playback time as the video progresses
+   */
+  const onProgress = useCallback(
+    (data: OnProgressData) => {
+      if (!playerState.isSliding && playerState.currentTime !== data.currentTime) {
+        setPlayerState(prevState => ({
+          ...prevState,
+          currentTime: data.currentTime, // Update current time based on progress
+        }));
+      }
+    },
+    [playerState.isSliding, playerState.currentTime],
+  );
+
+  // Marks the video as ready to be displayed (removes loading spinner)
+  const onReadyForDisplay = () => {
+    setPlayerState(prevState => ({
+      ...prevState,
+      isLoading: false, // Hide loader once video is ready
+    }));
+  };
+
+  /**
+   * Closes the settings modal
+   */
+  const onSettingModalClose = () => {
+    setIsSettingsModal(!isSettingsModal); // Toggle settings modal visibility
+  };
+
+  /**
+   * Handles buffering state of the video (displays loader during buffering)
+   */
+  const onVideoBuffer = (param: OnBufferData) => {
+    setPlayerState(prevState => ({
+      ...prevState,
+      isLoading: param.isBuffering, // Show or hide loader based on buffering state
+    }));
+  };
+
+  /**
+   * Toggles fullscreen mode
+   * Locks orientation based on fullscreen state
    */
   const toggleFullscreen = useCallback(() => {
     if (playerState.isFullscreen) {
-      Orientation.lockToPortrait(); // Lock orientation to portrait
+      Orientation.lockToPortrait(); // Lock to portrait mode when exiting fullscreen
     } else {
-      Orientation.lockToLandscapeLeft(); // Lock orientation to landscape
+      Orientation.lockToLandscapeLeft(); // Lock to landscape when entering fullscreen
     }
     setPlayerState(prevState => ({
       ...prevState,
-      isFullscreen: !prevState.isFullscreen,
+      isFullscreen: !prevState.isFullscreen, // Toggle fullscreen state
     }));
   }, [playerState.isFullscreen]);
 
-  // Start playing video when mounted, and unlock orientation on unmount
+  /**
+   * Effect to unlock orientation and reset fullscreen state when the component is unmounted
+   */
   useEffect(() => {
     setPlayerState(prevState => ({...prevState, paused: !prevState.paused}));
 
@@ -212,7 +240,6 @@ const PlayerScreen: React.FC = () => {
     };
   }, []);
 
-  // Rendering the player UI with video and controls
   return (
     <View style={styles.container as StyleProp<ViewStyle>}>
       <AppHeader /> {/* Header component */}
@@ -228,6 +255,8 @@ const PlayerScreen: React.FC = () => {
         }}
         style={styles.video} // Styling for the video element
         onLoadStart={onLoadStart} // Show loader when video starts loading
+        onBuffer={onVideoBuffer}
+        onReadyForDisplay={onReadyForDisplay}
       />
       {/* Controls section */}
       <View style={styles.controlsContainer as StyleProp<ViewStyle>}>
@@ -259,17 +288,17 @@ const PlayerScreen: React.FC = () => {
       </View>
       {/* Modals for settings, audio/subtitle, and errors */}
       <AudioSubtitleModal
-        isFullscreen={playerState.isFullscreen}
+        isFullscreen={playerState.isFullscreen} // Fullscreen state
         onClose={onAudioSubTitleClose}
         visible={isAudioSubtitleModal}
       />
       <PlayerSettingsModal
-        isFullscreen={playerState.isFullscreen}
+        isFullscreen={playerState.isFullscreen} // Fullscreen state
         onClose={onSettingModalClose}
         visible={isSettingsModal}
       />
       <ErrorScreen
-        isFullscreen={playerState.isFullscreen}
+        isFullscreen={playerState.isFullscreen} // Fullscreen state
         visible={isErrorVisible}
         onErrorModalClose={onErrorModalClose}
       />
