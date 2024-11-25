@@ -1,13 +1,11 @@
 import MainNavigator from '@navigation/MainNavigator';
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import {StyleSheet} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {ThemeProviderContext} from '@context/ThemeProviderContext';
-import {
-  configureReanimatedLogger,
-  ReanimatedLogLevel,
-} from 'react-native-reanimated';
+import {configureReanimatedLogger, ReanimatedLogLevel} from 'react-native-reanimated';
+import Orientation, {OrientationLocker} from 'react-native-orientation-locker';
 
 configureReanimatedLogger({
   level: ReanimatedLogLevel.warn,
@@ -15,6 +13,15 @@ configureReanimatedLogger({
 });
 
 export default function App() {
+  useEffect(() => {
+    // Lock orientation to portrait on app startup
+    Orientation.lockToPortrait();
+
+    return () => {
+      // Optional: Unlock all orientations when app is closed
+      Orientation.unlockAllOrientations();
+    };
+  });
   return (
     <SafeAreaProvider>
       <ThemeProviderContext>
