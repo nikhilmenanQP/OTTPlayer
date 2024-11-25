@@ -20,10 +20,7 @@ import SeriesScreen from '@screens/SeriesScreen';
  * @type {Icons}
  * Import icons for each tab
  */
-import HomeIcon from '@assets/images/appIcons/homeIcon.png';
-import MovieIcon from '@assets/images/appIcons/movieIcon.svg';
-import SearchIcon from '@assets/images/appIcons/SearchIcon.png';
-import SeriesIcon from '@assets/images/appIcons/SeriesIcon.png';
+import {Home, Movie, Search_2, Series} from '@assets/images/appIcons';
 
 /**
  * Create a bottom tab navigator with specified screen parameters
@@ -34,10 +31,10 @@ const Tab = createBottomTabNavigator<TabParamList>();
  * Define a mapping of route names to their respective icons
  */
 const ICONS: Record<string, any> = {
-  Home: HomeIcon,
-  Movies: MovieIcon,
-  Search: SearchIcon,
-  Series: SeriesIcon,
+  Home: Home,
+  Movies: Movie,
+  Search: Search_2,
+  Series: Series,
 };
 
 /**
@@ -49,12 +46,7 @@ const BottomNavigator: React.FC = React.memo(() => {
 
   // Use useMemo to memoize the tab bar background for performance optimization
   const tabBarBackground = useMemo(
-    () => (
-      <LinearGradient
-        colors={['#2d2d2d', '#171c24']}
-        style={{height: 80, borderRadius: 100}}
-      />
-    ),
+    () => <LinearGradient colors={['#2d2d2d', '#171c24']} style={{height: 80, borderRadius: 100}} />,
     [],
   );
 
