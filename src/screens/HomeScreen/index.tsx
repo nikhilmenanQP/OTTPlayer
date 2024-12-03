@@ -2,9 +2,8 @@ import AppCarousel from '@components/AppComponents/AppCarousel';
 import AppHeader from '@components/AppComponents/AppHeader';
 import MovieCard from '@components/HomeScreenComp/MovieCard';
 import React from 'react';
-
 import {NavigationProp} from '@react-navigation/native';
-import {ScrollView} from 'react-native';
+import {FlatList, View} from 'react-native';
 import {createStyle} from './styles';
 import {homeScreenData, banners} from '@dummyDataPreProd/HomeScreenMovie';
 import {mapDataProps} from './types';
@@ -28,35 +27,51 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
     navigation.navigate('ProfileScreen');
   };
 
-  return (
-    <ScrollView contentContainerStyle={styles.contentContainerStyle} style={styles.container}>
-      {/* AppHeader with extracted style */}
-      <AppHeader
-        appHeaderContainerStyle={styles.headerContainerStyle}
-        showLogo={true}
-        showMenuButton={true}
-        onProfileIconHandler={onProfileClickHandler}
+  const renderMovieCard = ({item}: {item: mapDataProps}) => {
+    const {data, isContinueWatching, isWatchList, title} = item;
+    return (
+      <MovieCard
+        data={data}
+        horizontalCard={(isContinueWatching || isWatchList) && true}
+        key={title}
+        marginLeft={false}
+        marginTop={false}
+        onPressHandler={onMovieClickHandler}
+        sectionContainerStyle={styles.sectionContainer}
+        showMovieDetails={isContinueWatching && true}
+        showTitle={true}
+        title={title}
       />
+    );
+  };
 
-      {/* AppCarousel for banners */}
-      <AppCarousel banners={banners} />
-
-      {/* Map through homeScreenData to render MovieCards */}
-      {homeScreenData.map(({data, isContinueWatching, isWatchList, title}: mapDataProps) => (
-        <MovieCard
-          data={data}
-          horizontalCard={(isContinueWatching || isWatchList) && true}
-          key={title}
-          marginLeft={false}
-          marginTop={false}
-          onPressHandler={onMovieClickHandler}
-          sectionContainerStyle={styles.sectionContainer}
-          showMovieDetails={isContinueWatching && true}
-          showTitle={true}
-          title={title}
+  const renderHeader = () => {
+    return (
+      <View>
+        <AppHeader
+          appHeaderContainerStyle={styles.headerContainerStyle}
+          showLogo={true}
+          showMenuButton={true}
+          onProfileIconHandler={onProfileClickHandler}
         />
-      ))}
-    </ScrollView>
+
+        <AppCarousel banners={banners} />
+      </View>
+    );
+  };
+
+  return (
+    <View style={styles.container}>
+      {/* FlatList with AppCarousel in ListHeaderComponent */}
+      <FlatList
+        data={homeScreenData}
+        renderItem={renderMovieCard}
+        keyExtractor={item => item.title}
+        contentContainerStyle={styles.contentContainerStyle}
+        showsVerticalScrollIndicator={false}
+        ListHeaderComponent={renderHeader}
+      />
+    </View>
   );
 };
 
