@@ -22,8 +22,7 @@ export default function ProfileScreen(): JSX.Element {
   };
 
   return (
-    <View
-      style={[styles.container, {backgroundColor: theme.colors.background}]}>
+    <View style={[styles.container, {backgroundColor: theme.colors.background}]}>
       {/* App Header Component */}
       <AppHeader showBackButton={true} profileName="John Doe" />
       {/* Tab Navigation Component */}

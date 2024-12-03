@@ -1,5 +1,5 @@
 import BlurBackground from '@components/AppComponents/BlurBackGround'; // Custom background blur component
-import React, {useState, useEffect, useRef, Component, ComponentElement, useCallback} from 'react';
+import React, {useState, useEffect, useRef, useCallback} from 'react';
 
 import {Check, CloseIcon} from '@assets/images/appIcons'; // Icons for selection and closing modal
 import {Modal, View, Text, TouchableOpacity, FlatList, Animated, ViewStyle, Easing, StyleProp} from 'react-native';

@@ -4,7 +4,6 @@ import ProfileScreen from '@screens/ProfileScreen';
 
 // import stack Navigator from react-navigation library
 import {createStackNavigator} from '@react-navigation/stack';
-import PlayerScreen from '@screens/PlayerScreen';
 
 // create stack navigator
 const Stack = createStackNavigator();

@@ -21,26 +21,17 @@ const AccountScreen: React.FC = () => {
   );
 
   const onChangePlaneHandler = () => {
-    console.log(
-      '🚀 ~ file: AccountScreen.tsx:35 ~ onChangePlaneHandler:',
-      onChangePlaneHandler,
-    );
+    console.log('🚀 ~ file: AccountScreen.tsx:35 ~ onChangePlaneHandler:', onChangePlaneHandler);
     // ...Write your code here
   };
 
   const onEditMailHandler = () => {
-    console.log(
-      '🚀 ~ file: AccountScreen.tsx:43 ~ onEditMailHandler:',
-      onEditMailHandler,
-    );
+    console.log('🚀 ~ file: AccountScreen.tsx:43 ~ onEditMailHandler:', onEditMailHandler);
     // ...Write your code here
   };
 
   const onSubscribeHandler = () => {
-    console.log(
-      '🚀 ~ file: AccountScreen.tsx:52 ~ onSubscribeHandler:',
-      onSubscribeHandler,
-    );
+    console.log('🚀 ~ file: AccountScreen.tsx:52 ~ onSubscribeHandler:', onSubscribeHandler);
     // ...Write your code here
   };
 
@@ -57,30 +48,28 @@ const AccountScreen: React.FC = () => {
   );
 };
 
-const AccountInfoSection: React.FC<AccountInfoSectionProps> = React.memo(
-  ({onEditMailHandler}) => {
-    const {theme} = useAppTheme();
-    const styles = createStyle(theme);
+const AccountInfoSection: React.FC<AccountInfoSectionProps> = React.memo(({onEditMailHandler}) => {
+  const {theme} = useAppTheme();
+  const styles = createStyle(theme);
 
-    return (
-      <View style={styles.accountSection}>
-        <View style={styles.infoRow}>
-          <View>
-            <Text style={styles.infoText}>SMITH</Text>
-            <Text style={styles.infoText}>Johndoe@email.com</Text>
-          </View>
-          <TouchableOpacity onPress={onEditMailHandler}>
-            <Text style={styles.editButton}>EDIT</Text>
-          </TouchableOpacity>
+  return (
+    <View style={styles.accountSection}>
+      <View style={styles.infoRow}>
+        <View>
+          <Text style={styles.infoText}>SMITH</Text>
+          <Text style={styles.infoText}>Johndoe@email.com</Text>
         </View>
-        <HorizontalRule style={styles.horizontalRule} />
-        <TouchableOpacity>
-          <Text style={styles.changePasswordText}>Change Password</Text>
+        <TouchableOpacity onPress={onEditMailHandler}>
+          <Text style={styles.editButton}>EDIT</Text>
         </TouchableOpacity>
       </View>
-    );
-  },
-);
+      <HorizontalRule style={styles.horizontalRule} />
+      <TouchableOpacity>
+        <Text style={styles.changePasswordText}>Change Password</Text>
+      </TouchableOpacity>
+    </View>
+  );
+});
 
 const SubscriptionSection: React.FC<SubscriptionSectionProps> = React.memo(
   ({hasActivePlan, onChangePlaneHandler, onSubscribeHandler}) => {
@@ -91,19 +80,11 @@ const SubscriptionSection: React.FC<SubscriptionSectionProps> = React.memo(
       <View style={styles.accountSection}>
         {hasActivePlan ? (
           <>
-            <Text style={[styles.planText, styles.activePlan]}>
-              CURRENT PLAN
-            </Text>
-            <Text
-              style={[
-                styles.planText,
-                {color: theme.colors.mediumGray, marginTop: 4},
-              ]}>
+            <Text style={[styles.planText, styles.activePlan]}>CURRENT PLAN</Text>
+            <Text style={[styles.planText, {color: theme.colors.mediumGray, marginTop: 4}]}>
               Billing on 4th of every month
             </Text>
-            <TouchableOpacity
-              style={[styles.buttonContainer]}
-              onPress={onChangePlaneHandler}>
+            <TouchableOpacity style={[styles.buttonContainer]} onPress={onChangePlaneHandler}>
               <Text style={styles.buttonText}>CHANGE PLAN</Text>
               <ArrowRight />
             </TouchableOpacity>
@@ -111,15 +92,9 @@ const SubscriptionSection: React.FC<SubscriptionSectionProps> = React.memo(
         ) : (
           <>
             <Text style={styles.noActivePlan}>NO ACTIVE PLAN</Text>
-            <TouchableOpacity
-              style={[styles.buttonContainer]}
-              onPress={onSubscribeHandler}>
+            <TouchableOpacity style={[styles.buttonContainer]} onPress={onSubscribeHandler}>
               <Text style={styles.buttonText}>SUBSCRIBE</Text>
-              <ArrowRight
-                height={12}
-                style={styles.arrowRightIcon}
-                width={12}
-              />
+              <ArrowRight height={12} style={styles.arrowRightIcon} width={12} />
             </TouchableOpacity>
           </>
         )}

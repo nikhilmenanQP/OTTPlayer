@@ -6,7 +6,6 @@ import {Setting, SubTitle} from '@assets/images/appIcons';
 import {Text, TouchableOpacity, View} from 'react-native';
 import {createStyle} from './styles';
 import {useAppTheme} from '@hooks/useAppTheme';
-import {SubtitleOverlay} from '@components/AppComponents';
 
 /**
  * @type {Component} The BottomControls component

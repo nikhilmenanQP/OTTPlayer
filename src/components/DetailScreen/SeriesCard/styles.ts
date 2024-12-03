@@ -1,11 +1,5 @@
 import {Theme} from '@styles/theme';
-import {
-  Dimensions,
-  ImageStyle,
-  StyleSheet,
-  TextStyle,
-  ViewStyle,
-} from 'react-native';
+import {Dimensions, ImageStyle, StyleSheet, TextStyle, ViewStyle} from 'react-native';
 
 const {width} = Dimensions.get('window');
 

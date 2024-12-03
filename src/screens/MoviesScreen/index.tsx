@@ -19,29 +19,25 @@ const MoviesScreen: React.FC<MoviesScreenProps> = ({navigation}) => {
   };
 
   return (
-    <ScrollView
-      contentContainerStyle={styles.contentContainerStyle}
-      style={styles.container}>
+    <ScrollView contentContainerStyle={styles.contentContainerStyle} style={styles.container}>
       {/* App Header */}
       <AppHeader showBackButton={true} />
 
       {/* Map through movieScreenData to render MovieCards */}
-      {movieScreenData.map(
-        ({data, isContinueWatching, isWatchList, title}: mapDataProps) => (
-          <MovieCard
-            data={data}
-            horizontalCard={isContinueWatching || isWatchList}
-            key={title}
-            marginLeft={false}
-            marginTop={false}
-            onPressHandler={() => onMovieClickHandler(data)} // Pass the movie data when clicked
-            sectionContainerStyle={styles.sectionContainer}
-            showMovieDetails={isContinueWatching}
-            showTitle={true}
-            title={title}
-          />
-        ),
-      )}
+      {movieScreenData.map(({data, isContinueWatching, isWatchList, title}: mapDataProps) => (
+        <MovieCard
+          data={data}
+          horizontalCard={isContinueWatching || isWatchList}
+          key={title}
+          marginLeft={false}
+          marginTop={false}
+          onPressHandler={() => onMovieClickHandler(data)} // Pass the movie data when clicked
+          sectionContainerStyle={styles.sectionContainer}
+          showMovieDetails={isContinueWatching}
+          showTitle={true}
+          title={title}
+        />
+      ))}
     </ScrollView>
   );
 };

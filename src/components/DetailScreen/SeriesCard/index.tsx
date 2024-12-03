@@ -5,25 +5,10 @@ import React, {useState, useMemo, useCallback} from 'react';
 
 import {createStyle} from './styles';
 import {useAppTheme} from '@hooks/useAppTheme';
-import {
-  FlatList,
-  ImageBackground,
-  Modal,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import {
-  Episode,
-  Season,
-  SeasonSelectorModalProps,
-  SeriesCardProps,
-} from './types';
+import {FlatList, ImageBackground, Modal, Text, TouchableOpacity, View} from 'react-native';
+import {Episode, Season, SeasonSelectorModalProps, SeriesCardProps} from './types';
 
-export const SeriesCard: React.FC<SeriesCardProps> = ({
-  data,
-  isScrollable = false,
-}) => {
+export const SeriesCard: React.FC<SeriesCardProps> = ({data, isScrollable = false}) => {
   const {theme} = useAppTheme();
   const styles = useMemo(() => createStyle(theme), [theme]);
 
@@ -40,18 +25,13 @@ export const SeriesCard: React.FC<SeriesCardProps> = ({
     setModalVisible(false);
   }, []);
 
-  const renderItem = useCallback(
-    ({item}: {item: Episode}) => renderEpisode({item}, styles, theme),
-    [styles, theme],
-  );
+  const renderItem = useCallback(({item}: {item: Episode}) => renderEpisode({item}, styles, theme), [styles, theme]);
 
   const ListHeader = () => (
     <>
       <Text style={styles.moreText}>Episodes</Text>
       <View style={styles.horiZontalRule} />
-      <TouchableOpacity
-        onPress={() => setModalVisible(true)}
-        style={styles.episodePickerBtnContainer}>
+      <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.episodePickerBtnContainer}>
         <Text style={styles.episodePickerBtnText}>Season {selectedSeason}</Text>
         <PlayIcon />
       </TouchableOpacity>
@@ -117,21 +97,11 @@ const renderEpisode = (
   );
 };
 
-const SeasonSelectorModal: React.FC<SeasonSelectorModalProps> = ({
-  data,
-  onClose,
-  onSeasonSelect,
-  theme,
-  visible,
-}) => {
+const SeasonSelectorModal: React.FC<SeasonSelectorModalProps> = ({data, onClose, onSeasonSelect, theme, visible}) => {
   const styles = createStyle(theme);
 
   return (
-    <Modal
-      animationType="slide"
-      transparent={true}
-      onRequestClose={onClose}
-      visible={visible}>
+    <Modal animationType="slide" transparent={true} onRequestClose={onClose} visible={visible}>
       <View style={styles.seasonSelectorContainer}>
         <View style={styles.headerTitleContainer}>
           <Text style={styles.headerTitleText}>Select Season</Text>
@@ -142,9 +112,7 @@ const SeasonSelectorModal: React.FC<SeasonSelectorModalProps> = ({
 
         {data.map(item => (
           <React.Fragment key={item.seasonNumber}>
-            <TouchableOpacity
-              onPress={() => onSeasonSelect(item)}
-              style={styles.titleContainer}>
+            <TouchableOpacity onPress={() => onSeasonSelect(item)} style={styles.titleContainer}>
               <Text style={styles.titleText}>Season {item.seasonNumber}</Text>
             </TouchableOpacity>
             <View style={[styles.horiZontalRule, {opacity: 0.4}]} />

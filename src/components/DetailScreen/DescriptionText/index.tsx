@@ -39,9 +39,7 @@ export const DescriptionText: React.FC<DescriptionTextProps> = ({
 
       {isTruncated && (
         <TouchableOpacity onPress={toggleShowMore}>
-          <Text style={showMoreTextStyle}>
-            {showMore ? 'Show Less' : 'Show More'}
-          </Text>
+          <Text style={showMoreTextStyle}>{showMore ? 'Show Less' : 'Show More'}</Text>
         </TouchableOpacity>
       )}
     </View>

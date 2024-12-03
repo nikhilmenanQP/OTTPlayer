@@ -48,20 +48,14 @@ const MovieCard: React.FC<MovieCardProps> = React.memo(
     const renderItem = useCallback(
       ({item}: {item: {id: string; title: string; image: string}}) => {
         return (
-          <TouchableOpacity
-            style={[styles.card, cardStyle]}
-            onPress={() => onPressHandler(item)}>
+          <TouchableOpacity style={[styles.card, cardStyle]} onPress={() => onPressHandler(item)}>
             <Image source={{uri: item.image}} style={[cardImageStyle]} />
             {showMovieDetails && title === 'Continue Watching' && (
               <>
-                <Text
-                  key={`${item.id}-title`}
-                  style={[styles.cardTitle, cardTitleStyle]}>
+                <Text key={`${item.id}-title`} style={[styles.cardTitle, cardTitleStyle]}>
                   {item.title}
                 </Text>
-                <Text
-                  key={`${item.id}-subtitle`}
-                  style={[styles.cardSubTitle, cardSubTitleStyle]}>
+                <Text key={`${item.id}-subtitle`} style={[styles.cardSubTitle, cardSubTitleStyle]}>
                   Adventure · Drama
                 </Text>
               </>
@@ -69,22 +63,12 @@ const MovieCard: React.FC<MovieCardProps> = React.memo(
           </TouchableOpacity>
         );
       },
-      [
-        cardImageStyle,
-        marginBottom,
-        marginLeft,
-        marginRight,
-        marginTop,
-        showMovieDetails,
-        title,
-      ],
+      [cardImageStyle, marginBottom, marginLeft, marginRight, marginTop, showMovieDetails, title],
     );
 
     return (
       <View style={[styles.section, sectionContainerStyle]}>
-        {showTitle && (
-          <Text style={[styles.sectionTitle, sectionTitleStyle]}>{title}</Text>
-        )}
+        {showTitle && <Text style={[styles.sectionTitle, sectionTitleStyle]}>{title}</Text>}
         <FlatList
           contentContainerStyle={[listContentContainerStyle]}
           data={data}

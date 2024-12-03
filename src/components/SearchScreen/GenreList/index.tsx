@@ -11,11 +11,7 @@ import {useAppTheme} from '@hooks/useAppTheme';
  * It allows selecting a genre, and the list is dynamically styled based on the selected genre.
  * @param {GenreListProps} props - The properties passed into this component
  */
-const GenreList: React.FC<GenreListProps> = ({
-  genres,
-  onGenreSelect,
-  selectedGenre,
-}) => {
+const GenreList: React.FC<GenreListProps> = ({genres, onGenreSelect, selectedGenre}) => {
   // Retrieve the current theme for dynamic styling
   const {theme} = useAppTheme();
   const styles = useMemo(() => createStyle(theme), [theme]);
@@ -50,11 +46,7 @@ const GenreList: React.FC<GenreListProps> = ({
  * @param isSelected if this genre is currently selected
  * @param onGenreSelect function to handle genre selection
  */
-const GenreItem: React.FC<GenreItemProps> = ({
-  isSelected,
-  item,
-  onGenreSelect,
-}) => {
+const GenreItem: React.FC<GenreItemProps> = ({isSelected, item, onGenreSelect}) => {
   // Retrieve the current theme for dynamic styling
   const {theme} = useAppTheme();
   const styles = useMemo(() => createStyle(theme), [theme]);
@@ -66,11 +58,7 @@ const GenreItem: React.FC<GenreItemProps> = ({
   return (
     <TouchableOpacity onPress={handlePress}>
       <LinearGradient
-        colors={[
-          theme.colors.charcoalGray,
-          theme.colors.blueGray,
-          theme.colors.gunMetal,
-        ]}
+        colors={[theme.colors.charcoalGray, theme.colors.blueGray, theme.colors.gunMetal]}
         style={[styles.genreButton, isSelected && styles.selectedGenreButton]}>
         {/* Display the genre name */}
         <Text style={styles.genreText}>{item.name}</Text>

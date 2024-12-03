@@ -31,9 +31,7 @@ const AppCarousel: React.FC<AppCarouselProps> = ({banners}) => {
           style={[
             styles.dotStyle,
             {
-              backgroundColor: isActive
-                ? theme.colors.dotIconActive
-                : theme.colors.dotIconNotActive,
+              backgroundColor: isActive ? theme.colors.dotIconActive : theme.colors.dotIconNotActive,
               height: isActive ? theme.spacing.sm : theme.spacing.sm_x,
               width: isActive ? theme.spacing.sm : theme.spacing.sm_x,
             },
@@ -54,15 +52,9 @@ const AppCarousel: React.FC<AppCarouselProps> = ({banners}) => {
         scrollAnimationDuration={1000}
         width={screenWidth}
       />
-      <LinearGradient
-        colors={[theme.colors.background, 'transparent']}
-        style={styles.topGradient}
-      />
+      <LinearGradient colors={[theme.colors.background, 'transparent']} style={styles.topGradient} />
       <View style={styles.dotsContainer}>{renderDots()}</View>
-      <LinearGradient
-        colors={['transparent', theme.colors.background]}
-        style={styles.bottomGradient}
-      />
+      <LinearGradient colors={['transparent', theme.colors.background]} style={styles.bottomGradient} />
     </View>
   );
 };

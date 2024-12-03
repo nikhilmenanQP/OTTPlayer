@@ -1,7 +1,7 @@
 import Orientation from 'react-native-orientation-locker';
 import React, {useCallback} from 'react';
 
-import {ArrowTailLeft, Cast, Expand, MusicPlaylist, Next} from '@assets/images/appIcons';
+import {ArrowTailLeft, Cast, Expand} from '@assets/images/appIcons';
 import {createStyle} from './styles';
 import {Styles, TopControlsProps} from './types';
 import {Text, View, TouchableOpacity, ViewStyle} from 'react-native';

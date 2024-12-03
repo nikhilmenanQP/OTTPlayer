@@ -5,18 +5,12 @@ import {GradientSeparatorProps} from './types';
 import {ViewStyle} from 'react-native';
 import {useAppTheme} from '@hooks/useAppTheme';
 
-const GradientSeparator: React.FC<GradientSeparatorProps> = ({
-  position,
-  style,
-}) => {
+const GradientSeparator: React.FC<GradientSeparatorProps> = ({position, style}) => {
   const {theme} = useAppTheme();
   // Memoize the color configuration based on the 'position' prop
   // The gradient for the top has a black transparent fade, while the bottom has the inverse.
   const colors = useMemo<string[]>(
-    () =>
-      position === 'top'
-        ? [theme.colors.black_92, 'transparent']
-        : ['transparent', theme.colors.black_92],
+    () => (position === 'top' ? [theme.colors.black_92, 'transparent'] : ['transparent', theme.colors.black_92]),
     [position], // Only recompute colors when 'position' changes
   );
 

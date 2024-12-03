@@ -3,7 +3,7 @@ import Logo from '@assets/images/appImages/LOGO.svg';
 import React, {memo} from 'react';
 
 import {BackButtonProps, AppHeaderProps, ProfileIconProps} from './types';
-import {Image, Text, TouchableOpacity, View, Dimensions} from 'react-native';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {createStyles} from './styles';
 import {useAppTheme} from '@hooks/useAppTheme';
 import {useNavigation} from '@react-navigation/native';
@@ -43,18 +43,10 @@ const AppHeader: React.FC<AppHeaderProps> = ({
   return (
     <View style={[styles.appHeaderContainer, appHeaderContainerStyle]}>
       {/* Conditionally rendering the back button */}
-      {showBackButton && (
-        <BackButton
-          handleBackButton={handleBackButton}
-          styles={styles}
-          theme={theme}
-        />
-      )}
+      {showBackButton && <BackButton handleBackButton={handleBackButton} styles={styles} theme={theme} />}
 
       {/* Conditionally rendering the logo */}
-      {showLogo && (
-        <Logo width={theme.spacing.lg_xxx} height={theme.spacing.lg_xxx} />
-      )}
+      {showLogo && <Logo width={theme.spacing.lg_xxx} height={theme.spacing.lg_xxx} />}
 
       {/* Conditionally rendering the profile name */}
       {profileName && (
@@ -79,32 +71,24 @@ const AppHeader: React.FC<AppHeaderProps> = ({
 /**
  * @type {Component} BackButton component definition
  */
-const BackButton: React.FC<BackButtonProps> = memo(
-  ({styles, theme, handleBackButton}) => (
-    <TouchableOpacity
-      onPress={handleBackButton}
-      style={styles.backButtonContainer}>
-      <ArrowLeft width={theme.spacing.sm_ll} height={theme.spacing.sm_ll} />
-    </TouchableOpacity>
-  ),
-);
+const BackButton: React.FC<BackButtonProps> = memo(({styles, theme, handleBackButton}) => (
+  <TouchableOpacity onPress={handleBackButton} style={styles.backButtonContainer}>
+    <ArrowLeft width={theme.spacing.sm_ll} height={theme.spacing.sm_ll} />
+  </TouchableOpacity>
+));
 
 /**
  * @type {Component} ProfileIcon component definition
  */
-const ProfileIcon: React.FC<ProfileIconProps> = memo(
-  ({profileImage, styles, theme, onProfileIconHandler}) => (
-    <TouchableOpacity
-      onPress={onProfileIconHandler}
-      style={styles.showMenuContainer}>
-      <Image
-        height={theme.spacing.md_ll}
-        source={{uri: profileImage}}
-        style={styles.profileIconStyle}
-        width={theme.spacing.md_ll}
-      />
-    </TouchableOpacity>
-  ),
-);
+const ProfileIcon: React.FC<ProfileIconProps> = memo(({profileImage, styles, theme, onProfileIconHandler}) => (
+  <TouchableOpacity onPress={onProfileIconHandler} style={styles.showMenuContainer}>
+    <Image
+      height={theme.spacing.md_ll}
+      source={{uri: profileImage}}
+      style={styles.profileIconStyle}
+      width={theme.spacing.md_ll}
+    />
+  </TouchableOpacity>
+));
 
 export default AppHeader;

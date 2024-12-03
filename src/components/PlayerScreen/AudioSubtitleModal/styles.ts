@@ -1,4 +1,4 @@
-import {StyleSheet, ViewStyle, TextStyle} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {Theme} from '@styles/theme'; // Assuming you have a Theme type defined
 import {Styles} from './types';
 

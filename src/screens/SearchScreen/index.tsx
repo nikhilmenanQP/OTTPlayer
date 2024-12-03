@@ -1,4 +1,4 @@
-import React, {useState, useCallback, useMemo, Component} from 'react';
+import React, {useState, useCallback, useMemo} from 'react';
 import SearchBar from '@components/AppComponents/SearchBar';
 
 import {AppHeader} from '@components/AppComponents';
@@ -51,9 +51,7 @@ const SearchScreen: React.FC = () => {
     setLoading(true);
     const lowercasedQuery = query.toLowerCase();
     // Filter movies based on the search query (case-insensitive)
-    const filteredMovies = DEFAULT_MOVIES.filter(movie =>
-      movie.title.toLowerCase().includes(lowercasedQuery),
-    );
+    const filteredMovies = DEFAULT_MOVIES.filter(movie => movie.title.toLowerCase().includes(lowercasedQuery));
 
     setMovies(filteredMovies);
     setError(filteredMovies.length === 0 ? 'No results found' : null); // Display an error if no movies match
@@ -81,9 +79,7 @@ const SearchScreen: React.FC = () => {
         const selectedGenreId = genre.name.toLowerCase();
         // Filter movies based on the selected genre
         const filteredMovies = DEFAULT_MOVIES.filter(movie =>
-          movie.genreIds.some(
-            genreId => genreId.toLowerCase() === selectedGenreId,
-          ),
+          movie.genreIds.some(genreId => genreId.toLowerCase() === selectedGenreId),
         );
 
         setMovies(filteredMovies);
@@ -113,20 +109,11 @@ const SearchScreen: React.FC = () => {
 
       {/* If there is no active search query, display the genre selection list */}
       {searchQuery === '' && (
-        <GenreList
-          genres={genres}
-          onGenreSelect={onGenreSelectHandler}
-          selectedGenre={selectedGenre}
-        />
+        <GenreList genres={genres} onGenreSelect={onGenreSelectHandler} selectedGenre={selectedGenre} />
       )}
 
       {/* Display the movie content, handling loading state, movie list, errors, and theme */}
-      <MovieContent
-        loading={loading}
-        movies={movies}
-        searchQuery={searchQuery}
-        error={error}
-      />
+      <MovieContent loading={loading} movies={movies} searchQuery={searchQuery} error={error} />
     </View>
   );
 };

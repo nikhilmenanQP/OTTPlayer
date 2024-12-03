@@ -5,10 +5,7 @@ import {Text, View} from 'react-native';
 import {RenderExtrasProps} from './types';
 import {createStyle} from './styles';
 
-export const RenderExtras: React.FC<RenderExtrasProps> = ({
-  data,
-  onPress = () => {},
-}) => {
+export const RenderExtras: React.FC<RenderExtrasProps> = ({data, onPress = () => {}}) => {
   const {theme} = useAppTheme();
   const styles = createStyle(theme);
 

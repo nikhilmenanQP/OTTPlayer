@@ -14,12 +14,7 @@ const {width} = Dimensions.get('window');
  * @param param0
  * @returns
  */
-const MovieContent: React.FC<MovieContentProps> = ({
-  error,
-  loading,
-  movies,
-  searchQuery,
-}) => {
+const MovieContent: React.FC<MovieContentProps> = ({error, loading, movies, searchQuery}) => {
   const {theme} = useAppTheme();
   // Create styles based on the current theme
   const styles = createStyle(theme);
@@ -66,8 +61,7 @@ const MovieContent: React.FC<MovieContentProps> = ({
             <Text style={styles.noResultsText}>{`"${searchQuery}"`}</Text>
             {/* Display error message or a fallback message */}
             <Text style={styles.errorMessage}>
-              {error ||
-                "Your search didn't match any titles.\nPlease refine your search and try again."}
+              {error || "Your search didn't match any titles.\nPlease refine your search and try again."}
             </Text>
           </View>
         </LinearGradient>

@@ -16,13 +16,7 @@ const BlurBackground: React.FC<BlurBackgroundProps> = ({
   const {theme} = useAppTheme();
   const styles = createStyle(theme);
 
-  return (
-    <BlurView
-      style={[styles.absolute, style]}
-      blurType={blurType}
-      blurAmount={blurAmount}
-    />
-  );
+  return <BlurView style={[styles.absolute, style]} blurType={blurType} blurAmount={blurAmount} />;
 };
 
 export default BlurBackground;

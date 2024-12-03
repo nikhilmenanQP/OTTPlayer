@@ -29,9 +29,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   };
 
   return (
-    <ScrollView
-      contentContainerStyle={styles.contentContainerStyle}
-      style={styles.container}>
+    <ScrollView contentContainerStyle={styles.contentContainerStyle} style={styles.container}>
       {/* AppHeader with extracted style */}
       <AppHeader
         appHeaderContainerStyle={styles.headerContainerStyle}
@@ -44,22 +42,20 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
       <AppCarousel banners={banners} />
 
       {/* Map through homeScreenData to render MovieCards */}
-      {homeScreenData.map(
-        ({data, isContinueWatching, isWatchList, title}: mapDataProps) => (
-          <MovieCard
-            data={data}
-            horizontalCard={(isContinueWatching || isWatchList) && true}
-            key={title}
-            marginLeft={false}
-            marginTop={false}
-            onPressHandler={onMovieClickHandler}
-            sectionContainerStyle={styles.sectionContainer}
-            showMovieDetails={isContinueWatching && true}
-            showTitle={true}
-            title={title}
-          />
-        ),
-      )}
+      {homeScreenData.map(({data, isContinueWatching, isWatchList, title}: mapDataProps) => (
+        <MovieCard
+          data={data}
+          horizontalCard={(isContinueWatching || isWatchList) && true}
+          key={title}
+          marginLeft={false}
+          marginTop={false}
+          onPressHandler={onMovieClickHandler}
+          sectionContainerStyle={styles.sectionContainer}
+          showMovieDetails={isContinueWatching && true}
+          showTitle={true}
+          title={title}
+        />
+      ))}
     </ScrollView>
   );
 };
