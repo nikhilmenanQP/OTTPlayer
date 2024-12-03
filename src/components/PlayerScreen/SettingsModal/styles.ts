@@ -180,7 +180,7 @@ export const createStyle = (theme: Theme) => {
      */
     tabsContainer: {
       alignItems: 'flex-start', // Align tabs to the left
-      borderBottomColor: '#fff', // White underline color for active tab
+      borderBottomColor: theme.colors.white, // White underline color for active tab
       borderBottomWidth: 0.2, // Thin border to represent active tab
       flexDirection: 'row', // Arrange tabs in a row
       justifyContent: 'space-between', // Distribute space evenly between tabs

@@ -30,14 +30,14 @@ const BottomControls: React.FC<BottomControlsProps> = ({
       {/* Slider container */}
       <View style={styles.sliderContainer}>
         <Slider
-          maximumTrackTintColor="#FFFFFF" // Color of the maximum track (after the thumb)
+          maximumTrackTintColor={theme.colors.white} // Color of the maximum track (after the thumb)
           maximumValue={duration} // Maximum value of the slider (end of the video)
-          minimumTrackTintColor="#1E90FF" // Color of the minimum track (before the thumb)
+          minimumTrackTintColor={theme.colors.dodgerBlue} // Color of the minimum track (before the thumb)
           minimumValue={0} // Minimum value of the slider (start of the video)
           onSlidingComplete={handleSlidingComplete} // Callback for when sliding completes
           onSlidingStart={handleSlidingStart} // Callback for when sliding starts
           style={styles.slider}
-          thumbTintColor="#1E90FF" // Color of the thumb (slider handle)
+          thumbTintColor={theme.colors.dodgerBlue} // Color of the thumb (slider handle)
           value={currentTime} // Current playback position
         />
         {/* Time display container */}

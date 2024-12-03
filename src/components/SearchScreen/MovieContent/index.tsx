@@ -54,7 +54,7 @@ const MovieContent: React.FC<MovieContentProps> = ({error, loading, movies, sear
     return (
       <>
         <LinearGradient
-          colors={['#1a1f27', '#161c24', '#10161e']} // Gradient background for the error message
+          colors={[theme.colors.raisinBlack, theme.colors.gunMetal, theme.colors.richBlack]} // Gradient background for the error message
           style={styles.errorGradient}>
           <View style={styles.errorContainer}>
             {/* Display search query */}

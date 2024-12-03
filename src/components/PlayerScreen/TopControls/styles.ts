@@ -34,7 +34,7 @@ export const createStyle = (theme: Theme): Styles =>
       fontFamily: theme.fontFamily.inter_semiBold,
     },
     movieGenre: {
-      color: '#fff',
+      color: theme.colors.white,
       fontSize: theme.fontSize.sm_lll - 2,
       fontFamily: theme.fontFamily.inter_regular,
     },

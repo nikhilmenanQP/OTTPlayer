@@ -51,6 +51,9 @@ type ThemeColors = {
   black_95: string;
   black_32: string;
   black_50: string;
+  dodgerBlue: string;
+  raisinBlack: string;
+  richBlack: string;
 };
 
 // Extend the base theme with colors for light and dark themes
@@ -184,6 +187,7 @@ export const darkTheme: Theme = {
     textPrimary: '#FFFFFF',
     white: '#ffffff',
     bootstrapBlue: '#007bff',
+    dodgerBlue: '#1E90FF',
     mediumGray: '#aaa',
     firebrickRed: '#B72B31',
     blueGray: '#262c34',
@@ -196,6 +200,8 @@ export const darkTheme: Theme = {
     black_95: '#00000095',
     black_32: '#00000032',
     black_50: '#00000050',
+    raisinBlack: '#1a1f27',
+    richBlack: '#10161e',
   },
 };
 
@@ -221,6 +227,7 @@ export const lightTheme: Theme = {
     textPrimary: '#000000',
     white: '#ffffff',
     bootstrapBlue: '#007bff',
+    dodgerBlue: '#1E90FF',
     mediumGray: '#aaa',
     firebrickRed: '#B72B31',
     blueGray: '#262c34',
@@ -233,5 +240,7 @@ export const lightTheme: Theme = {
     black_95: '#00000095',
     black_32: '#00000032',
     black_50: '#00000050',
+    raisinBlack: '#1a1f27',
+    richBlack: '#10161e',
   },
 };

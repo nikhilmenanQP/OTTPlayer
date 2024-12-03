@@ -84,7 +84,7 @@ const renderTabBarIcon = (focused: boolean, routeName: keyof TabParamList) => {
   const {theme} = useAppTheme();
   const styles = createStyles(theme);
 
-  const iconColor = focused ? '#ffffff' : '#808080';
+  const iconColor = focused ? theme.colors.white : theme.colors.standardGray;
   const IconSource = ICONS[routeName];
 
   return (
@@ -114,7 +114,7 @@ const renderTabBarLabel = (focused: boolean, routeName: keyof TabParamList) => {
     <Text
       style={{
         ...styles?.tabBarLabelStyle, // Base style for the label
-        color: focused ? '#ffffff' : '#808080', // Determine label color based on focus state
+        color: focused ? theme.colors.white : theme.colors.standardGray, // Determine label color based on focus state
       }}>
       {routeName?.toUpperCase()}
     </Text>

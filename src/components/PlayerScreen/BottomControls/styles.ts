@@ -24,7 +24,7 @@ export const createStyle = (theme: Theme) =>
     },
     optionsText: {
       paddingLeft: theme.spacing.sm,
-      color: '#fff',
+      color: theme.colors.white,
     },
     slider: {
       flex: 1,
