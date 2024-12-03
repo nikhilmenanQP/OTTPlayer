@@ -3,6 +3,7 @@ import React, {createContext, useEffect, useState} from 'react';
 import {darkTheme, lightTheme, Theme} from '@styles/theme';
 import {useColorScheme} from 'react-native';
 import {ThemeContextType, ThemeProviderProps} from './types';
+import {ThemeProvider} from 'styled-components/native';
 
 /**
  * @type {Hook} Defining the default context value for the theme
@@ -38,5 +39,9 @@ export const ThemeProviderContext: React.FC<ThemeProviderProps> = ({children}) =
   };
 
   // Returning the ThemeContext provider with the current theme and toggle function
-  return <ThemeContext.Provider value={{theme, toggleTheme}}>{children}</ThemeContext.Provider>;
+  return (
+    <ThemeContext.Provider value={{theme, toggleTheme}}>
+      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+    </ThemeContext.Provider>
+  );
 };
