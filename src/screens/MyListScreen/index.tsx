@@ -12,33 +12,27 @@ const MyListScreen: React.FC<MyListScreenProps> = ({data}) => {
   const {theme} = useAppTheme();
   const styles = createStyle(theme);
 
-  // Memoized render function for list items
-  const renderItem = useCallback(
-    ({item}: {item: ListItem}) => (
-      <View style={styles.listItem}>
-        <Image source={{uri: item.image}} style={styles.image} />
-        <View style={styles.details}>
-          <Text style={styles.title}>{item.title}</Text>
-          <Text style={styles.meta}>
-            {item.duration || item.seasons} • {item.rating}
-          </Text>
-        </View>
+  // Render function for list items
+  const renderItem = ({item}: {item: ListItem}) => (
+    <View style={styles.listItem}>
+      <Image source={{uri: item.image}} style={styles.image} />
+      <View style={styles.details}>
+        <Text style={styles.title}>{item.title}</Text>
+        <Text style={styles.meta}>
+          {item.duration || item.seasons} • {item.rating}
+        </Text>
       </View>
-    ),
-    [styles],
+    </View>
   );
 
-  // Memoized render function for hidden swipeable items
-  const renderHiddenItem = useCallback(
-    () => (
-      <View style={styles.hiddenItem}>
-        <TouchableOpacity style={styles.deleteButton}>
-          <DeleteIcon style={styles.deleteIcon} />
-          <Text style={styles.deleteText}>REMOVE</Text>
-        </TouchableOpacity>
-      </View>
-    ),
-    [styles],
+  // Render function for hidden swipeable items
+  const renderHiddenItem = () => (
+    <View style={styles.hiddenItem}>
+      <TouchableOpacity style={styles.deleteButton}>
+        <DeleteIcon style={styles.deleteIcon} />
+        <Text style={styles.deleteText}>REMOVE</Text>
+      </TouchableOpacity>
+    </View>
   );
 
   return (
