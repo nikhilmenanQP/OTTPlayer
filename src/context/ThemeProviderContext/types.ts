@@ -1,17 +1,21 @@
 import {ReactNode} from 'react';
-import {Theme} from '@styles/theme';
 
-/**
- * Define the shape of the ThemeContext
- */
+export interface BaseTheme {
+  colors?: Record<string, string>;
+  fontFamily: Record<string, string>;
+  fontSize: Record<string, number>;
+  spacing: Record<string, number>;
+}
+
+export interface Theme extends BaseTheme {
+  colors: Record<string, string>;
+}
+
 export interface ThemeContextType {
   theme: Theme;
   toggleTheme: () => void;
 }
 
-/**
- * Define the type for the ThemeProviderContext's props
- */
 export interface ThemeProviderProps {
   children: ReactNode;
 }
