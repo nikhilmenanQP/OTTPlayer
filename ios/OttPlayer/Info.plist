@@ -68,26 +68,6 @@
 		<string>Inter-SemiBoldItalic.ttf</string>
 		<string>Inter-Thin.ttf</string>
 		<string>Inter-ThinItalic.ttf</string>
-		<string>InterDisplay-Black.ttf</string>
-		<string>InterDisplay-BlackItalic.ttf</string>
-		<string>InterDisplay-Bold.ttf</string>
-		<string>InterDisplay-BoldItalic.ttf</string>
-		<string>InterDisplay-ExtraBold.ttf</string>
-		<string>InterDisplay-ExtraBoldItalic.ttf</string>
-		<string>InterDisplay-ExtraLight.ttf</string>
-		<string>InterDisplay-ExtraLightItalic.ttf</string>
-		<string>InterDisplay-Italic.ttf</string>
-		<string>InterDisplay-Light.ttf</string>
-		<string>InterDisplay-LightItalic.ttf</string>
-		<string>InterDisplay-Medium.ttf</string>
-		<string>InterDisplay-MediumItalic.ttf</string>
-		<string>InterDisplay-Regular.ttf</string>
-		<string>InterDisplay-SemiBold.ttf</string>
-		<string>InterDisplay-SemiBoldItalic.ttf</string>
-		<string>InterDisplay-Thin.ttf</string>
-		<string>InterDisplay-ThinItalic.ttf</string>
-		<string>InterVariable-Italic.ttf</string>
-		<string>InterVariable.ttf</string>
 	</array>
 </dict>
 </plist>
