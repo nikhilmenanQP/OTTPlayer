@@ -2,7 +2,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import React, {useMemo, useCallback} from 'react';
 
 import {FlatList, Text, TouchableOpacity, View} from 'react-native';
-import {GenreItemProps, GenreListProps} from './types';
+import {Genre, GenreItemProps, GenreListProps} from './types';
 import {createStyle} from './styles';
 import {useAppTheme} from '@hooks/useAppTheme';
 
@@ -12,9 +12,20 @@ import {useAppTheme} from '@hooks/useAppTheme';
  * @param {GenreListProps} props - The properties passed into this component
  */
 const GenreList: React.FC<GenreListProps> = ({genres, onGenreSelect, selectedGenre}) => {
-  // Retrieve the current theme for dynamic styling
   const {theme} = useAppTheme();
   const styles = useMemo(() => createStyle(theme), [theme]);
+
+  const renderGenreItem = useCallback(
+    ({item}: {item: Genre}) => (
+      <GenreItem
+        item={item}
+        onGenreSelect={onGenreSelect}
+        isSelected={selectedGenre?.name === item.name}
+        styles={styles}
+      />
+    ),
+    [selectedGenre],
+  );
 
   return (
     <View>
@@ -23,15 +34,8 @@ const GenreList: React.FC<GenreListProps> = ({genres, onGenreSelect, selectedGen
         contentContainerStyle={styles.genreList}
         data={genres}
         horizontal
-        keyExtractor={item => item.id.toString()} // Ensure each item has a unique key (as a string)
-        renderItem={({item}) => (
-          <GenreItem
-            item={item}
-            onGenreSelect={onGenreSelect}
-            isSelected={selectedGenre?.name === item.name}
-            styles={styles}
-          />
-        )}
+        keyExtractor={item => item.id.toString()}
+        renderItem={renderGenreItem}
         showsHorizontalScrollIndicator={false}
       />
     </View>
@@ -47,12 +51,11 @@ const GenreList: React.FC<GenreListProps> = ({genres, onGenreSelect, selectedGen
  * @param onGenreSelect function to handle genre selection
  */
 const GenreItem: React.FC<GenreItemProps> = ({isSelected, item, onGenreSelect}) => {
-  // Retrieve the current theme for dynamic styling
   const {theme} = useAppTheme();
   const styles = useMemo(() => createStyle(theme), [theme]);
 
   const handlePress = useCallback(() => {
-    onGenreSelect(item); // Call the onGenreSelect function when the genre is pressed
+    onGenreSelect(item);
   }, [item, onGenreSelect]);
 
   return (
