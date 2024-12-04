@@ -1,13 +1,23 @@
-import {NavigationContainer} from '@react-navigation/native';
-import {StyleSheet} from 'react-native';
-import {StackNavigator} from '@navigation/StackNavigator';
+import BottomNavigator from '@navigation/BottomNavigator';
+import PlayerScreen from '@screens/PlayerScreen';
 
-export default function MainNavigator() {
+import {NavigationContainer} from '@react-navigation/native';
+import {RootStackParamList} from './types';
+import {createStackNavigator} from '@react-navigation/stack';
+
+const Stack = createStackNavigator<RootStackParamList>();
+
+const stackScreenOptions = () => ({
+  headerShown: false,
+});
+
+export const MainNavigator = () => {
   return (
     <NavigationContainer>
-      <StackNavigator />
+      <Stack.Navigator screenOptions={stackScreenOptions}>
+        <Stack.Screen name="BottomNavigator" component={BottomNavigator} />
+        <Stack.Screen name="PlayerScreen" component={PlayerScreen} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
-}
-
-const styles = StyleSheet.create({});
+};

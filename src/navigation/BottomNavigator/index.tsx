@@ -1,8 +1,7 @@
 import React, {useMemo} from 'react';
 
-import {HomeStack} from '@navigation/HomeStack';
 import {LinearGradient} from 'react-native-linear-gradient';
-import {MoviesStack} from '@navigation/MoviesStack';
+import {StackNavigator} from '@navigation/StackNavigator';
 import {TabParamList} from './types';
 import {Text, Image} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -46,7 +45,12 @@ const BottomNavigator: React.FC = React.memo(() => {
 
   // Use useMemo to memoize the tab bar background for performance optimization
   const tabBarBackground = useMemo(
-    () => <LinearGradient colors={['#2d2d2d', '#171c24']} style={{height: 80, borderRadius: 100}} />,
+    () => (
+      <LinearGradient
+        colors={[theme.colors.darkCharcoal, theme.colors.blackPear]}
+        style={{height: 80, borderRadius: 100}}
+      />
+    ),
     [],
   );
 
@@ -54,20 +58,18 @@ const BottomNavigator: React.FC = React.memo(() => {
     <Tab.Navigator
       screenOptions={({route}) => ({
         headerShown: false,
-        // Set the tab bar background
         tabBarBackground: () => tabBarBackground,
-        // Render the icon for the tab based on the focused state
         tabBarIcon: ({focused}) => renderTabBarIcon(focused, route?.name),
-        // Style for the tab bar item
         tabBarItemStyle: styles.tabBarItemStyle,
-        // Render the label for the tab based on the focused state
         tabBarLabel: ({focused}) => renderTabBarLabel(focused, route?.name),
-        // Style for the tab bar
         tabBarStyle: styles.tabBarStyle,
       })}>
-      {/* Define the screens for each tab in the navigator */}
-      <Tab.Screen name="Home" component={HomeStack} />
-      <Tab.Screen name="Movies" component={MoviesStack} />
+      <Tab.Screen name="Home" options={{headerShown: false}}>
+        {() => <StackNavigator initialRouteName="HomeScreen" />}
+      </Tab.Screen>
+      <Tab.Screen name="Movies" options={{headerShown: false}}>
+        {() => <StackNavigator initialRouteName="MoviesScreen" />}
+      </Tab.Screen>
       <Tab.Screen name="Series" component={SeriesScreen} />
       <Tab.Screen name="Search" component={SearchScreen} />
     </Tab.Navigator>
