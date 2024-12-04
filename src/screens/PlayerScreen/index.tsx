@@ -87,23 +87,30 @@ const PlayerScreen: React.FC = () => {
    * Handle the seek bar interaction completion
    * Updates the playback time and resumes video playback after seeking
    */
-  const handleSlidingComplete = useCallback((value: number) => {
+  const handleSlidingComplete = useCallback(
+    (value: number) => {
+      if (value !== playerState.currentTime) {
+        setPlayerState(prevState => ({
+          ...prevState,
+          isSliding: false, // Stop sliding
+          currentTime: value, // Update the current playback time
+          isLoading: true, // Show loader while seeking
+        }));
+
+        // Seek to the specified time in the video
+        videoRef.current?.seek(value);
+      }
+    },
+    [playerState.currentTime],
+  );
+
+  // Listen to seek completion through the onSeek event
+  const handleSeek = useCallback(() => {
     setPlayerState(prevState => ({
       ...prevState,
-      isSliding: false, // Stop sliding
-      currentTime: value, // Update the current playback time
-      isLoading: true, // Show loader while seeking
+      isLoading: false, // Hide loader after seeking
+      paused: false, // Resume playback after seeking
     }));
-    videoRef.current?.seek(value); // Seek to the specified time in the video
-
-    // Resume playing the video and hide loader after a short delay
-    setTimeout(() => {
-      setPlayerState(prevState => ({
-        ...prevState,
-        isLoading: false, // Hide loader after seeking
-        paused: false, // Resume playback
-      }));
-    }, 500); // Adjust timeout for smooth transition
   }, []);
 
   /**
@@ -342,6 +349,7 @@ const PlayerScreen: React.FC = () => {
           onLoad={onLoad} // Event handler for video load
           onLoadStart={onLoadStart} // Show loader when video starts loading
           onProgress={onProgress} // Event handler for video progress
+          onSeek={handleSeek}
           onReadyForDisplay={onReadyForDisplay}
           paused={playerState.paused} // Control the play/pause state
           ref={videoRef}
