@@ -6,7 +6,7 @@ import CloseIcon from '@assets/images/appIcons/close.svg';
 import Danger from '@assets/images/appIcons/danger.svg';
 import Expand from '@assets/images/appIcons/expand.svg';
 import ForwardTenSec from '@assets/images/appIcons/forward-10-seconds.svg';
-import Home from '@assets/images/appIcons/homeIcon.png';
+import Home from '@assets/images/appIcons/HomeIcon.png';
 import Loader from '@assets/images/appIcons/loader.svg';
 import Movie from '@assets/images/appIcons/MovieIcon.png';
 import MusicPlaylist from '@assets/images/appIcons/music-playlist.svg';

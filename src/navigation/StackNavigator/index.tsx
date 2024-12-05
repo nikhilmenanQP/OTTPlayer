@@ -1,10 +1,10 @@
-import DetailScreen from '@screens/DetailScreen';
-import HomeScreen from '@screens/HomeScreen';
-import MoviesScreen from '@screens/MoviesScreen';
-import ProfileScreen from '@screens/ProfileScreen';
 import React from 'react';
 
 import {createStackNavigator} from '@react-navigation/stack';
+import HomeScreen from '@components/pages/HomeScreen';
+import MoviesScreen from '@components/pages/MoviesScreen';
+import DetailScreen from '@components/pages/DetailScreen';
+import ProfileScreen from '@components/pages/ProfileScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 

@@ -12,8 +12,8 @@ import {useAppTheme} from '@hooks/useAppTheme';
  * @type {Screens}
  * Import screen components for each tab
  */
-import SearchScreen from '@screens/SearchScreen';
-import SeriesScreen from '@screens/SeriesScreen';
+import SearchScreen from '@components/pages/SearchScreen';
+import SeriesScreen from '@components/pages/SeriesScreen';
 
 /**
  * @type {Icons}

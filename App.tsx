@@ -2,9 +2,10 @@ import {useEffect} from 'react';
 
 import {StyleSheet} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {ThemeProviderContext} from '@context/ThemeProviderContext';
 import {configureReanimatedLogger, ReanimatedLogLevel} from 'react-native-reanimated';
 import Orientation from 'react-native-orientation-locker';
+import BottomNavigator from '@navigation/BottomNavigator';
+import {ThemeProviderContext} from '@context/ThemeProviderContext';
 import {MainNavigator} from '@navigation/MainNavigator';
 
 configureReanimatedLogger({

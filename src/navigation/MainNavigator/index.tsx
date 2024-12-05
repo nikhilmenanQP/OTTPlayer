@@ -1,9 +1,9 @@
 import BottomNavigator from '@navigation/BottomNavigator';
-import PlayerScreen from '@screens/PlayerScreen';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {RootStackParamList} from './types';
 import {createStackNavigator} from '@react-navigation/stack';
+import PlayerScreen from '@components/pages/PlayerScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
