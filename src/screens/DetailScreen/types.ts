@@ -1,13 +1,3 @@
-/**
- * @type {Types}
- * Add your types here if needed...
- */
+import {StackScreenProps} from '@react-navigation/stack';
 
-/**
- * Example
- */
-// interface Type {
-//   title: string;
-//   subString: string;
-//   id: number;
-// }
+export type DetailScreenProps = StackScreenProps<RootStackParamList, 'DetailScreen'>;

@@ -3,7 +3,13 @@ type SharedStackProps = {
 };
 
 type RootStackParamList = {
-  DetailScreen: undefined;
+  DetailScreen: {
+    data: {
+      contentType?: string;
+      seasonsData?: Array<any>;
+      extras?: Array<any>;
+    };
+  };
   HomeScreen: undefined;
   MoviesScreen: undefined;
   PlayerScreen: undefined;

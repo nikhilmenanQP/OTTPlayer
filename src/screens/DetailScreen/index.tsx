@@ -7,26 +7,14 @@ import ShareIcon from '@assets/images/appIcons/shareIcon.svg';
 
 import {ActionButton} from '@components/DetailScreen/ActionButton';
 import {DescriptionText} from '@components/DetailScreen/DescriptionText';
+import {DetailScreenProps} from './types';
 import {MovieBanner} from '@components/DetailScreen/MovieBanner';
 import {RenderExtras} from '@components/DetailScreen/RenderExtras';
-import {RouteProp} from '@react-navigation/native';
 import {SeasonCardContainer} from '@components/DetailScreen/SeasonCardContainer';
 import {View, Text, ScrollView, TouchableOpacity} from 'react-native';
+
 import {createStyle} from './styles';
 import {useAppTheme} from '@hooks/useAppTheme';
-
-interface ContentType {
-  contentType?: string;
-  seasonsData?: Array<any>;
-  extras?: Array<any>;
-}
-
-type DetailScreenRouteProp = RouteProp<{DetailScreen: {data: ContentType}}, 'DetailScreen'>;
-
-interface DetailScreenProps {
-  navigation: any;
-  route: DetailScreenRouteProp;
-}
 
 const DetailScreen: React.FC<DetailScreenProps> = ({navigation, route}) => {
   const {theme} = useAppTheme();
