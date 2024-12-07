@@ -1,17 +1,12 @@
-import {useAppTheme} from '@hooks/useAppTheme';
-import {memo, useMemo} from 'react';
-import {createStyle} from './styles';
-import {Text, TouchableOpacity} from 'react-native';
+import {memo} from 'react';
+import {ButtonContainer, ButtonText} from './styles';
 import {ActionButtonProps} from './types';
 
 export const ActionButton: React.FC<ActionButtonProps> = memo(({icon, label, onPress}) => {
-  const {theme} = useAppTheme();
-  const styles = useMemo(() => createStyle(theme), [theme]);
-
   return (
-    <TouchableOpacity style={styles.actionBtn} onPress={onPress}>
+    <ButtonContainer onPress={onPress}>
       {icon}
-      <Text style={styles.actionBtnText}>{label}</Text>
-    </TouchableOpacity>
+      <ButtonText>{label}</ButtonText>
+    </ButtonContainer>
   );
 });
