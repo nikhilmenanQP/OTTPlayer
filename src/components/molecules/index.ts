@@ -8,6 +8,7 @@ import MiddleControls from './MiddleControls';
 import TopControls from './TopControls';
 import PlayerSettingsModal from './PlayerSettingsModal';
 import AudioSubtitleModal from './AudioSubtitleModal';
+import MovieCard from './MovieCard';
 
 export {
   AppCarousel,
@@ -20,4 +21,5 @@ export {
   TopControls,
   PlayerSettingsModal,
   AudioSubtitleModal,
+  MovieCard,
 };

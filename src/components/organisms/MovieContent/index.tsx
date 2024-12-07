@@ -1,6 +1,5 @@
 import LinearGradient from 'react-native-linear-gradient';
-// import MovieCard from '@components/HomeScreenComp/MovieCard';
-import MovieCard from '@components/organisms/MovieCard';
+import MovieCardList from '../MovieCardList';
 
 import {ActivityIndicator, Dimensions, Text, View} from 'react-native';
 import {Movie, MovieContentProps} from './types';
@@ -21,13 +20,13 @@ const MovieContent: React.FC<MovieContentProps> = ({error, loading, movies, sear
   const styles = createStyle(theme);
 
   /**
-   * @type {Function} Function to render a MovieCard with dynamic data and styling
+   * @type {Function} Function to render a MovieCardList with dynamic data and styling
    * @param data
    * @param title
    * @returns JSX.Element
    */
-  const renderMovieCard = (data: Movie[], title: string): JSX.Element => (
-    <MovieCard
+  const renderMovieCardList = (data: Movie[], title: string): JSX.Element => (
+    <MovieCardList
       data={data} // Pass movie data
       horizontal={false} // Display movies in a vertical layout
       numberOfColumns={2} // Display 2 columns of cards
@@ -67,14 +66,14 @@ const MovieContent: React.FC<MovieContentProps> = ({error, loading, movies, sear
           </View>
         </LinearGradient>
 
-        {/* Fallback MovieCard to show popular movies */}
-        {renderMovieCard(popularMovies[0].data, 'Popular Searches')}
+        {/* Fallback MovieCardList to show popular movies */}
+        {renderMovieCardList(popularMovies[0].data, 'Popular Searches')}
       </>
     );
   }
 
-  // If movies are found, display them using the renderMovieCard function
-  return renderMovieCard(movies, 'Popular Searches');
+  // If movies are found, display them using the renderMovieCardList function
+  return renderMovieCardList(movies, 'Popular Searches');
 };
 
 export default MovieContent;

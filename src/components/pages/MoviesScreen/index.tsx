@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {AppHeader} from '@components/molecules';
-import {MovieCard} from '@components/organisms';
+import {MovieCardList} from '@components/organisms';
 import {ScrollView} from 'react-native';
 
 import {createStyle} from './styles';
@@ -24,9 +24,9 @@ const MoviesScreen: React.FC<MoviesScreenProps> = ({navigation}) => {
       {/* App Header */}
       <AppHeader showBackButton={true} />
 
-      {/* Map through movieScreenData to render MovieCards */}
+      {/* Map through movieScreenData to render MovieCardLists */}
       {movieScreenData.map(({data, isContinueWatching, isWatchList, title}: mapDataProps) => (
-        <MovieCard
+        <MovieCardList
           data={data}
           horizontalCard={isContinueWatching || isWatchList}
           key={title}

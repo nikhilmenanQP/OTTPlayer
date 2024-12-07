@@ -1,4 +1,4 @@
-import {MovieCard} from '@components/organisms';
+import {MovieCardList} from '@components/organisms';
 
 import {useAppTheme} from '@hooks/useAppTheme';
 import {Text, View} from 'react-native';
@@ -16,7 +16,7 @@ export const RenderExtras: React.FC<RenderExtrasProps> = ({data, onPress = () =>
         <View style={styles.horiZontalRule} />
       </View>
       <View style={[{width: '100%'}, {marginVertical: theme.spacing.sm}]}>
-        <MovieCard
+        <MovieCardList
           data={data}
           onPressHandler={onPress}
           sectionContainerStyle={{paddingLeft: theme.spacing.sm_ll}}

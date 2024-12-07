@@ -1,6 +1,5 @@
-export interface mapDataProps {
-  data: any;
-  isContinueWatching: boolean;
-  isWatchList: boolean;
-  title: string;
+import {NavigationProp} from '@react-navigation/native';
+
+export interface HomeScreenProps {
+  navigation: NavigationProp<any>;
 }
