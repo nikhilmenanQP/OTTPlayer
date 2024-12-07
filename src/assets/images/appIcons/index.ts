@@ -1,3 +1,4 @@
+import ArrowLeft from '@assets/images/appIcons/ArrowLeft.svg';
 import ArrowTailLeft from '@assets/images/appIcons/arrowTail-left.svg';
 import BackwardTenSec from '@assets/images/appIcons/backward-10-seconds.svg';
 import Cast from '@assets/images/appIcons/cast.svg';
@@ -21,6 +22,7 @@ import Setting from '@assets/images/appIcons/Settings.svg';
 import SubTitle from '@assets/images/appIcons/subtitle.svg';
 
 export {
+  ArrowLeft,
   ArrowTailLeft,
   BackwardTenSec,
   Cast,

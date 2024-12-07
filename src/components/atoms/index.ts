@@ -1,8 +1,19 @@
-import {ActionButton} from './ActionButton';
-import GradientSeparator from './GradientSeparator';
-import SubtitleOverlay from './SubtitleOverlay';
+import ActionButton from './ActionButton';
+import BackButton from './BackButton';
 import BlurBackground from './BlurBackground';
-import LottieLoader from './LottieLoader';
+import GradientSeparator from './GradientSeparator';
 import HorizontalRule from './HorizontalRule';
+import LottieLoader from './LottieLoader';
+import ProfileIcon from './ProfileIcon/Index';
+import SubtitleOverlay from './SubtitleOverlay';
 
-export {ActionButton, GradientSeparator, SubtitleOverlay, BlurBackground, LottieLoader, HorizontalRule};
+export {
+  ActionButton,
+  BackButton,
+  BlurBackground,
+  GradientSeparator,
+  HorizontalRule,
+  LottieLoader,
+  ProfileIcon,
+  SubtitleOverlay,
+};
