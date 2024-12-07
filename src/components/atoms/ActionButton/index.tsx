@@ -1,12 +1,12 @@
-import {memo} from 'react';
-import {ButtonContainer, ButtonText} from './styles';
 import {ActionButtonProps} from './types';
+import {ButtonContainer, ButtonText} from './styles';
+import {memo} from 'react';
 
-export const ActionButton: React.FC<ActionButtonProps> = memo(({icon, label, onPress}) => {
+export const ActionButton: React.FC<ActionButtonProps> = memo(({buttonStyle, icon, label, onPress, textStyle}) => {
   return (
-    <ButtonContainer onPress={onPress}>
+    <ButtonContainer onPress={onPress} style={buttonStyle}>
       {icon}
-      <ButtonText>{label}</ButtonText>
+      <ButtonText style={textStyle}>{label}</ButtonText>
     </ButtonContainer>
   );
 });

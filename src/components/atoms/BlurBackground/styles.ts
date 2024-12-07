@@ -1,9 +1,7 @@
 import {BlurViewProps} from '@react-native-community/blur';
 import {StyleSheet} from 'react-native';
-// import {Theme} from '@styles/theme';
 import {Theme} from '@context/ThemeProviderContext/types';
 
-// Styles for the component
 export const createStyle = (theme: Theme) =>
   StyleSheet.create({
     absolute: {
