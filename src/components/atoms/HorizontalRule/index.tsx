@@ -1,15 +1,9 @@
 import React from 'react';
-
-import {createStyle} from './styles';
 import {HorizontalRuleProps} from './types';
-import {useAppTheme} from '@hooks/useAppTheme';
-import {View} from 'react-native';
+import {Container} from './styles';
 
 const HorizontalRule: React.FC<HorizontalRuleProps> = ({style}) => {
-  const {theme} = useAppTheme();
-  const styles = createStyle(theme);
-
-  return <View style={[styles.horiZontalRule, style]} />;
+  return <Container style={style} />;
 };
 
 export default HorizontalRule;
