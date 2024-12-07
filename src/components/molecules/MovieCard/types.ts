@@ -34,7 +34,7 @@ interface LayoutProps {
   marginTop?: boolean;
 }
 
-export interface MovieCardProps extends LayoutProps, PressablxeProps, BaseCardStyles {
+export interface MovieCardProps extends LayoutProps, PressableProps, BaseCardStyles {
   horizontalCard?: boolean;
   movieData: ItemProps;
   showMovieDetails?: boolean;

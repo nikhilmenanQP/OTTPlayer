@@ -38,9 +38,6 @@ const MovieContent: React.FC<MovieContentProps> = ({error, loading, movies, sear
       marginTop={false} // Disable top margin
       showTitle={true} // Show title on the card
       title={title} // Set title of the section
-      onPressHandler={() => {
-        /* handle movie click */
-      }}
     />
   );
 

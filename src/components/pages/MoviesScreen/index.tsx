@@ -1,45 +1,50 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 
 import {AppHeader} from '@components/molecules';
+import {FlatList, View} from 'react-native';
 import {MovieCardList} from '@components/organisms';
-import {ScrollView} from 'react-native';
 
 import {createStyle} from './styles';
 import {mapDataProps, MoviesScreenProps} from './types';
 import {movieScreenData} from '../../../dummyDataPreProd/MoviesScreen';
 import {useAppTheme} from '@hooks/useAppTheme';
 
-const MoviesScreen: React.FC<MoviesScreenProps> = ({navigation}) => {
+const MoviesScreen: React.FC<MoviesScreenProps> = ({}) => {
   const {theme} = useAppTheme();
-  const styles = createStyle(theme);
+  const styles = useMemo(() => createStyle(theme), [theme]);
 
-  const onMovieClickHandler = (movie: any) => {
-    navigation.navigate('DetailScreen', {
-      data: movie,
-    });
-  };
+  const renderMovieCardList = ({item}: {item: mapDataProps}) => (
+    <MovieCardList
+      data={item.data}
+      horizontalCard={item.isContinueWatching || item.isWatchList}
+      key={item.title}
+      marginLeft={false}
+      marginTop={false}
+      sectionContainerStyle={styles.sectionContainer}
+      showMovieDetails={item.isContinueWatching}
+      showTitle={true}
+      title={item.title}
+    />
+  );
 
   return (
-    <ScrollView contentContainerStyle={styles.contentContainerStyle} style={styles.container}>
+    <View style={styles.container}>
       {/* App Header */}
       <AppHeader showBackButton={true} />
 
-      {/* Map through movieScreenData to render MovieCardLists */}
-      {movieScreenData.map(({data, isContinueWatching, isWatchList, title}: mapDataProps) => (
-        <MovieCardList
-          data={data}
-          horizontalCard={isContinueWatching || isWatchList}
-          key={title}
-          marginLeft={false}
-          marginTop={false}
-          onPressHandler={() => onMovieClickHandler(data)} // Pass the movie data when clicked
-          sectionContainerStyle={styles.sectionContainer}
-          showMovieDetails={isContinueWatching}
-          showTitle={true}
-          title={title}
-        />
-      ))}
-    </ScrollView>
+      {/* FlatList to render MovieCardLists */}
+      <FlatList
+        contentContainerStyle={styles.contentContainerStyle}
+        data={movieScreenData}
+        initialNumToRender={5}
+        keyExtractor={item => item.title}
+        maxToRenderPerBatch={10}
+        removeClippedSubviews={true}
+        renderItem={renderMovieCardList}
+        showsVerticalScrollIndicator={false}
+        windowSize={10}
+      />
+    </View>
   );
 };
 

@@ -5,7 +5,7 @@ import {Text, View} from 'react-native';
 import {RenderExtrasProps} from './types';
 import {createStyle} from './styles';
 
-export const RenderExtras: React.FC<RenderExtrasProps> = ({data, onPress = () => {}}) => {
+export const RenderExtras: React.FC<RenderExtrasProps> = ({data}) => {
   const {theme} = useAppTheme();
   const styles = createStyle(theme);
 
@@ -16,12 +16,7 @@ export const RenderExtras: React.FC<RenderExtrasProps> = ({data, onPress = () =>
         <View style={styles.horiZontalRule} />
       </View>
       <View style={[{width: '100%'}, {marginVertical: theme.spacing.sm}]}>
-        <MovieCardList
-          data={data}
-          onPressHandler={onPress}
-          sectionContainerStyle={{paddingLeft: theme.spacing.sm_ll}}
-          showMovieDetails={true}
-        />
+        <MovieCardList data={data} sectionContainerStyle={{paddingLeft: theme.spacing.sm_ll}} showMovieDetails={true} />
       </View>
     </>
   );

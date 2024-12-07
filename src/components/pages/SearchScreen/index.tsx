@@ -1,10 +1,10 @@
 import React, {useState, useCallback, useMemo} from 'react';
-import {SearchBar} from '@components/molecules';
 
 import {AppHeader} from '@components/molecules';
 import {GenreList, MovieContent} from '@components/organisms';
-import {Genre} from '@components/SearchScreen/GenreList/types';
-import {Movie} from '@components/SearchScreen/MovieContent/types';
+import {Genre} from '@components/organisms/GenreList/types';
+import {Movie} from '@components/organisms/MovieContent/types';
+import {SearchBar} from '@components/molecules';
 import {View} from 'react-native';
 
 import {createStyle} from './styles';
