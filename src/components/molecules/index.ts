@@ -9,6 +9,7 @@ import TopControls from './TopControls';
 import PlayerSettingsModal from './PlayerSettingsModal';
 import AudioSubtitleModal from './AudioSubtitleModal';
 import MovieCard from './MovieCard';
+import ErrorMessage from './ErrorMessage';
 
 export {
   AppCarousel,
@@ -22,4 +23,5 @@ export {
   PlayerSettingsModal,
   AudioSubtitleModal,
   MovieCard,
+  ErrorMessage,
 };

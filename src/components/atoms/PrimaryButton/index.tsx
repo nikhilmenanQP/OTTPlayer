@@ -8,29 +8,45 @@ import {useNavigation} from '@react-navigation/native';
 interface PrimaryButtonProps {
   onPressHandler?: () => void;
   buttonStyle?: ViewStyle;
-  icon: any;
+  icon?: any;
   textStyle?: TextStyle;
-  text: string;
+  text?: string;
+  iconWidth?: number;
+  iconHeight?: number;
+  iconStyle?: ImageStyle;
 }
 
-const ICON_SIZE = 20;
+const ICON_DEFAULT_SIZE = 20;
 
-export default function PrimaryButton({onPressHandler, icon, buttonStyle, text, textStyle}: PrimaryButtonProps) {
+export default function PrimaryButton({
+  onPressHandler,
+  icon,
+  buttonStyle,
+  text,
+  textStyle,
+  iconWidth,
+  iconHeight,
+  iconStyle,
+}: PrimaryButtonProps) {
   const {theme} = useAppTheme();
   const styles = createStyle(theme);
+
+  const ICON_WIDTH = iconWidth || ICON_DEFAULT_SIZE;
+  const ICON_HEIGHT = iconHeight || ICON_DEFAULT_SIZE;
 
   const renderIcon = () => {
     if (typeof icon === 'function') {
       const IconComponent = icon;
-      return <IconComponent width={ICON_SIZE} heigh={ICON_SIZE} />;
+      return <IconComponent width={ICON_WIDTH} heigh={ICON_HEIGHT} style={iconStyle} />;
     }
     if (typeof icon === 'number') {
       return (
         <Image
           source={icon}
           style={{
-            width: ICON_SIZE,
-            height: ICON_SIZE,
+            width: ICON_WIDTH,
+            height: ICON_HEIGHT,
+            ...iconStyle,
           }}
         />
       );
@@ -41,7 +57,7 @@ export default function PrimaryButton({onPressHandler, icon, buttonStyle, text, 
   return (
     <TouchableOpacity style={[styles.watchNowBtn, buttonStyle]} onPress={onPressHandler}>
       {renderIcon()}
-      <Text style={[styles.watchNowBtnText, textStyle]}>{text}</Text>
+      {text && <Text style={[styles.watchNowBtnText, textStyle]}>{text}</Text>}
     </TouchableOpacity>
   );
 }

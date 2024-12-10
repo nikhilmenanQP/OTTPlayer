@@ -36,7 +36,7 @@ const PlayerScreen: React.FC = () => {
     controlsVisible: true,
     currentTime: 0, // Current playback time in seconds
     duration: 0, // Total duration of the video
-    isErrorVisible: false,
+    isErrorVisible: true,
     isFullscreen: false, // Fullscreen state (true/false)
     isLoading: true, // Flag for loading state (true when the video is buffering or loading)
     isSliding: false, // Flag indicating if the seek bar is being dragged

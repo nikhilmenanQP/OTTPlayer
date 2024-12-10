@@ -6,6 +6,7 @@ import HorizontalRule from './HorizontalRule';
 import LottieLoader from './LottieLoader';
 import ProfileIcon from './ProfileIcon/Index';
 import SubtitleOverlay from './SubtitleOverlay';
+import AppModal from './AppModal';
 
 export {
   ActionButton,
@@ -16,4 +17,5 @@ export {
   LottieLoader,
   ProfileIcon,
   SubtitleOverlay,
+  AppModal,
 };
