@@ -19,7 +19,7 @@ import SeriesScreen from '@components/pages/SeriesScreen';
  * @type {Icons}
  * Import icons for each tab
  */
-import {Home, Movie, Search_2, Series} from '@assets/images/appIcons';
+import {Home, Movie_2, Search_2, Series} from '@assets/images/appIcons';
 
 /**
  * Create a bottom tab navigator with specified screen parameters
@@ -31,7 +31,7 @@ const Tab = createBottomTabNavigator<TabParamList>();
  */
 const ICONS: Record<string, any> = {
   Home: Home,
-  Movies: Movie,
+  Movies: Movie_2,
   Search: Search_2,
   Series: Series,
 };
