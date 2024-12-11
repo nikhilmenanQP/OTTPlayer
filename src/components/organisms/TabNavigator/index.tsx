@@ -1,7 +1,6 @@
 import React, {useEffect, useMemo, useRef} from 'react';
 
 import {TabNavigatorProps} from './types';
-// import {Tab} from '@screens/ProfileScreen/types';
 import {Tab} from './types';
 import {Animated, Easing, Text, TouchableOpacity, View} from 'react-native';
 import {createStyle} from './styles';

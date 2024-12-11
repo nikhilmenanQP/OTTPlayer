@@ -1,38 +1,11 @@
-// import AccountScreen from '@screens/AccountScreen';
-import {AccountScreen, MyListScreen} from '@components/pages';
-// import AppHeader from '@components/AppComponents/AppHeader';
-import {AppHeader} from '@components/molecules';
-// import MyListScreen from '@screens/MyListScreen';
+import ProfileScreenTemplate from '@components/templates/ProfileScreenTemplate';
 import React, {useState} from 'react';
-// import TabNavigator from '@components/ProfileScreenComp/TabNavigator';
-// import TabNavigator from '@components/organisms/TabNavigator';
-import {TabNavigator} from '@components/organisms';
-
-import {View} from 'react-native';
-import {createStyle} from './styles';
-import {data} from '../../../dummyDataPreProd/ProfileScreen';
-import {useAppTheme} from '@hooks/useAppTheme';
 import {Tab} from './types';
 
-export default function ProfileScreen(): JSX.Element {
+const ProfileScreen: React.FC = () => {
   const [tab, setTab] = useState<Tab>('account');
-  const {theme} = useAppTheme();
-  const styles = createStyle(theme);
 
-  // Tab content mapping with type inference
-  const tabContent: Record<Tab, JSX.Element | null> = {
-    account: <AccountScreen />,
-    myList: <MyListScreen data={data} />,
-  };
+  return <ProfileScreenTemplate tab={tab} setTab={setTab} />;
+};
 
-  return (
-    <View style={[styles.container, {backgroundColor: theme.colors.background}]}>
-      {/* App Header Component */}
-      <AppHeader showBackButton={true} profileName="John Doe" />
-      {/* Tab Navigation Component */}
-      <TabNavigator tab={tab} setTab={setTab} />
-      {/* Render active screen based on selected tab */}
-      {tabContent[tab] || null}
-    </View>
-  );
-}
+export default ProfileScreen;
