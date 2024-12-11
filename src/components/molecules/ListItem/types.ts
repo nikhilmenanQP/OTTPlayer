@@ -1,4 +1,4 @@
-export interface ListItem {
+interface ListItem {
   duration?: string;
   id: string;
   image: string;
@@ -7,6 +7,6 @@ export interface ListItem {
   title: string;
 }
 
-export interface MyListScreenProps {
-  data: ListItem[];
+interface ListItemProps {
+  item: ListItem;
 }
