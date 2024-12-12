@@ -1,6 +1,6 @@
 import {StyleSheet, ViewStyle} from 'react-native';
 import {Theme} from '@context/ThemeProviderContext/types';
-import {css} from 'styled-components/native';
+import {css} from '@emotion/native';
 
 export const createStyle = (theme: Theme) => {
   return StyleSheet.create({

@@ -1,6 +1,7 @@
-import styled from 'styled-components/native';
+import {Theme} from '@context/ThemeProviderContext/types';
+import styled from '@emotion/native';
 
-export const Container = styled.View(({theme}) => ({
+export const Container = styled.View(({theme}: {theme: Theme}) => ({
   alignSelf: 'center',
   backgroundColor: theme.colors.standardGray,
   height: 0.5,

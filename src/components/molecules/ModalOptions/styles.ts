@@ -1,4 +1,4 @@
-import styled from 'styled-components/native';
+import styled from '@emotion/native';
 import {OptionItemProps, OptionProps, OptionTextProps} from './types';
 
 export const ICON_SIZE = 13;

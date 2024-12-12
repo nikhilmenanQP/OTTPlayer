@@ -1,4 +1,4 @@
-import styled from 'styled-components/native';
+import styled from '@emotion/native';
 import {CardContainerProps, CardImageWideProps} from './types';
 import {Theme} from '@context/ThemeProviderContext/types';
 

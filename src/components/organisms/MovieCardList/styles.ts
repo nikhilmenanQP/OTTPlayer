@@ -1,11 +1,12 @@
-import styled from 'styled-components/native';
+import {Theme} from '@context/ThemeProviderContext/types';
+import styled from '@emotion/native';
 
 export const SectionContainer = styled.View(({theme}) => ({
   // marginTop: theme.spacing.sm_lll + 2,
   // paddingLeft: theme.spacing.sm_ll + 2,
 }));
 
-export const SectionTitle = styled.Text(({theme}) => ({
+export const SectionTitle = styled.Text(({theme}: {theme: Theme}) => ({
   color: theme.colors.white,
   fontFamily: theme.fontFamily.inter_semiBold,
   fontSize: theme.fontSize.sm_ll,

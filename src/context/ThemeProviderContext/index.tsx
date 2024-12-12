@@ -4,7 +4,7 @@ import {BaseTheme, Theme, ThemeContextType, ThemeProviderProps} from './types';
 import {DARK_THEME_COLORS, LIGHT_THEME_COLORS} from '@constants/colors';
 import {FONT_FAMILY} from '@constants/fontsFamily';
 import {FONT_SIZE, SPACING} from '@constants/spacing';
-import {ThemeProvider} from 'styled-components/native';
+import {ThemeProvider} from '@emotion/react';
 
 import {useColorScheme} from 'react-native';
 

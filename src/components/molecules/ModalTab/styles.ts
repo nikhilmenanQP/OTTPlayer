@@ -1,4 +1,4 @@
-import styled from 'styled-components/native';
+import styled from '@emotion/native';
 
 import {Animated} from 'react-native';
 import {TabTextProps} from './types';
@@ -44,7 +44,7 @@ export const TabsContainer = styled(View)<{theme: Theme}>(({theme}) => ({
   marginBottom: theme.spacing.sm_lll + theme.spacing.sm_xxxx,
 }));
 
-export const Underline = styled(Animated.View)(({theme}) => ({
+export const Underline = styled(Animated.View)(({theme}: {theme: Theme}) => ({
   backgroundColor: theme.colors.white,
   height: theme.spacing.sm_xxxx + 1,
   position: 'absolute',
