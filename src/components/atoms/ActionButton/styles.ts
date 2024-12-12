@@ -1,11 +1,11 @@
-import {Theme} from '@context/ThemeProviderContext/types';
 import styled from '@emotion/native';
+import {StyleProps} from './types';
 
 export const ButtonContainer = styled.TouchableOpacity(({}) => ({
   alignItems: 'center',
 }));
 
-export const ButtonText = styled.Text(({theme}: {theme: Theme}) => ({
+export const ButtonText = styled.Text<StyleProps>(({theme}) => ({
   color: theme.colors.white,
   fontFamily: theme.fontFamily.inter_bold,
   fontSize: theme.fontSize.sm,

@@ -1,4 +1,5 @@
 import {TextStyle, ViewStyle} from 'react-native';
+import {Theme} from '@context/ThemeProviderContext/types';
 
 export interface ActionButtonProps {
   buttonStyle?: ViewStyle;
@@ -6,4 +7,8 @@ export interface ActionButtonProps {
   label: string;
   onPress?: () => void;
   textStyle?: TextStyle;
+}
+
+export interface StyleProps {
+  theme?: Theme;
 }
