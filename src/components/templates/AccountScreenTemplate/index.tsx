@@ -1,8 +1,9 @@
 import React, {useMemo} from 'react';
-import {AccountInfoSection, SubscriptionSection} from '@components/organisms';
+
 import {AccountScreenProps} from './types';
 import {View} from 'react-native';
 import {useAppTheme} from '@hooks/useAppTheme';
+import {AccountInfoSection, SubscriptionSection} from '@components/organisms';
 
 const AccountScreenTemplate: React.FC<AccountScreenProps> = ({
   hasActivePlan,

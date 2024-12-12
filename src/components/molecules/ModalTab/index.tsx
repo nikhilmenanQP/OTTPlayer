@@ -8,7 +8,7 @@ import {useAppTheme} from '@hooks/useAppTheme';
 
 const TAB: ['audio', 'subtitles'] = ['audio', 'subtitles'];
 
-const Tab: React.FC<TabProps> = React.memo(({selectedTab, setSelectedTab, onClose}) => {
+const ModalTab: React.FC<TabProps> = React.memo(({selectedTab, setSelectedTab, onClose}) => {
   const [initialTabWidth, setInitialTabWidth] = useState<number>(0); // Width of the first tab
   const tabWidth = useRef<number>(0); // Current width of the selected tab
   const translateX = useRef(new Animated.Value(0)).current; // Animated translation for underline movement
@@ -84,4 +84,4 @@ const Tab: React.FC<TabProps> = React.memo(({selectedTab, setSelectedTab, onClos
   );
 });
 
-export default Tab;
+export default ModalTab;

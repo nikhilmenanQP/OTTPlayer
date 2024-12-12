@@ -2,7 +2,7 @@ import {DescriptionTextProps} from './types';
 import {Text, TouchableOpacity, View} from 'react-native';
 import {useCallback, useRef, useState} from 'react';
 
-export const DescriptionText: React.FC<DescriptionTextProps> = ({
+const DescriptionText: React.FC<DescriptionTextProps> = ({
   containerStyle,
   numberOfLines,
   showMoreTextStyle,
@@ -45,3 +45,5 @@ export const DescriptionText: React.FC<DescriptionTextProps> = ({
     </View>
   );
 };
+
+export default DescriptionText;

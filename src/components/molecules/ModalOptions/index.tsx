@@ -67,4 +67,4 @@ const ModalOptions: React.FC<OptionContainerProps> = React.memo(
   },
 );
 
-export {ModalOptions};
+export default ModalOptions;

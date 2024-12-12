@@ -3,12 +3,12 @@
 import {BlurBackground} from '@components/atoms';
 import React, {useState, useCallback, useEffect, useMemo} from 'react';
 // import Tab from '../ModalTab';
-import Tab from '../ModalTab';
+import ModalTab from '../ModalTab';
 
 import {AudioSubtitleModalProps} from './types';
 import {ModalContainer} from './styles';
 // import {ModalOptions} from '../ModalOptions';
-import {ModalOptions} from '../ModalOptions';
+import ModalOptions from '../ModalOptions';
 import {Modal} from 'react-native';
 import {useAppTheme} from '@hooks/useAppTheme';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -61,7 +61,7 @@ const AudioSubtitleModal: React.FC<AudioSubtitleModalProps> = React.memo(
           {/* Background with blur effect */}
           <BlurBackground />
           {/* Tabs for audio and subtitle selection */}
-          <Tab selectedTab={activeTab} setSelectedTab={handleTabChange} onClose={onClose} />
+          <ModalTab selectedTab={activeTab} setSelectedTab={handleTabChange} onClose={onClose} />
           {/* Options for audio and subtitle */}
           <ModalOptions
             activeTab={activeTab}

@@ -5,7 +5,7 @@ import {MovieBannerProps} from './types';
 import {createStyle} from './styles';
 import {useAppTheme} from '@hooks/useAppTheme';
 
-export const MovieBanner: React.FC<MovieBannerProps> = ({imageUri, movieInfo}) => {
+const MovieBanner: React.FC<MovieBannerProps> = ({imageUri, movieInfo}) => {
   const {theme} = useAppTheme();
   const styles = createStyle(theme);
 
@@ -17,3 +17,5 @@ export const MovieBanner: React.FC<MovieBannerProps> = ({imageUri, movieInfo}) =
     </ImageBackground>
   );
 };
+
+export default MovieBanner;

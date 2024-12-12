@@ -1,13 +1,14 @@
 // @components/organisms/ContentScroll.tsx
 import React, {useMemo} from 'react';
 import {ScrollView, View} from 'react-native';
-import {MovieBanner, DescriptionText} from '@components/molecules';
+import MovieBanner from '@components/molecules/MovieBanner';
 import PrimaryButton from '@components/atoms/PrimaryButton';
-import {RenderExtras} from '@components/molecules/RenderExtras';
+import RenderExtras from '@components/molecules/RenderExtras';
 import {SeasonCardContainer} from '@components/organisms';
 import ActionButtonGroup from '@components/molecules/ActionButtonGroup';
 import {useAppTheme} from '@hooks/useAppTheme';
 import {createStyle} from './styles';
+import DescriptionText from '@components/molecules/DescriptionText';
 
 interface ContentScrollProps {
   contentType: string;

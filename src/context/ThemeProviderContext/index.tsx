@@ -1,23 +1,22 @@
 import React, {createContext, useEffect, useState} from 'react';
+
+import {BaseTheme, Theme, ThemeContextType, ThemeProviderProps} from './types';
 import {DARK_THEME_COLORS, LIGHT_THEME_COLORS} from '@constants/colors';
 import {FONT_FAMILY} from '@constants/fontsFamily';
 import {FONT_SIZE, SPACING} from '@constants/spacing';
-import {BaseTheme, Theme, ThemeContextType, ThemeProviderProps} from './types';
 import {ThemeProvider} from 'styled-components/native';
+
 import {useColorScheme} from 'react-native';
 
-// Base theme with common font sizes, font families, and spacing
 const baseTheme: BaseTheme = {
   fontFamily: FONT_FAMILY,
   fontSize: FONT_SIZE,
   spacing: SPACING,
 };
 
-// Dark and Light themes by extending the base theme
 export const darkTheme: Theme = {...baseTheme, colors: DARK_THEME_COLORS};
 export const lightTheme: Theme = {...baseTheme, colors: LIGHT_THEME_COLORS};
 
-// Theme context with default values
 export const ThemeContext = createContext<ThemeContextType>({
   theme: lightTheme,
   toggleTheme: () => {},
