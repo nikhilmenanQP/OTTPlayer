@@ -1,38 +1,32 @@
-import {Image, ImageStyle, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle} from 'react-native';
 import React from 'react';
-import {PlayIcon, Search_2} from '@assets/images/appIcons';
-import {useAppTheme} from '@hooks/useAppTheme';
-import {createStyle} from './styles';
-import {useNavigation} from '@react-navigation/native';
+import {Container, Text} from './styles';
+import {Image, ImageStyle, StyleSheet, TextStyle, ViewStyle} from 'react-native';
 
 interface PrimaryButtonProps {
-  onPressHandler?: () => void;
   buttonStyle?: ViewStyle;
   icon?: any;
-  textStyle?: TextStyle;
-  text?: string;
-  iconWidth?: number;
   iconHeight?: number;
   iconStyle?: ImageStyle;
+  iconWidth?: number;
+  onPressHandler?: () => void;
+  text?: string;
+  textStyle?: TextStyle;
 }
 
 const ICON_DEFAULT_SIZE = 20;
 
 export default function PrimaryButton({
-  onPressHandler,
-  icon,
   buttonStyle,
-  text,
-  textStyle,
-  iconWidth,
+  icon,
   iconHeight,
   iconStyle,
+  iconWidth,
+  onPressHandler,
+  text,
+  textStyle,
 }: PrimaryButtonProps) {
-  const {theme} = useAppTheme();
-  const styles = createStyle(theme);
-
-  const ICON_WIDTH = iconWidth || ICON_DEFAULT_SIZE;
   const ICON_HEIGHT = iconHeight || ICON_DEFAULT_SIZE;
+  const ICON_WIDTH = iconWidth || ICON_DEFAULT_SIZE;
 
   const renderIcon = () => {
     if (typeof icon === 'function') {
@@ -44,8 +38,8 @@ export default function PrimaryButton({
         <Image
           source={icon}
           style={{
-            width: ICON_WIDTH,
             height: ICON_HEIGHT,
+            width: ICON_WIDTH,
             ...iconStyle,
           }}
         />
@@ -55,10 +49,10 @@ export default function PrimaryButton({
   };
 
   return (
-    <TouchableOpacity style={[styles.watchNowBtn, buttonStyle]} onPress={onPressHandler}>
+    <Container style={buttonStyle} onPress={onPressHandler}>
       {renderIcon()}
-      {text && <Text style={[styles.watchNowBtnText, textStyle]}>{text}</Text>}
-    </TouchableOpacity>
+      {text && <Text style={textStyle}>{text}</Text>}
+    </Container>
   );
 }
 
