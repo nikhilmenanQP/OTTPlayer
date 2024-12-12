@@ -1,14 +1,10 @@
-import {StyleSheet, ViewStyle} from 'react-native';
-import {Theme} from '@context/ThemeProviderContext/types';
+import styled from '@emotion/native';
+import {StyleProps} from './types';
 
-export const createStyles = (theme: Theme) => {
-  return StyleSheet.create({
-    backButtonContainer: {
-      backgroundColor: theme.colors.midnightBlue,
-      borderRadius: theme.spacing.lg_llll,
-      left: theme.spacing.null,
-      padding: theme.spacing.sm_ll + 2,
-      position: 'absolute',
-    } as ViewStyle,
-  });
-};
+export const Container = styled.TouchableOpacity<StyleProps>(({theme}) => ({
+  backgroundColor: theme.colors.midnightBlue,
+  borderRadius: theme.spacing.lg_llll,
+  left: theme.spacing.null,
+  padding: theme.spacing.sm_ll + 2,
+  position: 'absolute',
+}));
