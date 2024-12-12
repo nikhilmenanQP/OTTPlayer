@@ -1,6 +1,10 @@
+import {Theme} from '@context/ThemeProviderContext/types';
 import {ViewStyle} from 'react-native';
 
-// Define the props for HorizontalRule component
 export interface HorizontalRuleProps {
-  style?: ViewStyle; // Optional style prop
+  style?: ViewStyle;
+}
+
+export interface StyleProps {
+  theme?: Theme;
 }
