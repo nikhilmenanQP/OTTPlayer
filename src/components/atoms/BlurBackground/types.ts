@@ -5,27 +5,27 @@ import {ViewStyle} from 'react-native';
  */
 export type BlurType =
   | (
+      | 'chromeMaterial'
+      | 'chromeMaterialDark'
+      | 'chromeMaterialLight'
       | 'dark'
+      | 'extraDark'
       | 'light'
-      | 'xlight'
+      | 'material'
+      | 'materialDark'
+      | 'materialLight'
       | 'prominent'
       | 'regular'
-      | 'extraDark'
-      | 'chromeMaterial'
-      | 'material'
       | 'thickMaterial'
-      | 'thinMaterial'
-      | 'ultraThinMaterial'
-      | 'chromeMaterialDark'
-      | 'materialDark'
       | 'thickMaterialDark'
-      | 'thinMaterialDark'
-      | 'ultraThinMaterialDark'
-      | 'chromeMaterialLight'
-      | 'materialLight'
       | 'thickMaterialLight'
+      | 'thinMaterial'
+      | 'thinMaterialDark'
       | 'thinMaterialLight'
+      | 'ultraThinMaterial'
+      | 'ultraThinMaterialDark'
       | 'ultraThinMaterialLight'
+      | 'xlight'
     )
   | undefined;
 
@@ -33,7 +33,7 @@ export type BlurType =
  * Define the types for the component's props
  */
 export interface BlurBackgroundProps {
-  blurType?: BlurType; // Available blur types
   blurAmount?: number; // Intensity of the blur
+  blurType?: BlurType; // Available blur types
   style?: ViewStyle; // Optional style to pass custom styles
 }
