@@ -1,9 +1,9 @@
-import React, {useState, useEffect, useMemo} from 'react';
+import PrimaryText from '../PrimaryText';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-
 import {Subtitle, SubtitleOverlayProps} from './types';
-import {Text, StyleProp, TextStyle} from 'react-native';
-import {createStyle} from './styles';
+import {TextStyle} from 'react-native';
+import {subTitleStyle} from './styles';
 import {useAppTheme} from '@hooks/useAppTheme';
 
 const SubtitleOverlay: React.FC<SubtitleOverlayProps> = ({
@@ -16,11 +16,6 @@ const SubtitleOverlay: React.FC<SubtitleOverlayProps> = ({
    * Get the current theme (dark/light) from the app's theme context.
    */
   const {theme} = useAppTheme();
-
-  /**
-   * Memoize the styles to avoid recalculating them on each render unless dependencies change.
-   */
-  const styles = useMemo(() => createStyle(theme, isFullScreen), [theme, isFullScreen]);
 
   const [subtitles, setSubtitles] = useState<Subtitle[]>([]); // State to store the list of parsed subtitles.
   const [currentSubtitle, setCurrentSubtitle] = useState<string>(''); // State to store the subtitle text currently being displayed.
@@ -70,7 +65,10 @@ const SubtitleOverlay: React.FC<SubtitleOverlayProps> = ({
    * Return the current subtitle text, if available, or render nothing.
    */
   return currentSubtitle ? (
-    <Text style={[styles.subTitle as StyleProp<TextStyle>, subtitleTextStyle]}>{currentSubtitle}</Text>
+    // <Text style={[styles.subTitle as StyleProp<TextStyle>, subtitleTextStyle]}>{currentSubtitle}</Text>
+    <PrimaryText style={[subTitleStyle(theme, isFullScreen), subtitleTextStyle as TextStyle]}>
+      {currentSubtitle}
+    </PrimaryText>
   ) : null;
 };
 
