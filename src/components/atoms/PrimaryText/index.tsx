@@ -1,13 +1,13 @@
 import React from 'react';
 import {PrimaryTextProps} from './types';
-import {Text} from 'react-native';
+import {Text} from './styles';
 import {useAppTheme} from '@hooks/useAppTheme';
 
 const PrimaryText: React.FC<PrimaryTextProps> = ({
-  align = 'left',
+  align,
   children,
   color,
-  fontFamily = 'normal',
+  fontFamily,
   lineHeight,
   size,
   style,
@@ -22,8 +22,8 @@ const PrimaryText: React.FC<PrimaryTextProps> = ({
           color: color || theme.colors.white,
           fontFamily: fontFamily || theme.fontFamily.inter_regular,
           fontSize: size || theme.fontSize.medium,
-          lineHeight: lineHeight,
-          textAlign: align,
+          lineHeight: lineHeight || theme.spacing.sm_llll,
+          textAlign: align || 'left',
         },
         style,
       ]}
