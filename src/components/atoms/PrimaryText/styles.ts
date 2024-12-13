@@ -1,3 +1,3 @@
 import styled from '@emotion/native';
 
-export const Text = styled.Text(({theme}) => ({}));
+export const Text = styled.Text(({}) => ({}));

@@ -1,5 +1,7 @@
+import {Container, ToggleShowMore} from './styles';
 import {DescriptionTextProps} from './types';
-import {Text, TouchableOpacity, View} from 'react-native';
+import {PrimaryText} from '@components/atoms';
+import {Text} from 'react-native';
 import {useCallback, useRef, useState} from 'react';
 
 const DescriptionText: React.FC<DescriptionTextProps> = ({
@@ -28,21 +30,21 @@ const DescriptionText: React.FC<DescriptionTextProps> = ({
   };
 
   return (
-    <View style={containerStyle}>
-      <Text
+    <Container style={containerStyle}>
+      <PrimaryText
         numberOfLines={showMore ? undefined : numberOfLines}
         onTextLayout={handleTextLayout}
         ref={textRef}
         style={textStyle}>
         {text}
-      </Text>
+      </PrimaryText>
 
       {isTruncated && (
-        <TouchableOpacity onPress={toggleShowMore}>
+        <ToggleShowMore onPress={toggleShowMore}>
           <Text style={showMoreTextStyle}>{showMore ? 'Show Less' : 'Show More'}</Text>
-        </TouchableOpacity>
+        </ToggleShowMore>
       )}
-    </View>
+    </Container>
   );
 };
 
