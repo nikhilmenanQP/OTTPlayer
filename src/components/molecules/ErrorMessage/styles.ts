@@ -1,26 +1,19 @@
-import {StyleSheet} from 'react-native';
 import {Theme} from '@context/ThemeProviderContext/types';
+import {css} from '@emotion/native';
 
-export const createStyle = (theme: Theme) => {
-  const {colors, fontSize, fontFamily, spacing} = theme;
-
-  const mdXxSpacing = spacing.md_xx;
-  const smLLSpacing = spacing.sm_ll;
-
-  return StyleSheet.create({
-    titleText: {
-      color: colors.white,
-      fontFamily: fontFamily.inter_medium,
-      fontSize: fontSize.sm_llll,
-      marginBottom: smLLSpacing,
-      textAlign: 'center',
-    },
-
-    descriptionText: {
-      color: colors.standardGray,
-      fontSize: fontSize.sm_lll,
-      marginBottom: mdXxSpacing,
-      textAlign: 'center',
-    },
+export const titleTextStyle = (theme: Theme) =>
+  css({
+    color: theme.colors.white,
+    fontFamily: theme.fontFamily.inter_medium,
+    fontSize: theme.fontSize.sm_llll,
+    marginBottom: theme.spacing.sm_ll,
+    textAlign: 'center',
   });
-};
+
+export const descriptionTextStyle = (theme: Theme) =>
+  css({
+    color: theme.colors.standardGray,
+    fontSize: theme.fontSize.sm_lll,
+    marginBottom: theme.spacing.md_xx,
+    textAlign: 'center',
+  });
