@@ -1,9 +1,9 @@
 import Carousel from 'react-native-reanimated-carousel';
 import LinearGradient from 'react-native-linear-gradient';
 import React, {useState, useCallback} from 'react';
-import {AppCarouselProps} from './types';
-import {View, Dimensions, ImageBackground} from 'react-native';
-import {createStyles} from './styles';
+import {AppCarouselProps, BannerProps} from './types';
+import {Banner, bottomGradient, DotContainer, Dots, topGradient} from './styles';
+import {Dimensions} from 'react-native';
 import {useAppTheme} from '@hooks/useAppTheme';
 
 const {width: screenWidth} = Dimensions.get('window');
@@ -11,38 +11,29 @@ const {width: screenWidth} = Dimensions.get('window');
 const AppCarousel: React.FC<AppCarouselProps> = ({banners}) => {
   const [activeSlide, setActiveSlide] = useState<number>(0);
   const {theme} = useAppTheme();
-  const styles = createStyles(theme);
 
-  const renderItem = useCallback(() => {
-    return (
-      <ImageBackground
-        source={{uri: 'https://picsum.photos/200/300'}} // Placeholder image
-        style={styles.header}
-      />
-    );
-  }, [styles]);
+  const renderItem = useCallback(({item}: {item: BannerProps}) => {
+    return <Banner source={{uri: item?.image}} />;
+  }, []);
 
-  const renderDots = () => {
+  const renderDots = useCallback(() => {
     return banners.map((_, index) => {
       const isActive = index === activeSlide;
       return (
-        <View
+        <Dots
           key={index}
-          style={[
-            styles.dotStyle,
-            {
-              backgroundColor: isActive ? theme.colors.dotIconActive : theme.colors.dotIconNotActive,
-              height: isActive ? theme.spacing.sm : theme.spacing.sm_x,
-              width: isActive ? theme.spacing.sm : theme.spacing.sm_x,
-            },
-          ]}
+          style={{
+            backgroundColor: isActive ? theme.colors.dotIconActive : theme.colors.dotIconNotActive,
+            height: isActive ? theme.spacing.sm : theme.spacing.sm_x,
+            width: isActive ? theme.spacing.sm : theme.spacing.sm_x,
+          }}
         />
       );
     });
-  };
+  }, [banners, activeSlide]);
 
   return (
-    <View>
+    <>
       <Carousel
         autoPlay
         data={banners}
@@ -52,11 +43,11 @@ const AppCarousel: React.FC<AppCarouselProps> = ({banners}) => {
         scrollAnimationDuration={1000}
         width={screenWidth}
       />
-      <LinearGradient colors={[theme.colors.background, 'transparent']} style={styles.topGradient} />
-      <View style={styles.dotsContainer}>{renderDots()}</View>
-      <LinearGradient colors={['transparent', theme.colors.background]} style={styles.bottomGradient} />
-    </View>
+      <LinearGradient colors={[theme.colors.background, 'transparent']} style={topGradient(theme)} />
+      <DotContainer>{renderDots()}</DotContainer>
+      <LinearGradient colors={['transparent', theme.colors.background]} style={bottomGradient(theme)} />
+    </>
   );
 };
 
-export default AppCarousel;
+export default React.memo(AppCarousel);

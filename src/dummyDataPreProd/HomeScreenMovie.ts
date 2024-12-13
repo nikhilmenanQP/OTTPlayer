@@ -333,28 +333,28 @@ export const banners = [
   {
     contentType: 'movie',
     id: '1',
-    image: 'https://example.com/spiderman.jpg', // Replace with actual image URL
+    image: 'https://picsum.photos/200/300', // Replace with actual image URL
     title: 'Spider-Man: No Way Home',
     logo: 'LOGO',
   },
   {
     contentType: 'movie',
     id: '2',
-    image: 'https://example.com/another-banner.jpg', // Another banner image
+    image: 'https://picsum.photos/200/300', // Another banner image
     title: 'Another Movie',
     logo: 'LOGO',
   },
   {
     contentType: 'movie',
     id: '3',
-    image: 'https://example.com/another-banner.jpg', // Another banner image
+    image: 'https://picsum.photos/200/300', // Another banner image
     title: 'Another Movie',
     logo: 'LOGO',
   },
   {
     contentType: 'movie',
     id: '4',
-    image: 'https://example.com/another-banner.jpg', // Another banner image
+    image: 'https://picsum.photos/200/300', // Another banner image
     title: 'Another Movie',
     logo: 'LOGO',
   },

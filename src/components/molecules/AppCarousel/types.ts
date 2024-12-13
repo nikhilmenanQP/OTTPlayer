@@ -1,10 +1,16 @@
-interface Banner {
+import {Theme} from '@context/ThemeProviderContext/types';
+
+export interface AppCarouselProps {
+  banners: BannerProps[];
+}
+
+export interface BannerProps {
   id: string;
-  title: string;
   image: string;
+  title: string;
 }
 [];
 
-export interface AppCarouselProps {
-  banners: Banner[];
+export interface StyleProps {
+  theme?: Theme;
 }
