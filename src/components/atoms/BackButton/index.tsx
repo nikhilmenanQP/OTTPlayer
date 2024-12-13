@@ -1,13 +1,11 @@
 import React, {memo} from 'react';
-
 import {ArrowLeft} from '@assets/images/appIcons';
 import {BackButtonProps} from './types';
 import {Container} from './styles';
-
 import {useAppTheme} from '@hooks/useAppTheme';
 import {useNavigation} from '@react-navigation/native';
 
-const BackButton: React.FC<BackButtonProps> = memo(({onPressHandler}) => {
+const BackButton: React.FC<BackButtonProps> = memo(({onPressHandler, iconContainerStyle, iconStyle}) => {
   const {theme} = useAppTheme();
   const navigation = useNavigation();
 
@@ -17,8 +15,8 @@ const BackButton: React.FC<BackButtonProps> = memo(({onPressHandler}) => {
   const onPress = onPressHandler || (() => navigation.goBack());
 
   return (
-    <Container onPress={onPress}>
-      <ArrowLeft width={theme.spacing.sm_ll} height={theme.spacing.sm_ll} />
+    <Container onPress={onPress} style={iconContainerStyle}>
+      <ArrowLeft height={theme.spacing.sm_ll} style={iconStyle} width={theme.spacing.sm_ll} />
     </Container>
   );
 });

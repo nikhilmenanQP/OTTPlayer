@@ -1,6 +1,6 @@
-import {TextStyle} from 'react-native';
+import {TextStyle, TextProps} from 'react-native';
 
-export interface PrimaryTextProps {
+export interface PrimaryTextProps extends TextProps {
   align?: TextStyle['textAlign'];
   children: React.ReactNode;
   color?: string;

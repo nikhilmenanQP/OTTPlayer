@@ -15,7 +15,7 @@ export interface AppHeaderProps {
 export interface BackButtonProps {
   handleBackButton: () => void;
   styles: BackButtonStyles;
-  theme: Theme;
+  theme: StyleProps;
 }
 
 interface BackButtonStyles {
@@ -26,10 +26,15 @@ export interface ProfileIconProps {
   onProfileIconHandler: () => void;
   profileImage: string;
   styles: ProfileIconStyles;
-  theme: Theme;
+  theme: StyleProps;
 }
 
 export interface ProfileIconStyles {
   profileIconStyle: ImageStyle;
   showMenuContainer: ViewStyle;
+}
+
+export interface StyleProps {
+  insets?: any;
+  theme?: Theme;
 }

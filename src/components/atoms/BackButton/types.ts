@@ -1,12 +1,13 @@
+import {ImageStyle, ViewStyle} from 'react-native';
 import {Theme} from '@context/ThemeProviderContext/types';
-import {ViewStyle} from 'react-native';
 
 export interface BackButtonProps extends BackButtonStyles, StyleProps {
   onPressHandler?: () => void;
 }
 
 export interface BackButtonStyles {
-  backButtonContainer: ViewStyle;
+  iconContainerStyle?: ViewStyle;
+  iconStyle?: ImageStyle;
 }
 
 export interface StyleProps {
