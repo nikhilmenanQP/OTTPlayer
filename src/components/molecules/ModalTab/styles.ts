@@ -1,13 +1,9 @@
 import styled from '@emotion/native';
-
 import {Animated} from 'react-native';
-import {TabTextProps} from './types';
-// import {Theme} from '@styles/theme';
-// import {Theme} from '@react-navigation/native';
-import {Theme} from '@context/ThemeProviderContext/types';
+import {StyleProps, TabButtonStyle, TabTextProps} from './types';
 import {TouchableOpacity, View, Text} from 'react-native';
 
-export const CloseButton = styled(TouchableOpacity)<{theme: Theme}>(({theme}) => ({
+export const CloseButton = styled(TouchableOpacity)<StyleProps>(({theme}) => ({
   alignItems: 'center',
   backgroundColor: theme.colors.standardGray_32,
   borderRadius: theme.spacing.lg_llll,
@@ -15,16 +11,23 @@ export const CloseButton = styled(TouchableOpacity)<{theme: Theme}>(({theme}) =>
   padding: theme.spacing.sm_lll - theme.spacing.sm_xxxx,
 }));
 
-export const TabButton = styled(TouchableOpacity)<{theme: Theme; initialTabWidth: number}>(
-  ({theme, initialTabWidth}) => ({
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: theme.spacing.sm_lll - theme.spacing.sm_xxxx,
-    width: initialTabWidth !== 0 ? initialTabWidth + 50 : undefined, // handle width here
-  }),
-);
+export const TabButton = styled(TouchableOpacity)<TabButtonStyle>(({theme, initialTabWidth}) => ({
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: theme.spacing.sm_lll - theme.spacing.sm_xxxx,
+  width: initialTabWidth !== 0 ? initialTabWidth + 50 : undefined,
+}));
 
-export const TabRow = styled(View)<{theme: Theme}>(() => ({
+export const TabsContainer = styled(View)<StyleProps>(({theme}) => ({
+  alignItems: 'flex-start',
+  borderBottomColor: theme.colors.white,
+  borderBottomWidth: 0.2,
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  marginBottom: theme.spacing.sm_lll + theme.spacing.sm_xxxx,
+}));
+
+export const TabRow = styled(View)<StyleProps>(() => ({
   flexDirection: 'row',
 }));
 
@@ -35,18 +38,9 @@ export const TabText = styled(Text)<TabTextProps>(({theme, isSelected}) => ({
   textAlign: 'center',
 }));
 
-export const TabsContainer = styled(View)<{theme: Theme}>(({theme}) => ({
-  alignItems: 'flex-start',
-  borderBottomColor: theme.colors.white,
-  borderBottomWidth: 0.2,
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-  marginBottom: theme.spacing.sm_lll + theme.spacing.sm_xxxx,
-}));
-
-export const Underline = styled(Animated.View)(({theme}: {theme: Theme}) => ({
+export const Underline = styled(Animated.View)<StyleProps>(({theme}) => ({
   backgroundColor: theme.colors.white,
+  bottom: theme.spacing.null,
   height: theme.spacing.sm_xxxx + 1,
   position: 'absolute',
-  bottom: theme.spacing.null,
 }));

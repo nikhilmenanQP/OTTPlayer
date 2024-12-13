@@ -1,5 +1,4 @@
 import React, {useState, useRef, useEffect, useCallback} from 'react';
-
 import {Animated, Easing, LayoutChangeEvent} from 'react-native';
 import {CloseButton, TabButton, TabRow, TabsContainer, TabText, Underline} from './styles';
 import {CloseIcon} from '@assets/images/appIcons';
@@ -67,10 +66,10 @@ const ModalTab: React.FC<TabProps> = React.memo(({selectedTab, setSelectedTab, o
       <TabRow>
         {TAB.map((tab, index) => (
           <TabButton
+            initialTabWidth={initialTabWidth}
             key={tab}
             onLayout={event => handleTabLayout(event, index)}
-            onPress={() => setSelectedTab(tab)}
-            initialTabWidth={initialTabWidth}>
+            onPress={() => setSelectedTab(tab)}>
             <TabText isSelected={getTabTextStyle(tab)}>{tab.charAt(0).toUpperCase() + tab.slice(1)}</TabText>
           </TabButton>
         ))}
