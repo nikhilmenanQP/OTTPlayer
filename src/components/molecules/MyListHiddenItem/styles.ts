@@ -1,29 +1,29 @@
-import {StyleSheet, TextStyle, ViewStyle} from 'react-native';
+import styled, {css} from '@emotion/native';
+import {StyleProps} from './types';
 import {Theme} from '@context/ThemeProviderContext/types';
 
-export const createStyle = (theme: Theme) =>
-  StyleSheet.create({
-    deleteButton: {
-      alignItems: 'center',
-      backgroundColor: theme.colors.firebrickRed,
-      height: theme.spacing.lg_llll,
-      justifyContent: 'center',
-      width: theme.spacing.lg_llll,
-    } as ViewStyle,
+export const Container = styled.View<StyleProps>(({theme}) => ({
+  alignItems: 'flex-end',
+  height: theme.spacing.lg_llll,
+  marginBottom: theme.spacing.sm,
+}));
 
-    deleteIcon: {
-      marginBottom: theme.spacing.sm_x,
-    } as ViewStyle,
+export const DeleteButton = styled.TouchableOpacity<StyleProps>(({theme}) => ({
+  alignItems: 'center',
+  backgroundColor: theme.colors.firebrickRed,
+  height: theme.spacing.lg_llll,
+  justifyContent: 'center',
+  width: theme.spacing.lg_llll,
+}));
 
-    deleteText: {
-      color: theme.colors.white,
-      fontFamily: theme.fontFamily.inter_regular,
-      fontSize: theme.spacing.sm_ll + 1,
-    } as TextStyle,
+export const deleteIconStyle = (theme: Theme) =>
+  css({
+    marginBottom: theme.spacing.sm_x,
+  });
 
-    hiddenItem: {
-      alignItems: 'flex-end',
-      height: theme.spacing.lg_llll,
-      marginBottom: theme.spacing.sm,
-    } as ViewStyle,
+export const deleteTextStyle = (theme: Theme) =>
+  css({
+    color: theme.colors.white,
+    fontFamily: theme.fontFamily.inter_regular,
+    fontSize: theme.spacing.sm_ll + 1,
   });
