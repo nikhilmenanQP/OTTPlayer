@@ -1,5 +1,5 @@
-import styled from '@emotion/native';
-import {CardContainerProps, CardImageWideProps} from './types';
+import styled, {css} from '@emotion/native';
+import {CardContainerProps, CardImageWideProps, StyleProps} from './types';
 import {Theme} from '@context/ThemeProviderContext/types';
 
 export const CardContainer = styled.TouchableOpacity<CardContainerProps>(
@@ -19,20 +19,21 @@ export const cardImageNarrow = ({theme}: {theme: Theme}) => ({
   width: theme.spacing.lg_llll + theme.spacing.sm_lll,
 });
 
-export const cardImageWide = ({theme, cardHeight, cardWidth}: CardImageWideProps) => ({
-  borderRadius: theme.spacing.sm_xx,
-  height: cardHeight || theme.spacing.lg_lll + theme.spacing.sm_lll,
-  width: cardWidth || theme.spacing.lg_llll + theme.spacing.lg_lll,
-});
+export const cardImageWide = ({cardHeight, cardWidth, theme}: CardImageWideProps) =>
+  css({
+    borderRadius: theme.spacing.sm_xx,
+    height: cardHeight || theme.spacing.lg_lll + theme.spacing.sm_lll,
+    width: cardWidth || theme.spacing.lg_llll + theme.spacing.lg_lll,
+  });
 
-export const CardSubTitle = styled.Text(({theme}: {theme: any}) => ({
+export const CardSubTitle = styled.Text<StyleProps>(({theme}) => ({
   color: theme.colors.bottomNavText,
   fontSize: theme.spacing.sm_ll + 1,
   marginTop: theme.spacing.sm_xxxx,
   textAlign: 'left',
 }));
 
-export const CardTitle = styled.Text(({theme}: {theme: any}) => ({
+export const CardTitle = styled.Text<StyleProps>(({theme}) => ({
   alignSelf: 'flex-start',
   color: theme.colors.white,
   fontSize: theme.spacing.sm_ll + 1,

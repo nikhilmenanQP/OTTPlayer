@@ -1,7 +1,7 @@
 import React, {useCallback, useMemo} from 'react';
 import {CardContainer, CardImage, cardImageNarrow, cardImageWide, CardSubTitle, CardTitle} from './styles';
-import {ImageStyle} from 'react-native';
 import {DetailScreenNavigationProp, ItemProps, MovieCardProps, MovieDetailsProps} from './types';
+import {ImageStyle} from 'react-native';
 import {useAppTheme} from '@hooks/useAppTheme';
 import {useNavigation} from '@react-navigation/native';
 
@@ -12,11 +12,11 @@ const MovieCard: React.FC<MovieCardProps> = ({
   cardTitleStyle,
   cardWidth,
   horizontalCard,
-  movieData,
   marginBottom,
   marginLeft,
   marginRight,
   marginTop,
+  movieData,
   showMovieDetails,
   title,
 }) => {
