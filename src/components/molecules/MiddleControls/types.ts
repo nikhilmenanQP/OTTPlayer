@@ -1,13 +1,18 @@
+import {Theme} from '@context/ThemeProviderContext/types';
 import {ViewStyle} from 'react-native';
 
 export interface MiddleControlsProps {
-  handleFastForward: () => void; // Function to handle fast-forward action
-  handlePlayPause: () => void; // Function to handle play/pause action
-  handleRewind: () => void; // Function to handle rewind action
-  paused: boolean; // State to track whether the media is paused or playing
+  handleFastForward: () => void;
+  handlePlayPause: () => void;
+  handleRewind: () => void;
+  paused: boolean;
 }
 
 export interface Styles {
-  container: ViewStyle; // Style for the container view
-  middlePlayerIcon: ViewStyle; // Style for each icon button
+  container: ViewStyle;
+  middlePlayerIcon: ViewStyle;
+}
+
+export interface StyleProps {
+  theme?: Theme;
 }
