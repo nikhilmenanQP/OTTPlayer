@@ -1,12 +1,8 @@
-import {Theme} from '@context/ThemeProviderContext/types';
-import {ImageStyle, ViewStyle} from 'react-native';
-
-export interface ProfileIconStyles {
-  profileIconStyle: ImageStyle;
-  showMenuContainer: ViewStyle;
-}
+import {StackNavigationProp} from '@react-navigation/stack';
 
 export interface ProfileIconProps {
   onPressHandler?: () => void;
   profileImage?: string;
 }
+
+export type ProfileScreenNavigationProp = StackNavigationProp<RootStackParamList, 'ProfileScreen'>;
