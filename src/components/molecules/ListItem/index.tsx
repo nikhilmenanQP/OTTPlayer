@@ -1,25 +1,22 @@
 import PrimaryText from '@components/atoms/PrimaryText';
 import React, {memo} from 'react';
-
-import {Image, View} from 'react-native';
-
-import {createStyle} from './styles';
+import {Container, Details, metaStyle, Thumbnail, titleStyle} from './styles';
+import {ListItemProps} from './types';
 import {useAppTheme} from '@hooks/useAppTheme';
 
 const ListItem: React.FC<ListItemProps> = ({item}) => {
   const {theme} = useAppTheme();
-  const styles = createStyle(theme);
 
   return (
-    <View style={styles.listItem}>
-      <Image source={{uri: item.image}} style={styles.image} />
-      <View style={styles.details}>
-        <PrimaryText style={styles.title}>{item.title}</PrimaryText>
-        <PrimaryText style={styles.meta}>
+    <Container>
+      <Thumbnail source={{uri: item.image}} />
+      <Details>
+        <PrimaryText style={titleStyle(theme)}>{item.title}</PrimaryText>
+        <PrimaryText style={metaStyle(theme)}>
           {item.duration || `${item.seasons} seasons`} • {item.rating}
         </PrimaryText>
-      </View>
-    </View>
+      </Details>
+    </Container>
   );
 };
 
