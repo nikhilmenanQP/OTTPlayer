@@ -42,7 +42,7 @@ const AppModal: React.FC<AppModalProps> = ({
     <Modal
       animationType="fade"
       onRequestClose={handleClose}
-      supportedOrientations={['landscape', 'landscape-left', 'portrait']}
+      supportedOrientations={['portrait', 'landscape', 'landscape-left', 'landscape-right']}
       transparent
       visible={visible}>
       <Container style={containerStyle}>
