@@ -1,5 +1,4 @@
 import React, {useCallback, useMemo} from 'react';
-
 import {Check} from '@assets/images/appIcons';
 import {ICON_SIZE, OptionContainer, OptionItem, OptionText} from './styles';
 import {OptionContainerProps} from './types';

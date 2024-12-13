@@ -1,4 +1,3 @@
-// import {Theme} from '@styles/theme';
 import {Theme} from '@context/ThemeProviderContext/types';
 import {TextProps, TouchableOpacityProps} from 'react-native';
 
@@ -12,14 +11,16 @@ export interface OptionContainerProps {
 }
 
 export interface OptionProps {
-  theme: Theme;
-  justifyContent: string;
-}
-
-export interface OptionItemProps extends TouchableOpacityProps {
-  backgroundColor: any;
+  justifyContent: 'center' | 'flex-start' | 'space-between';
+  theme?: Theme;
 }
 
 export interface OptionTextProps extends TextProps {
   marginLeft: any;
+  theme?: Theme;
+}
+
+export interface OptionItemProps extends TouchableOpacityProps {
+  backgroundColor: any;
+  theme?: Theme;
 }
